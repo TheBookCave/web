@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using web.Models.InputModels;
 using web.Models.ViewModels;
 using web.Repositories;
 
@@ -27,6 +28,11 @@ namespace web.Services
         {
             var book = _bookRepo.GetBookWithId(Id);
             return book;
+        }
+
+        public void AddBook(BookInputModel inputBook)
+        {
+            _bookRepo.AddBook(inputBook);
         }
     }
 }

@@ -4,7 +4,10 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using web.Data.EntityModels;
 using web.Models;
+using web.Models.InputModels;
+using web.Models.ViewModels;
 using web.Services;
 
 namespace web.Controllers
@@ -37,6 +40,23 @@ namespace web.Controllers
             }
             return View(book);
         }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+         [HttpPost]
+        public IActionResult Create(BookInputModel inputBook)
+        {
+            if(ModelState.IsValid)
+            {
+                _bookService.AddBook(inputBook);
+                return RedirectToAction("Index");
+            }
+            return View();
+        } 
 
     }
 }

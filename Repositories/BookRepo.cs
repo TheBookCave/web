@@ -3,6 +3,8 @@ using web.Data;
 using System.Linq;
 using web.Models.ViewModels;
 using System;
+using web.Models.InputModels;
+using web.Data.EntityModels;
 
 namespace web.Repositories
 {
@@ -54,6 +56,28 @@ namespace web.Repositories
                         }).SingleOrDefault();
 
             return book;
+        }
+
+        public void AddBook(BookInputModel inputBook)
+        {
+            var newBook = new Book()
+            {
+                //Id
+                Name = inputBook.Name,
+                AuthorId = inputBook.AuthorId,
+                PublisherId = inputBook.PublisherId,
+                ImageId = inputBook.ImageId,
+                Year = inputBook.Year,
+                ISBN = inputBook.ISBN,
+                Language = inputBook.Language,
+                Quantity = inputBook.Quantity,
+                Price = inputBook.Price, 
+                Discount = inputBook.Discount,
+                Rating = 0
+            };
+
+            _db.Books.Add(newBook);
+            _db.SaveChanges();
         }
     }
 }

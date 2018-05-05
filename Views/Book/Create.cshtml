@@ -1,0 +1,47 @@
+@model web.Models.InputModels.BookInputModel
+
+<h1>Add a new book</h1>
+
+ <form method="POST">
+    <label asp-for="Name">Name</label>
+    <input type="text" asp-for="Name">
+    <span asp-validation-for="Name" class="text-danger"></span>
+    <br/>
+    <label asp-for="AuthorId">AuthorId</label>
+    <input type="number" asp-for="AuthorId">
+    <span asp-validation-for="AuthorId" class="text-danger"></span>
+    <br/>
+    <label asp-for="PublisherId">PublisherId</label>
+    <input type="number" asp-for="PublisherId">
+    <span asp-validation-for="PublisherId" class="text-danger"></span>
+    <br/>
+    <label asp-for="ImageId">ImageId</label>
+    <input type="number" asp-for="ImageId">
+    <span asp-validation-for="ImageId" class="text-danger"></span>
+    <br/>
+    <label asp-for="Year">Year</label>
+    <input type="number" asp-for="Year">
+    <span asp-validation-for="Year" class="text-danger"></span>
+    <br/>
+    <label asp-for="ISBN">ISBN</label>
+    <input type="text" asp-for="ISBN">
+    <span asp-validation-for="ISBN" class="text-danger"></span>
+    <br/>
+    <label asp-for="Language">Language</label>
+    <input type="text" asp-for="Language">
+    <span asp-validation-for="Language" class="text-danger"></span>
+    <br/>
+    <label asp-for="Quantity">Quantity</label>
+    <input type="number" asp-for="Quantity">
+    <span asp-validation-for="Quantity" class="text-danger"></span>
+    <br/>
+    <label asp-for="Price">Price</label>
+    <input type="number" asp-for="Price">
+    <span asp-validation-for="Price" class="text-danger"></span>
+    <br/>
+    <label asp-for="Discount">Discount</label>
+    <input type="number" asp-for="Discount">
+    <span asp-validation-for="Discount" class="text-danger"></span>
+    <br/>
+    <input type="submit" value="Submit Book" class="btn btn-info">
+</form> 
