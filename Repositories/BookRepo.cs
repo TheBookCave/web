@@ -27,11 +27,10 @@ namespace web.Repositories
                              Id = b.Id,
                              Name = b.Name,
                              AuthorId = b.AuthorId,
-                             //PublisherId = b.PublisherId,
-                             ImageId = b.ImageId
-                             //Year = b.Year,
-                             //ISBN = b.ISBN,
-                             //Language = b.Language
+                             ImageId = b.ImageId,
+                             Rating = b.Rating,
+                             Price = b.Price,
+                             Discount = b.Discount
                          }).ToList();
 
             return books;

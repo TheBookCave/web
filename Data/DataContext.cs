@@ -11,7 +11,7 @@ namespace web.Data
         {
             optionsBuilder
                 .UseSqlServer(
-                    ""
+""
                 );
         }
 
