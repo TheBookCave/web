@@ -5,16 +5,26 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using web.Models;
+using web.Services;
 
 namespace web.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private BookService _bookService;
+
+        public HomeController()
         {
-            return View();
+            _bookService = new BookService();
         }
 
+        public IActionResult Index()
+        {
+            var books = _bookService.GetAllBooks();
+
+            return View(books);
+        }
+/*
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
@@ -33,5 +43,6 @@ namespace web.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+ */
     }
 }
