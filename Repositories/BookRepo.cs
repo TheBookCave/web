@@ -5,6 +5,7 @@ namespace web.Repositories
 {
     public class BookRepo
     {
+        // Function that returns a list of all the books in a database
         public List<BookListViewModel> GetAllBooks()
         {
             var books = new List<BookListViewModel>
