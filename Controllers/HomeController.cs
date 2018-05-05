@@ -11,22 +11,11 @@ namespace web.Controllers
 {
     public class HomeController : Controller
     {
-        // Home controller owns an instance of the BookService
-        private BookService _bookService;
-
-        // Constructor for the HomeController where the _bookService is created
-        public HomeController()
-        {
-            _bookService = new BookService();
-        }
-
         public IActionResult Index()
         {
-            var books = _bookService.GetAllBooks();
-
-            return View(books);
+            return View();
         }
-/*
+
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
@@ -45,6 +34,6 @@ namespace web.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
- */
+ 
     }
 }
