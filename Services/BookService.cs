@@ -21,5 +21,12 @@ namespace web.Services
             var books = _bookRepo.GetAllBooks();
             return books;
         }
+
+        // Function that return a book with specified ID
+        public BookDetailViewModel GetBookWithId(int Id)
+        {
+            var book = _bookRepo.GetBookWithId(Id);
+            return book;
+        }
     }
 }

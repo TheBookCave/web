@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using web.Data;
 using System.Linq;
 using web.Models.ViewModels;
+using System;
 
 namespace web.Repositories
 {
@@ -26,14 +27,34 @@ namespace web.Repositories
                              Id = b.Id,
                              Name = b.Name,
                              AuthorId = b.AuthorId,
-                             PublisherId = b.PublisherId,
-                             ImageId = b.ImageId,
-                             Year = b.Year,
-                             ISBN = b.ISBN,
-                             Language = b.Language
+                             //PublisherId = b.PublisherId,
+                             ImageId = b.ImageId
+                             //Year = b.Year,
+                             //ISBN = b.ISBN,
+                             //Language = b.Language
                          }).ToList();
 
             return books;
+        }
+
+        // Function that returns a book with specified id
+        public BookDetailViewModel GetBookWithId(int Id)
+        {
+            var book = (from b in _db.Books
+                        where b.Id == Id
+                        select new BookDetailViewModel
+                        {
+                            Id = b.Id,
+                            Name = b.Name,
+                            AuthorId = b.AuthorId,
+                            PublisherId = b.PublisherId,
+                            ImageId = b.ImageId,
+                            Year = b.Year,
+                            ISBN = b.ISBN,
+                            Language = b.Language
+                        }).SingleOrDefault();
+
+            return book;
         }
     }
 }

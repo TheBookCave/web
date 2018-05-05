@@ -27,5 +27,16 @@ namespace web.Controllers
             return View(books);
         }
 
+        public IActionResult Details(int Id)
+        {
+            var book = _bookService.GetBookWithId(Id);
+
+            if (book == null)
+            {
+                return View("ErrorNotFound");
+            }
+            return View(book);
+        }
+
     }
 }
