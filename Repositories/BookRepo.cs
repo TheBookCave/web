@@ -40,14 +40,19 @@ namespace web.Repositories
         // Function that returns a book with specified id
         public BookDetailViewModel GetBookWithId(int Id)
         {
-            var rating = ( from r in _db.Ratings 
+            var rating = 0.0;
+            var ratings = ( from r in _db.Ratings 
                            where r.BookId == Id
-                           select r.RatingValue ).Average();
+                           select r.RatingValue ).ToList();
+
+            if (ratings.Count != 0)
+            {
+                rating = ratings.Average();
+            }
 
             var book = (from b in _db.Books
                         join a in _db.Authors on b.AuthorId equals a.Id
                         join p in _db.Publishers on b.PublisherId equals p.Id
-                        join r in _db.Ratings on b.Id equals r.BookId
                         where b.Id == Id
                         select new BookDetailViewModel
                         {
