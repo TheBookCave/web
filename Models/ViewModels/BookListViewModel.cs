@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace web.Models.ViewModels
 {
     // BookListViewModel for the customer
@@ -10,6 +12,5 @@ namespace web.Models.ViewModels
         public double Price { get; set; }
         public double Discount { get; set; }
         public double Rating { get; set; }
-
     }
 }

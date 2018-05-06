@@ -11,6 +11,7 @@ using web.Models;
 using web.Models.ViewModels;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using System.Net.Mail;
 
 namespace web.Controllers
 {
@@ -29,6 +30,9 @@ namespace web.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            //var userid = _userManager.GetUserId(HttpContext.User);
+            //ApplicationUser user = _userManager.FindByIdAsync(userid).Result;
+           // _userManager.GetClaimsAsync(user)
             return View();
         }
 
@@ -79,7 +83,6 @@ namespace web.Controllers
         }
 
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
@@ -93,5 +96,6 @@ namespace web.Controllers
         {
             return View();
         }
+
     }
 }

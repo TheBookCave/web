@@ -23,36 +23,35 @@ namespace web.Controllers
             _bookService = new BookService();
         }
 
-        public IActionResult Index(string orderby)
+        public IActionResult Index(string orderby, string genre)
         {
             var books = new List<BookListViewModel>();
+
+            books = _bookService.GetAllBooks();
+
             if (orderby == "name-asc")
             {
-                books = _bookService.GetAllBooksOrderedByName();
+                books = _bookService.OrderByName(books);
             }
             else if(orderby == "name-desc")
             {
-                books = _bookService.GetAllBooksOrderedByNameDesc();
-            }
-            else if(orderby == "id")
-            {
-                books = _bookService.GetAllBooks();
+                books = _bookService.OrderByNameDesc(books);
             }
             else if(orderby == "price-asc")
             {
-                books = _bookService.GetAllBooksOrderedByPrice();
+                books = _bookService.OrderByPrice(books);
             }
             else if(orderby == "price-desc")
             {
-                books = _bookService.GetAllBooksOrderedByPriceDesc();
+                books = _bookService.OrderByPriceDesc(books);
             }
             else if(orderby == "rating-asc")
             {
-                books = _bookService.GetAllBooksOrderedByRating();
+                books = _bookService.OrderByRating(books);
             }
             else if(orderby == "rating-desc")
             {
-                books = _bookService.GetAllBooksOrderedByRatingDesc();
+                books = _bookService.OrderByRatingDesc(books);
             }
             else
             {
@@ -60,6 +59,13 @@ namespace web.Controllers
             }      
             return View(books);
         }
+
+        public IActionResult Top10()
+        {
+            var books = _bookService.GetTop10Books();
+            return View(books);
+        }
+
 
         public IActionResult Details(int Id)
         {
@@ -146,6 +152,7 @@ namespace web.Controllers
         {
             return View();
         }
+
 
     }
 }

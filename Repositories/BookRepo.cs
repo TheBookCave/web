@@ -63,48 +63,6 @@ namespace web.Repositories
             return averageRatings;
         }
 
-        // Function that returns a list of all books ordered by the book name
-        public List<BookListViewModel> GetAllBooksOrderedByName()
-        {
-            var books = GetAllBooksLinqQuery().OrderBy(x => x.Name).ToList();
-            return books;            
-        }
-
-        // Function that returns a list of all books ordered by the book name descending
-        public List<BookListViewModel> GetAllBooksOrderedByNameDesc()
-        {
-            var books = GetAllBooksLinqQuery().OrderByDescending(x => x.Name).ToList();
-            return books;            
-        }
-
-        // Function that returns a list of all books ordered by the book price descending
-        public List<BookListViewModel> GetAllBooksOrderedByPriceDesc()
-        {
-            var books = GetAllBooksLinqQuery().OrderByDescending(x => x.Price).ToList();
-            return books;            
-        }
-
-        // Function that returns a list of all books ordered by the book price
-        public List<BookListViewModel> GetAllBooksOrderedByPrice()
-        {
-            var books = GetAllBooksLinqQuery().OrderBy(x => x.Price).ToList();
-            return books;            
-        }
-
-        // Function that returns a list of all books ordered by the book rating descending
-        public List<BookListViewModel> GetAllBooksOrderedByRatingDesc()
-        {
-            var books = GetAllBooksLinqQuery().OrderByDescending(x => x.Rating).ToList();
-            return books;            
-        }
-
-        // Function that returns a list of all books ordered by the book rating
-        public List<BookListViewModel> GetAllBooksOrderedByRating()
-        {
-            var books = GetAllBooksLinqQuery().OrderBy(x => x.Rating).ToList();
-            return books;            
-        }
-
         // Function that returns a book with specified id
         public BookDetailViewModel GetBookWithId(int Id)
         {
