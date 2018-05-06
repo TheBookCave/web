@@ -1,14 +1,6 @@
 @model List<web.Models.ViewModels.BookListViewModel>
 <div>
-    <h2>List of books</h2>
-    <h4><a asp-controller="Book" asp-action="Index" asp-route-orderby="name-asc">Order by Name Ascending</a></h4>
-    <h4><a asp-controller="Book" asp-action="Index" asp-route-orderby="name-desc">Order by Name Descending</a></h4>
-    <h4><a asp-controller="Book" asp-action="Index" asp-route-orderby="id">Order by ID</a></h4>
-    <h4><a asp-controller="Book" asp-action="Index" asp-route-orderby="price-asc">Order by Price Ascending</a></h4>
-    <h4><a asp-controller="Book" asp-action="Index" asp-route-orderby="price-desc">Order by Price Descending</a></h4>
-    <h4><a asp-controller="Book" asp-action="Index" asp-route-orderby="rating-asc">Order by Rating Ascending</a></h4>
-    <h4><a asp-controller="Book" asp-action="Index" asp-route-orderby="rating-desc">Order by Rating Descending</a></h4>
-    <h5>Test: <a asp-controller="Book" asp-action="Top10">Top 10 books by rating</a></h5>
+    <h2>Top 10 books</h2>
 </div>
 <div class="row">
     @foreach(var book in @Model)

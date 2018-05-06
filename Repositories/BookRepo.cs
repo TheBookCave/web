@@ -103,6 +103,14 @@ namespace web.Repositories
             return books;            
         }
 
+
+       // Function that returns the top 10 books based on the rating
+        public List<BookListViewModel> GetTop10Books()
+        {
+            var books = GetAllBooksLinqQuery().OrderByDescending(x => x.Rating).Take(10).ToList();
+            return books;            
+        }
+
         // Function that returns a book with specified id
         public BookDetailViewModel GetBookWithId(int Id)
         {

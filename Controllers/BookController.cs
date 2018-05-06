@@ -61,6 +61,13 @@ namespace web.Controllers
             return View(books);
         }
 
+        public IActionResult Top10()
+        {
+            var books = _bookService.GetTop10Books();
+            return View(books);
+        }
+
+
         public IActionResult Details(int Id)
         {
             var book = _bookService.GetBookWithId(Id);
@@ -145,6 +152,7 @@ namespace web.Controllers
         {
             return View();
         }
+
 
     }
 }

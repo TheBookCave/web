@@ -71,6 +71,13 @@ namespace web.Services
             return books;
         }
 
+        // Function that return a list of all the books ordered by rating
+        public List<BookListViewModel> GetTop10Books()
+        {
+            var books = _bookRepo.GetTop10Books();
+            return books;
+        }
+
         // Function that return a book with specified ID
         public BookDetailViewModel GetBookWithId(int Id)
         {
