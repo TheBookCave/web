@@ -7,6 +7,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using web.Models;
+using web.Data;
+
 namespace web
 {
     public class Startup
@@ -21,6 +26,21 @@ namespace web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<AuthenticationDbContext>( options => options.UseSqlServer(Configuration.GetConnectionString("Vln2_db")));
+            services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AuthenticationDbContext>().AddDefaultTokenProviders();
+            services.Configure<IdentityOptions>( config => {
+                config.User.RequireUniqueEmail = true;
+                config.Password.RequiredLength = 8;
+            });
+            services.ConfigureApplicationCookie( options => {
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromHours(3);
+                options.LoginPath = "/Account/Login";
+                options.AccessDeniedPath = "/Account/AccessDenied";
+                options.SlidingExpiration = true;
+            });
+
+
             services.AddMvc();
         }
 
@@ -37,6 +57,7 @@ namespace web
             }
 
             app.UseStaticFiles();
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
