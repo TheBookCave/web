@@ -11,6 +11,7 @@ namespace web.Data
         public DbSet<Publisher> Publishers { get; set; }
 
         public DbSet<Rating> Ratings { get; set; }
+        public DbSet<BookGenre> BookGenres { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
