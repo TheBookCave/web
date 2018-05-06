@@ -18,5 +18,6 @@ namespace web.Models.InputModels
         public double Discount { get; set; }
         public List<int> Genres { get; set; }
         public List<GenreListViewModel> AllGenres { get; set; }
+        public List<AuthorListViewModel>AllAuthors { get; set; }
     }
 }
