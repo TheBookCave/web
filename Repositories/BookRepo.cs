@@ -30,7 +30,6 @@ namespace web.Repositories
                              Name = b.Name,
                              AuthorId = b.AuthorId,
                              ImageUrl = b.ImageUrl,
-                             Rating = b.Rating,
                              Price = b.Price,
                              Discount = b.Discount
                          }).ToList();
@@ -85,7 +84,6 @@ namespace web.Repositories
                 Quantity = inputBook.Quantity,
                 Price = inputBook.Price, 
                 Discount = inputBook.Discount,
-                Rating = 0
             };
 
             _db.Books.Add(newBook);
