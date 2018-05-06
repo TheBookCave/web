@@ -1,5 +1,8 @@
 @model web.Models.InputModels.BookInputModel
-
+    <br/>
+    <br/>
+    <br/>
+    <br/>
 <h1>Add a new book</h1>
 
  <form method="POST">
@@ -7,10 +10,20 @@
     <input type="text" asp-for="Name">
     <span asp-validation-for="Name" class="text-danger"></span>
     <br/>
-    <label asp-for="AuthorId">AuthorId</label>
-    <input type="number" asp-for="AuthorId">
-    <span asp-validation-for="AuthorId" class="text-danger"></span>
+
+
+    <label>Author</label>
+    <select asp-for="AuthorId">
+        @foreach (var author in Model.AllAuthors)
+        {
+            <option name="AuthorId" value=@author.Id >@author.Name</option>
+        }
+    </select>
+
+    <a asp-controller="Book" asp-action="CreateAuthor" >New Author</a>
     <br/>
+
+
     <label asp-for="PublisherId">PublisherId</label>
     <input type="number" asp-for="PublisherId">
     <span asp-validation-for="PublisherId" class="text-danger"></span>
@@ -43,7 +56,7 @@
     <input type="number" asp-for="Discount">
     <span asp-validation-for="Discount" class="text-danger"></span>
     <br/>
-
+    <label asp-for="Genres">Genre</label>
     @foreach (var genre in Model.AllGenres)
     {
         <div class="checkbox">

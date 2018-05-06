@@ -20,9 +20,11 @@ namespace web.Repositories
         }
 
         // Function that returns a Linq Query of all the books in a database
+
         public IQueryable<BookListViewModel> GetAllBooksLinqQuery()
         {
             var ratings = GetAllAverageRatings();
+
 
             var books = (from b in _db.Books
                          join r in ratings on b.Id equals r.BookId into a

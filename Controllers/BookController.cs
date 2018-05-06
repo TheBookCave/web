@@ -76,11 +76,11 @@ namespace web.Controllers
         public IActionResult Create()
         {
 
-            var allGenres = new BookInputModel {
+            var inputModel = new BookInputModel {
                 AllGenres = _bookService.GetAllGenres(),
                 AllAuthors = _bookService.GetAllAuthors()
             };
-            return View(allGenres);
+            return View(inputModel);
         }
 
          [HttpPost]
@@ -119,7 +119,7 @@ namespace web.Controllers
             if(ModelState.IsValid)
             {
                 _bookService.AddAuthor(inputAuthor);
-                return RedirectToAction("Index");
+                return RedirectToAction("Create");
             }
             return View();
         } 
