@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using web.Models.InputModels;
 using web.Models.ViewModels;
 using web.Repositories;
+using System.Linq;
 
 namespace web.Services
 {
@@ -30,51 +31,51 @@ namespace web.Services
         }
 
         // Function that return a list of all the books in alphabetic order
-        public List<BookListViewModel> GetAllBooksOrderedByName()
+        public List<BookListViewModel> OrderByName(List<BookListViewModel> methodBooks)
         {
-            var books = _bookRepo.GetAllBooksOrderedByName();
+            var books = methodBooks.OrderBy(x => x.Name).ToList();
             return books;
         }
 
-        // Function that return a list of all the books in alphabetic order
-        public List<BookListViewModel> GetAllBooksOrderedByNameDesc()
+        // Function that return a list of all the books in alphabetic order desc.
+        public List<BookListViewModel> OrderByNameDesc(List<BookListViewModel> methodBooks)
         {
-            var books = _bookRepo.GetAllBooksOrderedByNameDesc();
+            var books = methodBooks.OrderByDescending(x => x.Name).ToList();
             return books;
         }
 
         // Function that return a list of all the books ordered by price
-        public List<BookListViewModel> GetAllBooksOrderedByPrice()
+        public List<BookListViewModel> OrderByPrice(List<BookListViewModel> methodBooks)
         {
-            var books = _bookRepo.GetAllBooksOrderedByPrice();
+            var books = methodBooks.OrderBy(x => x.Price).ToList();
             return books;
         }
 
         // Function that return a list of all the books ordered by price desc
-        public List<BookListViewModel> GetAllBooksOrderedByPriceDesc()
+        public List<BookListViewModel> OrderByPriceDesc(List<BookListViewModel> methodBooks)
         {
-            var books = _bookRepo.GetAllBooksOrderedByPriceDesc();
+            var books = methodBooks.OrderByDescending(x => x.Price).ToList();
             return books;
         }
 
         // Function that return a list of all the books ordered by rating desc
-        public List<BookListViewModel> GetAllBooksOrderedByRatingDesc()
+        public List<BookListViewModel> OrderByRatingDesc(List<BookListViewModel> methodBooks)
         {
-            var books = _bookRepo.GetAllBooksOrderedByRatingDesc();
+            var books = methodBooks.OrderByDescending(x => x.Rating).ToList();
             return books;
         }
 
         // Function that return a list of all the books ordered by rating
-        public List<BookListViewModel> GetAllBooksOrderedByRating()
+        public List<BookListViewModel> OrderByRating(List<BookListViewModel> methodBooks)
         {
-            var books = _bookRepo.GetAllBooksOrderedByRating();
+            var books = methodBooks.OrderBy(x => x.Rating).ToList();
             return books;
         }
 
         // Function that return a list of all the books ordered by rating
         public List<BookListViewModel> GetTop10Books()
         {
-            var books = _bookRepo.GetTop10Books();
+            var books = _bookRepo.GetAllBooksLinqQuery().OrderByDescending(x => x.Rating).Take(10).ToList();
             return books;
         }
 
