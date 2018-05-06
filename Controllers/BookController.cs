@@ -84,7 +84,8 @@ namespace web.Controllers
 
             var inputModel = new BookInputModel {
                 AllGenres = _bookService.GetAllGenres(),
-                AllAuthors = _bookService.GetAllAuthors()
+                AllAuthors = _bookService.GetAllAuthors(),
+                AllPublishers = _bookService.GetAllPublishers()
             };
             return View(inputModel);
         }
@@ -106,7 +107,7 @@ namespace web.Controllers
             if(ModelState.IsValid)
             {
                 _bookService.AddGenre(inputGenre);
-                return RedirectToAction("Index");
+                return RedirectToAction("Create");
             }
             return View();
         } 
@@ -142,7 +143,7 @@ namespace web.Controllers
             if(ModelState.IsValid)
             {
                 _bookService.AddPublisher(inputPublisher);
-                return RedirectToAction("Index");
+                return RedirectToAction("Create");
             }
             return View();
         } 

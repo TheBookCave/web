@@ -3,6 +3,7 @@ using web.Models.InputModels;
 using web.Models.ViewModels;
 using web.Repositories;
 using System.Linq;
+using System;
 
 namespace web.Services
 {
@@ -106,6 +107,15 @@ namespace web.Services
         {
             var authors = _authorRepo.GetAllAuthors();
             return authors;
+        }
+
+        public List<PublisherListViewModel> GetAllPublishers()
+        {
+            var publishers = _publisherRepo.GetAllPublishers();
+            foreach (var p in publishers) {
+                Console.WriteLine(p);
+            }
+            return publishers;
         }
 
         public void AddAuthor(AuthorInputModel inputAuthor)
