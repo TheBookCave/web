@@ -6,6 +6,7 @@ namespace web.Data.EntityModels
     public class Rating
     {
         public int Id { get; set; }
+        public int BookId { get; set; }
         public int CustomerId { get; set; }
         public int RatingValue { get; set; }
         public string Comment { get; set; }
