@@ -15,6 +15,6 @@ namespace web.Models.InputModels
         public int Quantity { get; set;}
         public double Price { get; set; }
         public double Discount { get; set; }
-        public List<Genre> Genres { get; set;}
+        public List<Genre> Genres { get; set; }
     }
 }
