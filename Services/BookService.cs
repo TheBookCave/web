@@ -29,6 +29,34 @@ namespace web.Services
             return books;
         }
 
+        // Function that return a list of all the books in alphabetic order
+        public List<BookListViewModel> GetAllBooksOrderedByName()
+        {
+            var books = _bookRepo.GetAllBooksOrderedByName();
+            return books;
+        }
+
+        // Function that return a list of all the books in alphabetic order
+        public List<BookListViewModel> GetAllBooksOrderedByNameDesc()
+        {
+            var books = _bookRepo.GetAllBooksOrderedByNameDesc();
+            return books;
+        }
+
+        // Function that return a list of all the books ordered by price
+        public List<BookListViewModel> GetAllBooksOrderedByPrice()
+        {
+            var books = _bookRepo.GetAllBooksOrderedByPrice();
+            return books;
+        }
+
+        // Function that return a list of all the books ordered by price
+        public List<BookListViewModel> GetAllBooksOrderedByPriceDesc()
+        {
+            var books = _bookRepo.GetAllBooksOrderedByPriceDesc();
+            return books;
+        }
+
         // Function that return a book with specified ID
         public BookDetailViewModel GetBookWithId(int Id)
         {

@@ -23,10 +23,33 @@ namespace web.Controllers
             _bookService = new BookService();
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string orderby)
         {
-            var books = _bookService.GetAllBooks();
-
+            var books = new List<BookListViewModel>();
+            if (orderby == "name-asc")
+            {
+                books = _bookService.GetAllBooksOrderedByName();
+            }
+            else if(orderby == "name-desc")
+            {
+                books = _bookService.GetAllBooksOrderedByNameDesc();
+            }
+            else if(orderby == "id")
+            {
+                books = _bookService.GetAllBooks();
+            }
+            else if(orderby == "price-asc")
+            {
+                books = _bookService.GetAllBooksOrderedByPrice();
+            }
+            else if(orderby == "price-desc")
+            {
+                books = _bookService.GetAllBooksOrderedByPriceDesc();
+            }     
+            else
+            {
+                books = _bookService.GetAllBooks();
+            }      
             return View(books);
         }
 

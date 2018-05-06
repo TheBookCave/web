@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using web.Models;
 using web.Models.ViewModels;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace web.Controllers
 {
@@ -22,6 +23,13 @@ namespace web.Controllers
         {
             _signInManager = signInManager;
             _userManager = userManager;
+        }
+
+        [Authorize]
+        [HttpGet]
+        public IActionResult Index()
+        {
+            return View();
         }
 
         [HttpGet]
@@ -44,7 +52,7 @@ namespace web.Controllers
                 await _userManager.AddClaimAsync(user, new Claim("Name", $"{model.FirstName} {model.LastName}"));
                 await _signInManager.SignInAsync(user, false);
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Account");
             }
             return View();
         }
@@ -65,10 +73,12 @@ namespace web.Controllers
 
             if(result.Succeeded)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Account");
             }
             return View();
         }
+
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]

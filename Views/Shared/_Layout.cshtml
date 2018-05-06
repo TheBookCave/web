@@ -35,8 +35,16 @@
           <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">The Book Cave</a>
         </div>
         <ul class="nav navbar-nav navbar-right">
-          <li><a asp-area="" asp-controller="Home" asp-action="Index"><i class="fas fa-user-plus"></i>Register</a></li>
-          <li><a asp-area="" asp-controller="Home" asp-action="About"><i class="fas fa-user"></i>Login</a></li>
+          @if(!User.Identity.IsAuthenticated) 
+          {
+              <li><a asp-area="" asp-controller="Account" asp-action="Register"><i class="fas fa-user-plus"></i>Register</a></li>
+              <li><a asp-area="" asp-controller="Account" asp-action="Login"><i class="fas fa-user"></i>Login</a></li>
+          } 
+          else 
+          {
+              <li><a asp-area="" asp-controller="Account" asp-action="Index"><i class="fas fa-user"></i>My Profile</a></li>
+              <li><a asp-area="" asp-controller="Account" asp-action="Logout"><i class="fas fa-user"></i>Logout</a></li>
+          }
         </ul>
         <form class="navbar-form navbar-right">
           <div class="form-group">
