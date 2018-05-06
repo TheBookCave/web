@@ -33,7 +33,7 @@ namespace web.Repositories
 
  //------------------------------------------------------------------------------------------- Virkar örugglega ekki eðlilega
  // Vantar að útbúa View á þessu formati:
- // |  Book ID  | List<GenreViewModel> |       þar sem GenreViewModel inniheldur Genre ID og Genre Name
+ // |  Book ID  | List<GenreViewModel> |       þar sem GenreViewModel inniheldur Genre ID og Genre Name eða bara List<string> þar sem það er nafnið á genre.
          public List<BookGenreViewModel> GetGenresForAllBooks()
          {
              var newList = new List<string>();
