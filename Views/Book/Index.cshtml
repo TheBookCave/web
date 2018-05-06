@@ -7,13 +7,23 @@
     <h4><a asp-controller="Book" asp-action="Index" asp-route-orderby="price-asc">Order by Price Ascending</a></h4>
     <h4><a asp-controller="Book" asp-action="Index" asp-route-orderby="price-desc">Order by Price Descending</a></h4>
 </div>
-<div>
+<div class="row">
     @foreach(var book in @Model)
     {
-        <p>Book Name: <a asp-controller="Book" asp-action="Details" asp-route-Id="@book.Id">@book.Name</a></p>
-        <p>Author ID: @book.AuthorId</p>
-        <p>Image ID: @book.ImageUrl</p>
-        <p>Price: @book.Price</p>
-        <p>Discount: @book.Discount</p>
+        <div class="col-sm-6 col-md-4 col-lg-3">
+            <div id="book-@book.Id" class="card">
+                <img class="card-img-top" src="@book.ImageUrl" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title"><a asp-controller="Book" asp-action="Details" asp-route-Id="@book.Id">@book.Name</a></h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the cards content.</p>
+                    <p>Author ID: @book.AuthorId</p>
+                    <p>Price: @book.Price</p>
+                    <p>Discount: @book.Discount</p>
+                    <p>Rating: @book.Rating</p>
+                    <a asp-controller="Book" asp-action="Details" asp-route-Id="@book.Id" class="btn btn-primary">Details</a>
+
+                </div>
+            </div>
+        </div>
     }
 </div>
