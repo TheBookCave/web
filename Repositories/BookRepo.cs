@@ -97,7 +97,7 @@ namespace web.Repositories
                 var newBookGenre = new BookGenre()
                 {
                     BookId = newBook.Id,
-                    GenreId = 1
+                    GenreId = genre.Id
                 };
 
                 _db.BookGenres.Add(newBookGenre);
