@@ -29,7 +29,7 @@ namespace web.Repositories
                              Id = b.Id,
                              Name = b.Name,
                              AuthorId = b.AuthorId,
-                             ImageId = b.ImageId,
+                             ImageUrl = b.ImageUrl,
                              Rating = b.Rating,
                              Price = b.Price,
                              Discount = b.Discount
@@ -49,7 +49,7 @@ namespace web.Repositories
                             Name = b.Name,
                             AuthorId = b.AuthorId,
                             PublisherId = b.PublisherId,
-                            ImageId = b.ImageId,
+                            ImageUrl = b.ImageUrl,
                             Year = b.Year,
                             ISBN = b.ISBN,
                             Language = b.Language
@@ -66,7 +66,7 @@ namespace web.Repositories
                 Name = inputBook.Name,
                 AuthorId = inputBook.AuthorId,
                 PublisherId = inputBook.PublisherId,
-                ImageId = inputBook.ImageId,
+                ImageUrl = inputBook.ImageUrl,
                 Year = inputBook.Year,
                 ISBN = inputBook.ISBN,
                 Language = inputBook.Language,

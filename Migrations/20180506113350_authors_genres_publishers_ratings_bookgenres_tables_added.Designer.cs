@@ -11,9 +11,10 @@ using web.Data;
 namespace web.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20180506113350_authors_genres_publishers_ratings_bookgenres_tables_added")]
+    partial class authors_genres_publishers_ratings_bookgenres_tables_added
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,17 +40,17 @@ namespace web.Migrations
 
                     b.Property<int>("AuthorId");
 
-                    b.Property<double>("Discount");
+                    b.Property<decimal>("Discount");
 
                     b.Property<string>("ISBN");
 
-                    b.Property<string>("ImageUrl");
+                    b.Property<int>("ImageId");
 
                     b.Property<string>("Language");
 
                     b.Property<string>("Name");
 
-                    b.Property<double>("Price");
+                    b.Property<decimal>("Price");
 
                     b.Property<int>("PublisherId");
 
