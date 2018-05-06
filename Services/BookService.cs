@@ -9,11 +9,17 @@ namespace web.Services
     {
         // BookService owns a private instance of BookRepo
         private BookRepo _bookRepo;
+        private GenreRepo _genreRepo;
+        private AuthorRepo _authorRepo;
+        private PublisherRepo _publisherRepo;
 
         // Constructor for BookService that creates the _bookRepo
         public BookService()
         {
             _bookRepo = new BookRepo();
+            _genreRepo = new GenreRepo();
+            _authorRepo = new AuthorRepo();
+            _publisherRepo = new PublisherRepo();
         }
 
         // Function that return a list of all the books
@@ -33,6 +39,28 @@ namespace web.Services
         public void AddBook(BookInputModel inputBook)
         {
             _bookRepo.AddBook(inputBook);
+        }
+
+        public void AddGenre(GenreInputModel inputGenre)
+        {
+            _genreRepo.AddGenre(inputGenre);
+        }
+
+        public List<GenreListViewModel> GetAllGenres()
+        {
+            var genres = _genreRepo.GetAllGenres();
+            return genres;
+        }
+
+        public void AddAuthor(AuthorInputModel inputAuthor)
+        {
+            _authorRepo.AddAuthor(inputAuthor);
+        }
+
+
+        public void AddPublisher(PublisherInputModel inputPublisher)
+        {
+            _publisherRepo.AddPublisher(inputPublisher);
         }
     }
 }

@@ -58,5 +58,58 @@ namespace web.Controllers
             return View();
         } 
 
+         [HttpPost]
+        public IActionResult CreateGenre(GenreInputModel inputGenre)
+        {
+            if(ModelState.IsValid)
+            {
+                _bookService.AddGenre(inputGenre);
+                return RedirectToAction("Index");
+            }
+            return View();
+        } 
+
+        [HttpGet]
+        public IActionResult CreateGenre()
+        {
+            return View();
+        }
+
+
+
+         [HttpPost]
+        public IActionResult CreateAuthor(AuthorInputModel inputAuthor)
+        {
+            if(ModelState.IsValid)
+            {
+                _bookService.AddAuthor(inputAuthor);
+                return RedirectToAction("Index");
+            }
+            return View();
+        } 
+
+        [HttpGet]
+        public IActionResult CreateAuthor()
+        {
+            return View();
+        }
+
+
+        public IActionResult CreatePublisher(PublisherInputModel inputPublisher)
+        {
+            if(ModelState.IsValid)
+            {
+                _bookService.AddPublisher(inputPublisher);
+                return RedirectToAction("Index");
+            }
+            return View();
+        } 
+
+        [HttpGet]
+        public IActionResult CreatePublisher()
+        {
+            return View();
+        }
+
     }
 }
