@@ -19,5 +19,7 @@ namespace web.Models.InputModels
         public List<int> Genres { get; set; }
         public List<GenreListViewModel> AllGenres { get; set; }
         public List<AuthorListViewModel>AllAuthors { get; set; }
+        public List<PublisherListViewModel>AllPublishers { get; set; }
+
     }
 }

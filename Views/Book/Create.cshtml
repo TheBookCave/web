@@ -24,16 +24,23 @@
     <br/>
 
 
-    <label asp-for="PublisherId">PublisherId</label>
-    <input type="number" asp-for="PublisherId">
-    <span asp-validation-for="PublisherId" class="text-danger"></span>
+    <label>Publisher</label>
+    <select asp-for="PublisherId">
+    @foreach (var publisher in Model.AllPublishers)
+        {
+            <option name="PublisherId" value=@publisher.Id>@publisher.Name</option>
+        }
+    </select>
+
+    <a asp-controller="Book" asp-action="CreatePublisher" >New Publisher</a>
     <br/>
+
     <label asp-for="ImageUrl">ImageUrl</label>
     <input type="url" asp-for="ImageUrl">
     <span asp-validation-for="ImageUrl" class="text-danger"></span>
     <br/>
     <label asp-for="Year">Year</label>
-    <input type="number" asp-for="Year">
+    <input type="number" asp-for="Year" value="@DateTime.Now.Year.ToString()">
     <span asp-validation-for="Year" class="text-danger"></span>
     <br/>
     <label asp-for="ISBN">ISBN</label>
@@ -41,7 +48,7 @@
     <span asp-validation-for="ISBN" class="text-danger"></span>
     <br/>
     <label asp-for="Language">Language</label>
-    <input type="text" asp-for="Language">
+    <input type="text" asp-for="Language" value="English">
     <span asp-validation-for="Language" class="text-danger"></span>
     <br/>
     <label asp-for="Quantity">Quantity</label>
@@ -49,7 +56,7 @@
     <span asp-validation-for="Quantity" class="text-danger"></span>
     <br/>
     <label asp-for="Price">Price</label>
-    <input type="number" asp-for="Price">
+    <input type="number" asp-for="Price" value="20">
     <span asp-validation-for="Price" class="text-danger"></span>
     <br/>
     <label asp-for="Discount">Discount</label>
@@ -65,6 +72,9 @@
                         value="@genre.Id" />@genre.Name
             </label>
             </div>
-    }
+    }    
+    <a asp-controller="Book" asp-action="CreateGenre" >New Genre</a>
+    <br/>
+
     <input type="submit" value="Submit Book" class="btn btn-info">
 </form> 
