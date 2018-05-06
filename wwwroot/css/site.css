@@ -34,8 +34,15 @@
         display: none;
     }
 }
+
+
 .card {
     width: 200px;
-    height:200px;
+    height:800px;
     margin: 10px;
+}
+
+.card-img-top {
+    height: 100px;
+    width: 100px;
 }

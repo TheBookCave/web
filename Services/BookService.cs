@@ -101,6 +101,12 @@ namespace web.Services
             return genres;
         }
 
+        public List<AuthorListViewModel> GetAllAuthors()
+        {
+            var authors = _authorRepo.GetAllAuthors();
+            return authors;
+        }
+
         public void AddAuthor(AuthorInputModel inputAuthor)
         {
             _authorRepo.AddAuthor(inputAuthor);

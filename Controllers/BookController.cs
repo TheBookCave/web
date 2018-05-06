@@ -84,7 +84,8 @@ namespace web.Controllers
         {
 
             var allGenres = new BookInputModel {
-                AllGenres = _bookService.GetAllGenres()
+                AllGenres = _bookService.GetAllGenres(),
+                AllAuthors = _bookService.GetAllAuthors()
             };
             return View(allGenres);
         }
