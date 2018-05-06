@@ -6,6 +6,8 @@
     <h4><a asp-controller="Book" asp-action="Index" asp-route-orderby="id">Order by ID</a></h4>
     <h4><a asp-controller="Book" asp-action="Index" asp-route-orderby="price-asc">Order by Price Ascending</a></h4>
     <h4><a asp-controller="Book" asp-action="Index" asp-route-orderby="price-desc">Order by Price Descending</a></h4>
+    <h4><a asp-controller="Book" asp-action="Index" asp-route-orderby="rating-asc">Order by Rating Ascending</a></h4>
+    <h4><a asp-controller="Book" asp-action="Index" asp-route-orderby="rating-desc">Order by Rating Descending</a></h4>
 </div>
 <div>
     @foreach(var book in @Model)

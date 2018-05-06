@@ -19,8 +19,8 @@ namespace web.Repositories
             _db = new DataContext();
         }
 
-        // Function that returns a list of all the books in a database
-        public List<BookListViewModel> GetAllBooks()
+        // Function that returns a Linq Query of all the books in a database
+        public IQueryable<BookListViewModel> GetAllBooksLinqQuery()
         {
             var ratings = GetAllAverageRatings();
 
@@ -36,7 +36,14 @@ namespace web.Repositories
                              Price = b.Price,
                              Discount = b.Discount,
                              Rating = c.AverageRating
-                         }).ToList();
+                         });
+            return books;
+        }
+
+        // Function that returns the list of Books
+        public List<BookListViewModel> GetAllBooks()
+        {
+            var books = GetAllBooksLinqQuery().ToList();
             return books;
         }
 
@@ -57,68 +64,42 @@ namespace web.Repositories
         // Function that returns a list of all books ordered by the book name
         public List<BookListViewModel> GetAllBooksOrderedByName()
         {
-            var books = (from b in _db.Books
-                         select new BookListViewModel
-                         {
-                             Id = b.Id,
-                             Name = b.Name,
-                             AuthorId = b.AuthorId,
-                             ImageUrl = b.ImageUrl,
-                             Price = b.Price,
-                             Discount = b.Discount
-                         }).OrderBy(x => x.Name).ToList();
-
+            var books = GetAllBooksLinqQuery().OrderBy(x => x.Name).ToList();
             return books;            
         }
 
         // Function that returns a list of all books ordered by the book name descending
         public List<BookListViewModel> GetAllBooksOrderedByNameDesc()
         {
-            var books = (from b in _db.Books
-                         select new BookListViewModel
-                         {
-                             Id = b.Id,
-                             Name = b.Name,
-                             AuthorId = b.AuthorId,
-                             ImageUrl = b.ImageUrl,
-                             Price = b.Price,
-                             Discount = b.Discount
-                         }).OrderByDescending(x => x.Name).ToList();
-
+            var books = GetAllBooksLinqQuery().OrderByDescending(x => x.Name).ToList();
             return books;            
         }
 
         // Function that returns a list of all books ordered by the book price descending
         public List<BookListViewModel> GetAllBooksOrderedByPriceDesc()
         {
-            var books = (from b in _db.Books
-                         select new BookListViewModel
-                         {
-                             Id = b.Id,
-                             Name = b.Name,
-                             AuthorId = b.AuthorId,
-                             ImageUrl = b.ImageUrl,
-                             Price = b.Price,
-                             Discount = b.Discount
-                         }).OrderByDescending(x => x.Price).ToList();
-
+            var books = GetAllBooksLinqQuery().OrderByDescending(x => x.Price).ToList();
             return books;            
         }
 
         // Function that returns a list of all books ordered by the book price
         public List<BookListViewModel> GetAllBooksOrderedByPrice()
         {
-            var books = (from b in _db.Books
-                         select new BookListViewModel
-                         {
-                             Id = b.Id,
-                             Name = b.Name,
-                             AuthorId = b.AuthorId,
-                             ImageUrl = b.ImageUrl,
-                             Price = b.Price,
-                             Discount = b.Discount
-                         }).OrderBy(x => x.Price).ToList();
+            var books = GetAllBooksLinqQuery().OrderBy(x => x.Price).ToList();
+            return books;            
+        }
 
+        // Function that returns a list of all books ordered by the book rating descending
+        public List<BookListViewModel> GetAllBooksOrderedByRatingDesc()
+        {
+            var books = GetAllBooksLinqQuery().OrderByDescending(x => x.Rating).ToList();
+            return books;            
+        }
+
+        // Function that returns a list of all books ordered by the book rating
+        public List<BookListViewModel> GetAllBooksOrderedByRating()
+        {
+            var books = GetAllBooksLinqQuery().OrderBy(x => x.Rating).ToList();
             return books;            
         }
 

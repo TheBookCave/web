@@ -45,7 +45,15 @@ namespace web.Controllers
             else if(orderby == "price-desc")
             {
                 books = _bookService.GetAllBooksOrderedByPriceDesc();
-            }     
+            }
+            else if(orderby == "rating-asc")
+            {
+                books = _bookService.GetAllBooksOrderedByRating();
+            }
+            else if(orderby == "rating-desc")
+            {
+                books = _bookService.GetAllBooksOrderedByRatingDesc();
+            }
             else
             {
                 books = _bookService.GetAllBooks();
