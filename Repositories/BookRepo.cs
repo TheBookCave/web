@@ -22,7 +22,11 @@ namespace web.Repositories
         // Function that returns a list of all the books in a database
         public List<BookListViewModel> GetAllBooks()
         {
+            var ratings = GetAllAverageRatings();
+
             var books = (from b in _db.Books
+                         join r in ratings on b.Id equals r.BookId into a
+                         from c in a.DefaultIfEmpty(new RatingViewModel() {BookId = b.Id, AverageRating = 0})
                          select new BookListViewModel
                          {
                              Id = b.Id,
@@ -30,10 +34,24 @@ namespace web.Repositories
                              AuthorId = b.AuthorId,
                              ImageUrl = b.ImageUrl,
                              Price = b.Price,
-                             Discount = b.Discount
+                             Discount = b.Discount,
+                             Rating = c.AverageRating
                          }).ToList();
-
             return books;
+        }
+
+        // Function that calculates average rating for all books
+        public List<RatingViewModel> GetAllAverageRatings()
+        {
+            var averageRatings = ( from r in _db.Ratings
+                                   group r by r.BookId into rating
+                                   select new RatingViewModel
+                                   {
+                                       BookId = rating.Key,
+                                       AverageRating = rating.Average(x => x.RatingValue)
+                                   }).ToList();
+        
+            return averageRatings;
         }
 
         // Function that returns a list of all books ordered by the book name
