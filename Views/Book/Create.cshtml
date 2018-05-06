@@ -43,5 +43,15 @@
     <input type="number" asp-for="Discount">
     <span asp-validation-for="Discount" class="text-danger"></span>
     <br/>
+
+    @foreach (var genre in Model.AllGenres)
+    {
+        <div class="checkbox">
+            <label>
+                <input name="Genres" type="checkbox"
+                        value="@genre.Id" />@genre.Name
+            </label>
+            </div>
+    }
     <input type="submit" value="Submit Book" class="btn btn-info">
 </form> 

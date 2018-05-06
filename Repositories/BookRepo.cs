@@ -85,25 +85,19 @@ namespace web.Repositories
                 Price = inputBook.Price, 
                 Discount = inputBook.Discount,
             };
-
-
+            
             _db.Books.Add(newBook);
             _db.SaveChanges();
 
-            int a = newBook.Id;
-        
-            foreach(var genre in inputBook.Genres)
-            {
-                var newBookGenre = new BookGenre()
-                {
+            foreach (var genre in inputBook.Genres) {
+                var _bookGenre = new BookGenre() {
+                    //Id
                     BookId = newBook.Id,
-                    GenreId = genre.Id
+                    GenreId = genre
                 };
-
-                _db.BookGenres.Add(newBookGenre);
-                _db.SaveChanges();
+                _db.BookGenres.Add(_bookGenre);
             }
-
+            _db.SaveChanges();
         }
 
     }

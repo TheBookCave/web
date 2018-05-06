@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using web.Models.ViewModels;
 using web.Data.EntityModels;
 
 namespace web.Models.InputModels
@@ -15,6 +16,7 @@ namespace web.Models.InputModels
         public int Quantity { get; set;}
         public double Price { get; set; }
         public double Discount { get; set; }
-        public List<Genre> Genres { get; set; }
+        public List<int> Genres { get; set; }
+        public List<GenreListViewModel> AllGenres { get; set; }
     }
 }

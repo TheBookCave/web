@@ -44,7 +44,11 @@ namespace web.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+
+            var allGenres = new BookInputModel {
+                AllGenres = _bookService.GetAllGenres()
+            };
+            return View(allGenres);
         }
 
          [HttpPost]
