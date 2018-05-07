@@ -9,23 +9,5 @@
     <h4><a asp-controller="Book" asp-action="Index" asp-route-orderby="rating-desc">Order by Rating Descending</a></h4>
     <h5>Test: <a asp-controller="Book" asp-action="Top10">Top 10 books by rating</a></h5>
 </div>
-<div class="row">
-    @foreach(var book in @Model)
-    {
-        <div class="col-sm-6 col-md-4 col-lg-3">
-            <div id="book-@book.Id" class="thumbnail card photo-item">
-                <img class="card-img-top" src="@book.ImageUrl" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title"><a asp-controller="Book" asp-action="Details" asp-route-Id="@book.Id">@book.Name</a></h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the cards content.</p>
-                    <p>Author ID: @book.AuthorId</p>
-                    <p>Price: @book.Price</p>
-                    <p>Discount: @book.Discount</p>
-                    <p>Rating: @book.Rating</p>
-                    <a asp-controller="Book" asp-action="Details" asp-route-Id="@book.Id" class="btn btn-primary">Details</a>
 
-                </div>
-            </div>
-        </div>
-    }
-</div>
+@{ await Html.RenderPartialAsync("Books", Model);}
