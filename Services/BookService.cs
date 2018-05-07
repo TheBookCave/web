@@ -90,6 +90,10 @@ namespace web.Services
         // Function that searches books
         public List<BookListViewModel> SearchResults(string searchString)
         {
+            if(searchString == null) 
+            {
+                searchString = "";
+            }
             searchString = searchString.ToLower();
             
             var books = _bookRepo.GetAllBooksLinqQuery().Where( a => a.Author.ToLower().Contains(searchString) || a.Name.ToLower().Contains(searchString)).ToList();
