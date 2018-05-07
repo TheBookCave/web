@@ -1,11 +1,21 @@
 
-
 <div>
     <h2>Account Profile</h2>
 </div>
-<div>
-    Hi you
-</div>
+@{
+    var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
+    if (claimsIdentity != null)
+    {
+        var b = claimsIdentity.Claims.FirstOrDefault(x => x.Type == "Name");
+        if (b != null)
+        {
+            <p>
+                Hi @b.Value.ToString()
+            </p>   
+        }
+    }
+}
+
 
 <form asp-action="Logout" asp-controller="Account" method="POST">
     <div class="form-group">
