@@ -1,34 +1,41 @@
 @model List<web.Models.ViewModels.BookListViewModel>
-<div class="row">
-  @{ int counter = 0;}
-  @foreach(var book in @Model)
-  {
-    <div class="col-sm-6 col-md-4 col-lg-3">
-      <div id="book-@book.Id" class="thumbnail card photo-item">
-        <img class="card-img-top" src="@book.ImageUrl" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title"><a asp-controller="Book" asp-action="Details" asp-route-Id="@book.Id">@book.Name</a></h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the cards content.</p>
-          <p>Author: @book.Author</p>
-          <p>Price: @book.Price</p>
-          <p>Discount: @book.Discount</p>
-          <p>Rating: @book.Rating</p>
-          <a asp-controller="Book" asp-action="Details" asp-route-Id="@book.Id" class="btn btn-primary">Details</a>
 
+@if(!Model.Any())
+{
+  <p>Sorry, we did not find what you were looking for. Please try again.</p>
+}
+else {
+  <div class="row">
+    @{ int counter = 0;}
+    @foreach(var book in @Model)
+    {
+      <div class="col-sm-6 col-md-4 col-lg-3">
+        <div id="book-@book.Id" class="thumbnail card photo-item">
+          <img class="card-img-top" src="@book.ImageUrl" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title"><a asp-controller="Book" asp-action="Details" asp-route-Id="@book.Id">@book.Name</a></h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the cards content.</p>
+            <p>Author: @book.Author</p>
+            <p>Price: @book.Price</p>
+            <p>Discount: @book.Discount</p>
+            <p>Rating: @book.Rating</p>
+            <a asp-controller="Book" asp-action="Details" asp-route-Id="@book.Id" class="btn btn-primary">Details</a>
+
+          </div>
         </div>
       </div>
-    </div>
-    counter++;
-    @if (counter % 4 == 0 && counter % 3 == 0) 
-    {
-      <div class="clearfix visible-lg-block visible-md-block"></div>
+      counter++;
+      @if (counter % 4 == 0 && counter % 3 == 0) 
+      {
+        <div class="clearfix visible-lg-block visible-md-block"></div>
+      }
+      else if (counter % 4 == 0) 
+      {
+        <div class="clearfix visible-lg-block"></div>
+      }
+      else if (counter % 3 == 0) {
+        <div class="clearfix visible-md-block"></div>
+      }
     }
-    else if (counter % 4 == 0) 
-    {
-      <div class="clearfix visible-lg-block"></div>
-    }
-    else if (counter % 3 == 0) {
-      <div class="clearfix visible-md-block"></div>
-    }
-  }
-</div>
+  </div>
+}
