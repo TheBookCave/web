@@ -87,6 +87,16 @@ namespace web.Services
             return book;
         }
 
+        // Function that searches books
+        public List<BookListViewModel> SearchResults(string searchString)
+        {
+            searchString = searchString.ToLower();
+            
+            var books = _bookRepo.GetAllBooksLinqQuery().Where( a => a.Author.ToLower().Contains(searchString) || a.Name.ToLower().Contains(searchString)).ToList();
+
+            return books;
+        }
+
         public void AddBook(BookInputModel inputBook)
         {
             _bookRepo.AddBook(inputBook);
@@ -128,5 +138,6 @@ namespace web.Services
         {
             _publisherRepo.AddPublisher(inputPublisher);
         }
+
     }
 }

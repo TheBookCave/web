@@ -68,13 +68,14 @@ namespace web.Repositories
             var allGenres = GetAllGenres();
 
             var books = (from b in _db.Books
+                         join at in _db.Authors on b.AuthorId equals at.Id
                          join r in ratings on b.Id equals r.BookId into a
                          from c in a.DefaultIfEmpty(new RatingViewModel() {BookId = b.Id, AverageRating = 0})
                          select new BookListViewModel
                          {
                              Id = b.Id,
                              Name = b.Name,
-                             AuthorId = b.AuthorId,
+                             Author = at.Name,
                              ImageUrl = b.ImageUrl,
                              Price = b.Price,
                              Discount = b.Discount,
