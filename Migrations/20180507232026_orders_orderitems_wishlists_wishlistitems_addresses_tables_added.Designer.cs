@@ -11,9 +11,10 @@ using web.Data;
 namespace web.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20180507232026_orders_orderitems_wishlists_wishlistitems_addresses_tables_added")]
+    partial class orders_orderitems_wishlists_wishlistitems_addresses_tables_added
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
