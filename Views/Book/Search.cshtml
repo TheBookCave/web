@@ -4,3 +4,8 @@
 </div>
 
 @{ await Html.RenderPartialAsync("Books", Model);}
+
+@if(!Model.Any())
+{
+   <p>No search results. Please try again.</p>
+}
