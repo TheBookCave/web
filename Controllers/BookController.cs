@@ -137,7 +137,6 @@ namespace web.Controllers
             return View();
         }
 
-
         public IActionResult CreatePublisher(PublisherInputModel inputPublisher)
         {
             if(ModelState.IsValid)
@@ -152,6 +151,13 @@ namespace web.Controllers
         public IActionResult CreatePublisher()
         {
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult Search(string searchString)
+        {
+            var foundBooks = _bookService.SearchResults(searchString);
+            return View(foundBooks);
         }
 
 

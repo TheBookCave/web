@@ -1,0 +1,6 @@
+@model List<web.Models.ViewModels.BookListViewModel>
+<div>
+    <h2>Search Results</h2>
+</div>
+
+@{ await Html.RenderPartialAsync("Books", Model);}
