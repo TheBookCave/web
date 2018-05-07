@@ -19,12 +19,53 @@ namespace web.Repositories
             _db = new DataContext();
         }
 
-        // Function that returns a Linq Query of all the books in a database
+        // Function that return all available Genres with their ID so that they can be clickable
+        public List<GenreListViewModel> GetAllGenres()
+        {
+            var genres = (from g in _db.Genres
+                         select new GenreListViewModel
+                         {
+                             Id = g.Id,
+                             Name = g.Name
+                         }).ToList();
+            return genres;
+        }
 
+ //------------------------------------------------------------------------------------------- Virkar örugglega ekki eðlilega
+ // Vantar að útbúa View á þessu formati:
+ // |  Book ID  | List<GenreViewModel> |       þar sem GenreViewModel inniheldur Genre ID og Genre Name eða bara List<string> þar sem það er nafnið á genre.
+         public List<BookGenreViewModel> GetGenresForAllBooks()
+         {
+             var newList = new List<string>();
+
+            var genres = ( from b in _db.Books
+                           join bg in _db.BookGenres on b.Id equals bg.BookId
+                           join g in _db.Genres on bg.GenreId equals g.Id into view
+                           from x in view.DefaultIfEmpty()
+                           select new
+                           {
+                               BookId = x.Id,
+                               BookGenres = view.SelectMany(y => y.Name).ToList()
+                           }).ToList();
+            
+            var result = genres.SelectMany(x => x.BookGenres).ToList();
+                           
+            return null;
+            //     from bg in _db.BookGenres
+            //               join g in _db.Genres on bg.GenreId equals g.Id into a
+            //               from b in a.DefaultIfEmpty(new BookGenreViewModel() {BookId = bg.BookId, BookGenres = null})
+            //               select new 
+            // )
+            // return genres;
+         }
+
+//--------------------------------------------------------------------------------------------------------------------------------------------
+        // Function that returns a Linq Query of all the books in a database
         public IQueryable<BookListViewModel> GetAllBooksLinqQuery()
         {
             var ratings = GetAllAverageRatings();
 
+            var allGenres = GetAllGenres();
 
             var books = (from b in _db.Books
                          join r in ratings on b.Id equals r.BookId into a
@@ -37,7 +78,9 @@ namespace web.Repositories
                              ImageUrl = b.ImageUrl,
                              Price = b.Price,
                              Discount = b.Discount,
-                             Rating = c.AverageRating
+                             Rating = c.AverageRating,
+                             Genres = null,
+                             AllGenres = allGenres
                          });
             return books;
         }
