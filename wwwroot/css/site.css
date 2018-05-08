@@ -13,7 +13,7 @@
 
 /* Resizing images */
 /* https://stackoverflow.com/questions/4684304/how-can-i-resize-an-image-dynamically-with-css-as-the-browser-width-height-chang */
-img {
+.bookImage {
   max-width: 100%;
   height: auto;
   width: auto\9; /* ie8 */
