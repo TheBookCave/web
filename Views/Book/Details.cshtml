@@ -1,18 +1,22 @@
 @model web.Models.ViewModels.BookDetailViewModel 
-<br />
-<br />
-<br />
 
 <h1>Book Detail</h1>
-<div>
-    <p>Book name: @Model.Name</p>
-    <p>Author name: @Model.AuthorName</p>
-    <p>Publisher name: @Model.PublisherName</p>
-    <p>ImageUrl: <img src="@Model.ImageUrl"/></p>
-    <p>Year published: @Model.Year</p>
-    <p>ISBN: @Model.ISBN</p>
-    <p>Language: @Model.Language</p>
-    <p>Price: @Model.Price</p>
-    <p>Discount: @Model.Discount</p>
-    <p>Rating: @Model.Rating</p>
+<div class="row">
+    <div class="col-md-4"><img src="@Model.ImageUrl"/></div>
+    <div class="row col-md-8">
+        <h3 class="col-md-12">@Model.Name</h3>
+        <div class="col-md-6">Price: @Model.Price</div>
+        <div class="col-md-6">Rating: @Model.Rating</div>
+        <div class="col-md-12">Discount: @Model.Discount</div>
+        <div class="col-md-12">Language: @Model.Language</div>
+        <div class="col-md-12">Author name: @Model.AuthorName</div>
+        <div class="col-md-12">Publisher name: @Model.PublisherName</div>
+        <div class="col-md-6">Year published: @Model.Year</div>
+        <div class="col-md-6">ISBN: @Model.ISBN</div>
+    </div>
+    <div class="row col-xl-4 col-lg-5">
+        <button class="btn col-md-12"><i class="fas fa-cart-plus"></i> Add to cart</button>
+        <button class="btn col-md-5"><i class="far fa-star"></i> Review</button>
+        <button class="btn col-md-6 offset-md-1"><i class="far fa-heart"></i> Add to wishlist</button>
+    </div>
 </div>
