@@ -11,6 +11,14 @@
   padding-top: inherit;
 }
 
+/* Resizing images */
+/* https://stackoverflow.com/questions/4684304/how-can-i-resize-an-image-dynamically-with-css-as-the-browser-width-height-chang */
+img {
+  max-width: 100%;
+  height: auto;
+  width: auto\9; /* ie8 */
+}
+
 /* Carousel */
 .carousel-caption p {
   font-size: 20px;
