@@ -11,15 +11,11 @@ namespace web.Services
     {
         // OrderService owns a private instance of OrderRepo
         private OrderRepo _orderRepo;
-        private BookRepo _bookRepo;
-        private GenreRepo _genreRepo;
-        private AuthorRepo _authorRepo;
-        private PublisherRepo _publisherRepo;
 
         // Constructor for OrderService that creates the _orderRepo
         public OrderService()
         {
-            _bookRepo = new BookRepo();
+            _orderRepo = new OrderRepo();
         }
 
         // Function that return a list of all the orders
