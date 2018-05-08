@@ -12,3 +12,8 @@ $("#currentPriceRangeValue").text($("#priceRange").val());
 $("#priceRange").change(function() {
   $("#currentPriceRangeValue").text($("#priceRange").val());
 });
+
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})

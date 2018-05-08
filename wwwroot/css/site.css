@@ -45,6 +45,18 @@
     }
 }
 
+.rating {
+    bottom: auto;
+}
+
+.star {
+    color: gold;
+    font-size: large;
+}
+
+.book-card {
+    margin-bottom: 25px;
+}
 
 /*.card {
     width: 200px;
