@@ -13,11 +13,21 @@ namespace web.Data
         public DbSet<Rating> Ratings { get; set; }
         public DbSet<BookGenre> BookGenres { get; set; }
 
+        public DbSet<Order> Orders { get; set; }
+
+        public DbSet<OrderItem> OrderItems { get; set; }
+
+        public DbSet<WishList> WishLists { get; set; }
+        public DbSet<WishListItem> WishListItems { get; set; }
+
+        public DbSet<Address> Addresses { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
                 .UseSqlServer(
+                    
 ""
                 );
         }

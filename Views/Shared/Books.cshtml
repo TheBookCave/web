@@ -6,10 +6,9 @@
 }
 else {
   <div class="row">
-    @{ int counter = 0;}
     @foreach(var book in @Model)
     {
-      <div class="col-sm-6 col-md-4 col-lg-3">
+      <!--<div class="col-sm-6 col-md-4 col-lg-3">
         <div id="book-@book.Id" class="thumbnail card photo-item">
           <img class="card-img-top" src="@book.ImageUrl" alt="Card image cap">
           <div class="card-body">
@@ -23,19 +22,47 @@ else {
 
           </div>
         </div>
+      </div>-->
+  <div class="col-sm-6 col-md-4 col-lg-3 book-card">
+    <div class="card align-item-stretch">
+      <a asp-controller="Book" asp-action="Details" asp-route-Id="@book.Id" data-toggle="tooltip" data-placement="right" title="Some quick example text to build on the card title and make up the bulk of the cards content.">
+        <img class="card-img-top" src="@book.ImageUrl" alt="Card image cap">
+        <div class="card-img-overlay badge rating">
+          <span class="badge badge-secondary star">
+          @if(@book.Rating <= 0.5) {
+            <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          }
+          else if(@book.Rating <= 1.5) {
+            <i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          }
+          else if(@book.Rating <= 2.5) {
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          }
+          else if(@book.Rating <= 3.5) {
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          }
+          else if(@book.Rating <= 4.5) {
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+          }
+          else if(@book.Rating <= 5) {
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          }
+          @book.Rating
+          </span>
+        </div>
+      </a>
+      <div class="card-body">
+        <a class="card-link" asp-controller="Book" asp-action="Details" asp-route-Id="@book.Id">
+          <h5 class="card-title">@book.Name</h5>
+        </a>
+        <h6 class="card-subtitle mb-2 text-muted">@book.Author</h6>
       </div>
-      counter++;
-      @if (counter % 4 == 0 && counter % 3 == 0) 
-      {
-        <div class="clearfix visible-lg-block visible-md-block"></div>
-      }
-      else if (counter % 4 == 0) 
-      {
-        <div class="clearfix visible-lg-block"></div>
-      }
-      else if (counter % 3 == 0) {
-        <div class="clearfix visible-md-block"></div>
-      }
+      <div class="card-body">
+        <span class=""><i class="fas fa-dollar-sign"></i>@book.Price</span>
+        <button class="btn btn-success float-right"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+      </div>
+    </div>
+  </div>
     }
   </div>
 }
