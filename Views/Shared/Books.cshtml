@@ -6,7 +6,6 @@
 }
 else {
   <div class="row">
-    @{ int counter = 0;}
     @foreach(var book in @Model)
     {
       <div class="col-sm-6 col-md-4 col-lg-3">
@@ -24,18 +23,6 @@ else {
           </div>
         </div>
       </div>
-      counter++;
-      @if (counter % 4 == 0 && counter % 3 == 0) 
-      {
-        <div class="clearfix visible-lg-block visible-md-block"></div>
-      }
-      else if (counter % 4 == 0) 
-      {
-        <div class="clearfix visible-lg-block"></div>
-      }
-      else if (counter % 3 == 0) {
-        <div class="clearfix visible-md-block"></div>
-      }
     }
   </div>
 }
