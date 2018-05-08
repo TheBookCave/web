@@ -24,11 +24,15 @@ namespace web.Controllers
             _bookService = new BookService(context);
         }
 
-        public IActionResult Index(string orderby, string genre)
+        public IActionResult Index(string orderby, string searchString2)
         {
-            var books = new List<BookListViewModel>();
 
-            books = _bookService.GetAllBooks();
+            var books = _bookService.GetAllBooks();
+
+            if (!String.IsNullOrEmpty(searchString2))
+            {
+                books = _bookService.SearchResults(searchString2);
+            }
 
             if (orderby == "name-asc")
             {
@@ -54,10 +58,7 @@ namespace web.Controllers
             {
                 books = _bookService.OrderByRatingDesc(books);
             }
-            else
-            {
-                books = _bookService.GetAllBooks();
-            }      
+    
             return View(books);
         }
 
