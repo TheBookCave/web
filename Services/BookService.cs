@@ -4,6 +4,7 @@ using web.Models.ViewModels;
 using web.Repositories;
 using System.Linq;
 using System;
+using web.Data;
 
 namespace web.Services
 {
@@ -16,12 +17,12 @@ namespace web.Services
         private PublisherRepo _publisherRepo;
 
         // Constructor for BookService that creates the _bookRepo
-        public BookService()
+        public BookService(DataContext context)
         {
-            _bookRepo = new BookRepo();
-            _genreRepo = new GenreRepo();
-            _authorRepo = new AuthorRepo();
-            _publisherRepo = new PublisherRepo();
+            _bookRepo = new BookRepo(context);
+            _genreRepo = new GenreRepo(context);
+            _authorRepo = new AuthorRepo(context);
+            _publisherRepo = new PublisherRepo(context);
         }
 
         // Function that return a list of all the books
