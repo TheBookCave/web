@@ -2,6 +2,7 @@
 using web.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using web.Data.EntityModels;
 
 namespace web.Data
 {
