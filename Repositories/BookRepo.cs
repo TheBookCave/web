@@ -14,9 +14,9 @@ namespace web.Repositories
         private DataContext _db;
 
         // Constructor to initialize the database
-        public BookRepo()
+        public BookRepo(DataContext context)
         {
-            _db = new DataContext();
+            _db = context;
         }
 
         // Function that return all available Genres with their ID so that they can be clickable

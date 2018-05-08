@@ -12,8 +12,8 @@ namespace web.Repositories
     {
         private DataContext _db;
 
-        public OrderRepo() {
-            _db = new DataContext();
+        public OrderRepo(DataContext context) {
+            _db = context;
         }
 
 // Function that returns a list of all the genres in a database

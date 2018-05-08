@@ -13,8 +13,8 @@ namespace web.Repositories
     {
         private DataContext _db;
 
-        public AuthorRepo() {
-            _db = new DataContext();
+        public AuthorRepo(DataContext context) {
+            _db = context;
         }
 
 // Function that returns a list of all the genres in a database

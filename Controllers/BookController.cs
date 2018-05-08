@@ -9,6 +9,7 @@ using web.Models;
 using web.Models.InputModels;
 using web.Models.ViewModels;
 using web.Services;
+using web.Data;
 
 namespace web.Controllers
 {
@@ -18,9 +19,9 @@ namespace web.Controllers
         private BookService _bookService;
 
         // Constructor for the BookController where the _bookService is created
-        public BookController()
+        public BookController(DataContext context)
         {
-            _bookService = new BookService();
+            _bookService = new BookService(context);
         }
 
         public IActionResult Index(string orderby, string genre)

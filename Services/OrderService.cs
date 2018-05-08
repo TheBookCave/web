@@ -4,6 +4,7 @@ using web.Models.ViewModels;
 using web.Repositories;
 using System.Linq;
 using System;
+using web.Data;
 
 namespace web.Services
 {
@@ -13,9 +14,9 @@ namespace web.Services
         private OrderRepo _orderRepo;
 
         // Constructor for OrderService that creates the _orderRepo
-        public OrderService()
+        public OrderService(DataContext context)
         {
-            _orderRepo = new OrderRepo();
+            _orderRepo = new OrderRepo(context);
         }
 
         // Function that return a list of all the orders

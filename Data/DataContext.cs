@@ -5,6 +5,8 @@ namespace web.Data
 {
     public class DataContext : DbContext
     {
+        public DataContext(DbContextOptions<DataContext> options) : base(options) { }
+
         public DbSet<Book> Books { get; set; }
         public DbSet<Author> Authors { get; set; }
         public DbSet<Genre> Genres { get; set; }
@@ -21,17 +23,6 @@ namespace web.Data
         public DbSet<WishListItem> WishListItems { get; set; }
 
         public DbSet<Address> Addresses { get; set; }
-
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder
-                .UseSqlServer(
-                    
-""
-                );
-        }
-
     }
 
 }
