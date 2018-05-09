@@ -10,6 +10,7 @@ using web.Models.InputModels;
 using web.Models.ViewModels;
 using web.Services;
 using web.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace web.Controllers
 {
@@ -17,15 +18,19 @@ namespace web.Controllers
     {
         // OrderController owns an instance of the OrderService
         private OrderService _orderService;
+        private readonly UserManager<ApplicationUser> _userManager;
+
 
         // Constructor for the BookController where the _bookService is created
-        public OrderController(DataContext context)
+        public OrderController(DataContext context, UserManager<ApplicationUser> userManager)
         {
             _orderService = new OrderService(context);
+            _userManager = userManager;
         }
 
         public IActionResult Index() {
-          var orderitems = _orderService.GetAllItemsInCart();
+          var userId = _userManager.GetUserId(HttpContext.User);
+          var orderitems = _orderService.GetAllItemsInCart(userId);
           return View(orderitems);
         }
 
@@ -60,10 +65,9 @@ namespace web.Controllers
 
 public IActionResult Cart(string orderby, Order order)
         {
-            var orderitems = new List<OrderItemListViewModel>();
-            orderitems = _orderService.GetAllItemsInCart();
-
-            return View(orderitems);
+          var userId = _userManager.GetUserId(HttpContext.User);
+          var orderitems = _orderService.GetAllItemsInCart(userId);
+          return View(orderitems);
         }
 
         public IActionResult Details(int Id)

@@ -2,13 +2,14 @@
 
 </br>
 </br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-<p>@Model[0].Id</p>
-<p> hallo </p>
 
+
+@foreach (var item in Model) {
+  <div class="cart-item">
+  <p>Book Title: @item.BookName</p>
+  <p>Book Price: @item.ItemPrice</p>
+  <p>Quantity: @item.Quantity</p>
+  <p>Discount: @item.ItemDiscount %</p>
+  <p>Total Price: @item.ItemTotalPrice</p>
+  </div>
+}

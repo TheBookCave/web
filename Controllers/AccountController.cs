@@ -21,11 +21,14 @@ namespace web.Controllers
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
+       // var RoleManager = new RoleManager<IdentityRole>
 
-        public AccountController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
+        public AccountController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         [Authorize]
@@ -53,12 +56,47 @@ namespace web.Controllers
             var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
             var result = await _userManager.CreateAsync(user, model.Password);
 
+            if(! await _roleManager.RoleExistsAsync("Staff"))
+            {
+                var staffRole = new IdentityRole();
+                staffRole.Name = "Staff";
+                await _roleManager.CreateAsync(staffRole);
+                await _userManager.AddToRoleAsync(user, "Staff");
+            }
+
             if(result.Succeeded)
             {
                 await _userManager.AddClaimAsync(user, new Claim("Name", $"{model.FirstName} {model.LastName}"));
                 await _signInManager.SignInAsync(user, false);
 
                 return RedirectToAction("Index", "Account");
+            }
+            return View();
+        }
+
+        [Authorize(Roles = "Staff")]
+        [HttpGet]
+        public IActionResult RegisterStaff()
+        {
+            return View("Register");
+        }
+
+        [Authorize(Roles = "Staff")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RegisterStaff(RegisterViewModel model)
+        {
+            if(!ModelState.IsValid) { return View(); }
+            
+            var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+            var result = await _userManager.CreateAsync(user, model.Password);
+
+            if(result.Succeeded)
+            {
+                await _userManager.AddToRoleAsync(user, "Staff");
+                await _userManager.AddClaimAsync(user, new Claim("Name", $"{model.FirstName} {model.LastName}"));
+
+                return RedirectToAction("Index", "Staff");
             }
             return View();
         }

@@ -73,16 +73,17 @@ namespace web.Repositories
         }
 
 
-        public int GetOpenOrderId()
+        public int GetOpenOrderId(string userId)
         {
             var orderId = (from o in _db.Orders
                         where o.Status == "open"
+                        where o.CustomerId == userId
                         select o.Id).ToList();
             if(orderId.Count() != 0) {
                 return orderId[0];
             }
             else {
-                return 4;
+                return 0;
 
                 //var neworderinput = new OrderInputModel() {
                     
@@ -97,12 +98,13 @@ namespace web.Repositories
 
             var orderitems = (from oi in _db.OrderItems
                             join b in _db.Books on oi.BookId equals b.Id
-                            join o in _db.Orders on oi.OrderId equals o.Id 
+                            join o in _db.Orders on oi.OrderId equals o.Id
                          select new OrderItemListViewModel
                          {
                              Id = oi.Id,
                              OrderId = oi.OrderId,
                              BookId = oi.BookId,
+                             CustomerId = o.CustomerId,
                              BookName = b.Name,
                              Quantity = oi.Quantity,
                              ItemPrice = oi.ItemPrice,
@@ -133,8 +135,5 @@ namespace web.Repositories
                          });
             return orders;
         }
-
-
-
     }
 }

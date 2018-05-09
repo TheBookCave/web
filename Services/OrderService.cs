@@ -32,9 +32,10 @@ namespace web.Services
             return orderitems;
         }
 
-        public List <OrderItemListViewModel> GetAllItemsInCart () {
-            var openOrderId = _orderRepo.GetOpenOrderId();
-            var orderitemlist = _orderRepo.GetAllOrderItemsLinqQuery().Where( a => a.OrderId.Equals(openOrderId)).ToList();
+        public List <OrderItemListViewModel> GetAllItemsInCart (string userId) {
+            var openOrderId = _orderRepo.GetOpenOrderId(userId);
+            //var openOrderId = 1;
+            var orderitemlist = _orderRepo.GetAllOrderItemsLinqQuery().Where( a => a.OrderId.Equals(openOrderId) && a.CustomerId == userId).ToList();
             return orderitemlist;
         } 
 
