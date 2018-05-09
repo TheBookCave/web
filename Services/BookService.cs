@@ -102,6 +102,19 @@ namespace web.Services
             return books;
         }
 
+        // Function that filters based on genre
+        public List<BookListViewModel> FilterGenre(List<BookListViewModel> books, string genreFilter)
+        {
+            if(genreFilter == null || genreFilter == "0")
+            {
+                return books;
+            }
+
+            books = books.Where( a => string.Join(",", a.Genres).Contains(genreFilter)).ToList();
+
+            return books;
+        }
+
         public void AddBook(BookInputModel inputBook)
         {
             _bookRepo.AddBook(inputBook);

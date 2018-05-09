@@ -22,11 +22,11 @@
 
         <div class="form-group">
           <label for="genre">Genre</label>
-          <select class="form-control" id="genre">
+          <select class="form-control" id="genre" name="genreFilter">
             <option value="0">All</option>
             @foreach(var genre in Model[0].AllGenres)
             {
-              <option value="@genre.Id">@genre.Name</option>
+              <option value="@genre.Name">@genre.Name</option>
             }
           </select>
         </div>

@@ -29,7 +29,7 @@ namespace web.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult Index(string orderby, string searchString2)
+        public IActionResult Index(string orderby, string searchString2, string genreFilter)
         {
 
             var books = _bookService.GetAllBooks();
@@ -37,6 +37,11 @@ namespace web.Controllers
             if (!String.IsNullOrEmpty(searchString2))
             {
                 books = _bookService.SearchResults(searchString2);
+            }
+
+            if(!String.IsNullOrEmpty(genreFilter) && genreFilter != "0")
+            {
+                books = _bookService.FilterGenre(books, genreFilter);
             }
 
             if (orderby == "name-asc")
@@ -62,6 +67,11 @@ namespace web.Controllers
             else if(orderby == "rating-desc")
             {
                 books = _bookService.OrderByRatingDesc(books);
+            }
+
+            if(books.Count == 0)
+            {
+                return View("ErrorNotFound");
             }
     
             return View(books);
