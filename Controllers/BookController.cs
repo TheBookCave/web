@@ -148,7 +148,7 @@ namespace web.Controllers
             if(ModelState.IsValid)
             {
                 _bookService.AddRating(rating);
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new {Id = rating.BookId});
             }
             return View();
         }
