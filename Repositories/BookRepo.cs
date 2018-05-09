@@ -75,7 +75,7 @@ namespace web.Repositories
                          {
                              Id = b.Id,
                              Name = b.Name,
-                             Description = b.Description,
+                             Description = b.Description.Substring(0, 200) + "...",
                              Author = at.Name,
                              ImageUrl = b.ImageUrl,
                              Price = b.Price,
