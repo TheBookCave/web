@@ -109,7 +109,7 @@ namespace web.Controllers
             var book = new RatingInputModel
             {
                 BookId = BId,
-                CustomerId = 0,
+                CustomerId = "",
                 RatingValue = 0,
                 Comment = "",
                 RatingDate = DateTime.Now
@@ -121,7 +121,7 @@ namespace web.Controllers
         [HttpPost]
         public IActionResult RateBook(RatingInputModel rating)
         {
-            rating.CustomerId = 101;    // dont know how to get customer ID
+            rating.CustomerId = "101";    // dont know how to get customer ID
             rating.RatingDate = DateTime.Now;
 
             if(ModelState.IsValid)
