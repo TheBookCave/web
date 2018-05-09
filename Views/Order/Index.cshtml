@@ -1,11 +1,5 @@
 @model List<web.Models.ViewModels.OrderItemListViewModel>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
+
 </br>
 </br>
 </br>
@@ -14,9 +8,10 @@
 
 @foreach (var item in Model) {
   <div class="cart-item">
-  <p>@item.CustomerId</p>
-  <p>@item.ItemPrice</p>
+  <p>Book Title: @item.BookName</p>
+  <p>Book Price: @item.ItemPrice</p>
+  <p>Quantity: @item.Quantity</p>
+  <p>Discount: @item.ItemDiscount %</p>
+  <p>Total Price: @item.ItemTotalPrice</p>
   </div>
 }
-<p>@Model[0].Quantity</p>
-<p> hallo</p>
