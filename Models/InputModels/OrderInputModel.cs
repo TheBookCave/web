@@ -3,7 +3,7 @@ namespace web.Models.InputModels
     public class OrderInputModel
     {
         public int Id { get; set; }
-        public int CustomerId { get; set; }
+        public string CustomerId { get; set; }
         public int BillingAddressId { get; set; }
         public int ShippingAddressId { get; set; }
         public string Status { get; set; }
