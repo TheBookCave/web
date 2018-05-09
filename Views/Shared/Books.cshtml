@@ -60,6 +60,27 @@ else {
               <h5 class="card-title">
                 <a class="card-link book-card-link" asp-controller="Book" asp-action="Details" asp-route-Id="@book.Id">@book.Name</a>
               </h5>
+              <span class="badge badge-pill star flex-fill">
+                @if(@book.Rating <= 0.5) {
+                  <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                }
+                else if(@book.Rating <= 1.5) {
+                  <i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                }
+                else if(@book.Rating <= 2.5) {
+                  <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                }
+                else if(@book.Rating <= 3.5) {
+                  <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                }
+                else if(@book.Rating <= 4.5) {
+                  <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                }
+                else if(@book.Rating <= 5) {
+                  <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                }
+                @book.Rating
+              </span>
             </div>
             <div class="card-img-overlay book-overlay-lower btn-group btn-group-toggle" data-toggle="buttons">
               <input class="btn btn-primary btn-sm btn-price" type="button" value="$@book.Price" disabled>
