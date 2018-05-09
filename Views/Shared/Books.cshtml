@@ -88,7 +88,7 @@ else {
             <br>
             <div class="btn-group btn-group-toggle" data-toggle="buttons">
               <input class="btn btn-primary btn-sm btn-price" type="button" value="$@book.Price" disabled>
-              <button class="btn btn-success btn-sm flex-fill" onclick="location.href='@Url.Action("AddToCart", "Order", new { BId = @Model.Id})'"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+              <button class="btn btn-success btn-sm flex-fill" onclick="location.href='@Url.Action("AddToCart", "Order", new { BId = @book.Id})'"><i class="fas fa-cart-plus"></i> Add to Cart</button>
             </div>
           </div>
         </div>

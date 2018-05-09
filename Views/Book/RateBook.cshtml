@@ -12,12 +12,10 @@
     <textarea name="Comment" placeholder="Enter comment here..."></textarea>
     <span asp-validation-for="Comment" class="text-danger"></span>
     <br/>
-@{
-    <input type="hidden" asp-for="BookId" value="@Model.BookId">
-}
-    
 
-
+    @{
+        <input type="hidden" asp-for="BookId" value="@Model.BookId">
+    }
 
     <input type="submit" value="Submit Comment" class="btn btn-info">
 </form> 
