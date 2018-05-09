@@ -140,6 +140,15 @@ namespace web.Repositories
                 rating = Math.Round(ratings.Average(),2);
             }
 
+            var comments = ( from c in _db.Ratings
+                            where c.BookId == Id
+                            select new RatingCommentViewModel
+                            {
+                                RatingValue = c.RatingValue,
+                                Comment = c.Comment,
+                                RatingDate = c.RatingDate
+                            } ).ToList();
+
             var book = (from b in _db.Books
                         join a in _db.Authors on b.AuthorId equals a.Id
                         join p in _db.Publishers on b.PublisherId equals p.Id
@@ -158,7 +167,9 @@ namespace web.Repositories
                             Language = b.Language,
                             Price = b.Price,
                             Discount = b.Discount,
-                            Rating = rating
+                            Rating = rating,
+                            Comments = comments
+
                         }).FirstOrDefault();
 
             return book;

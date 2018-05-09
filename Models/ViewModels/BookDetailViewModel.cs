@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace web.Models.ViewModels
 {
     // BookDetailViewModel for the customer
@@ -16,6 +18,7 @@ namespace web.Models.ViewModels
         public string Language { get; set; }
         public double Price { get; set; }
         public double Discount { get; set; }
-        public double Rating { get; set;}
+        public double Rating { get; set; }
+        public List<RatingCommentViewModel> Comments { get; set; }
     }
 }

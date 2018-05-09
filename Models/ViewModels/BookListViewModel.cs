@@ -14,7 +14,7 @@ namespace web.Models.ViewModels
         public double Discount { get; set; }
         public double Rating { get; set; }
         public List<string> Genres { get; set; }
-        public List<GenreListViewModel> AllGenres {get; set;}
+        public List<GenreListViewModel> AllGenres { get; set; }
 
     }
 }
