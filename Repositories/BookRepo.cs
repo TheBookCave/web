@@ -147,7 +147,7 @@ namespace web.Repositories
                                 RatingValue = c.RatingValue,
                                 Comment = c.Comment,
                                 RatingDate = c.RatingDate
-                            } ).ToList();
+                            } ).OrderByDescending(x => x.RatingDate).ToList();
 
             var book = (from b in _db.Books
                         join a in _db.Authors on b.AuthorId equals a.Id
