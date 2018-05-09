@@ -2,18 +2,18 @@
 <div>
     <h2>Account Profile</h2>
 </div>
-@{
-    var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
-    if (claimsIdentity != null)
-    {
-        var b = claimsIdentity.Claims.FirstOrDefault(x => x.Type == "Name");
-        if (b != null)
-        {
-            <p>
-                Hi @b.Value.ToString()
-            </p>   
-        }
-    }
+
+<p>
+    Hi @((User.Identity  as System.Security.Claims.ClaimsIdentity).Claims.FirstOrDefault(x => x.Type == "Name").Value.ToString())
+</p>
+
+@if (User.IsInRole("Staff"))
+{
+<form asp-action="Index" asp-controller="Staff" method="GET">
+    <div class="form-group">
+        <button type="submit" class="btn btn-default">Management Console</button>
+    </div>
+</form>
 }
 
 
@@ -22,3 +22,4 @@
         <button type="submit" class="btn btn-default">Logout</button>
     </div>
 </form>
+

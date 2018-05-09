@@ -78,7 +78,7 @@ namespace web.Controllers
         [HttpGet]
         public IActionResult RegisterStaff()
         {
-            return View("Register");
+            return View();
         }
 
         [Authorize(Roles = "Staff")]
