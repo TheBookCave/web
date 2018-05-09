@@ -103,6 +103,36 @@ namespace web.Controllers
             return View();
         } 
 
+        [HttpGet]
+        public IActionResult RateBook(int BId, string BookName)
+        {
+            var book = new RatingInputModel
+            {
+                BookId = BId,
+                CustomerId = 0,
+                RatingValue = 0,
+                Comment = "",
+                RatingDate = DateTime.Now
+            };
+            
+            return View(book);
+        }
+
+        [HttpPost]
+        public IActionResult RateBook(RatingInputModel rating)
+        {
+            rating.CustomerId = 101;    // dont know how to get customer ID
+            rating.BookId = 101; // dont knkow how to get BookId
+            rating.RatingDate = DateTime.Now;
+
+            if(ModelState.IsValid)
+            {
+                _bookService.AddRating(rating);
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
          [HttpPost]
         public IActionResult CreateGenre(GenreInputModel inputGenre)
         {

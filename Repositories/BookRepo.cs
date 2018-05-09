@@ -162,6 +162,21 @@ namespace web.Repositories
             return book;
         }
 
+        public void AddRating (RatingInputModel rating)
+        {
+            var r = new Rating()
+            {
+                BookId = rating.BookId,
+                CustomerId = rating.CustomerId,
+                RatingValue = rating.RatingValue,
+                Comment = rating.Comment,
+                RatingDate = rating.RatingDate
+            };
+
+            _db.Ratings.Add(r);
+            _db.SaveChanges();
+        }
+
         public void AddBook(BookInputModel inputBook)
         {
             var newBook = new Book()

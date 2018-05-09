@@ -138,6 +138,11 @@ namespace web.Services
             _authorRepo.AddAuthor(inputAuthor);
         }
 
+        public void AddRating(RatingInputModel rating)
+        {
+            _bookRepo.AddRating(rating);
+        }
+
 
         public void AddPublisher(PublisherInputModel inputPublisher)
         {
