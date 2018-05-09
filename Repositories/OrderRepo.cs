@@ -75,38 +75,44 @@ namespace web.Repositories
 
         public int GetOpenOrderId()
         {
-            var order = (from o in _db.Orders
-                        //where o.Status == "open"
-                        select new OrderDetailViewModel
-                        {
-                            Id = o.Id,
-                            CustomerId = o.CustomerId,
-                            BillingAddressId = o.BillingAddressId,
-                            ShippingAddressId = o.ShippingAddressId,
-                            Status = o.Status,
-                            OrderDate = o.OrderDate, 
-                            ShippingDate = o.ShippingDate,
-                            PurchaseAmount = o.PurchaseAmount
-                        }).FirstOrDefault();
-            return order.Id;
+            var orderId = (from o in _db.Orders
+                        where o.Status == "open"
+                        select o.Id).ToList();
+            if(orderId.Count() != 0) {
+                return orderId[0];
+            }
+            else {
+                return 4;
+
+                //var neworderinput = new OrderInputModel() {
+                    
+
+                //}
+               // _db.Orders.Add()
+            }
         }
 
         public IQueryable<OrderItemListViewModel> GetAllOrderItemsLinqQuery()
         {
 
             var orderitems = (from oi in _db.OrderItems
-                            join o in _db.Orders on oi.OrderId equals o.Id into a
+                            join b in _db.Books on oi.BookId equals b.Id
+                            join o in _db.Orders on oi.OrderId equals o.Id 
                          select new OrderItemListViewModel
                          {
                              Id = oi.Id,
                              OrderId = oi.OrderId,
                              BookId = oi.BookId,
+                             BookName = b.Name,
                              Quantity = oi.Quantity,
                              ItemPrice = oi.ItemPrice,
-                             ItemDiscount = oi.ItemDiscount
+                             ItemDiscount = Math.Round(oi.ItemDiscount * 100),
+                             ItemTotalPrice = Math.Round((oi.ItemPrice * oi.Quantity) * (1 - oi.ItemDiscount))
                          });
             return orderitems;
         }
+
+
 
         public IQueryable<OrderListViewModel> GetAllOrdersLinqQuery()
         {
