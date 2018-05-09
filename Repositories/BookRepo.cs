@@ -75,6 +75,7 @@ namespace web.Repositories
                          {
                              Id = b.Id,
                              Name = b.Name,
+                             Description = b.Description,
                              Author = at.Name,
                              ImageUrl = b.ImageUrl,
                              Price = b.Price,
@@ -92,6 +93,7 @@ namespace web.Repositories
                             {
                                 Id = b.Id,
                                 Name = b.Name,
+                                Description = b.Description,
                                 Author = b.Name,
                                 ImageUrl = b.ImageUrl,
                                 Price = b.Price,
@@ -183,6 +185,7 @@ namespace web.Repositories
             {
                 //Id
                 Name = inputBook.Name,
+                Description = inputBook.Description,
                 AuthorId = inputBook.AuthorId,
                 PublisherId = inputBook.PublisherId,
                 ImageUrl = inputBook.ImageUrl,
