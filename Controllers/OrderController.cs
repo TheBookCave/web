@@ -24,7 +24,13 @@ namespace web.Controllers
             _orderService = new OrderService(context);
         }
 
-        public IActionResult Index(string orderby, string genre)
+        public IActionResult Index() {
+          
+          var orderitems = _orderService.GetAllItemsInCart();
+          return View(orderitems);
+        }
+
+        public IActionResult temp(string orderby, string genre)
         {
             var orders = new List<OrderListViewModel>();
 
@@ -53,6 +59,13 @@ namespace web.Controllers
             return View(orders);
         }
 
+public IActionResult Cart(string orderby, Order order)
+        {
+            var orderitems = new List<OrderItemListViewModel>();
+            orderitems = _orderService.GetAllItemsInCart();
+
+            return View(orderitems);
+        }
 
         public IActionResult Details(int Id)
         {
