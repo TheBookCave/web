@@ -22,9 +22,21 @@ namespace web.Services
         // Function that return a list of all the orders
         public List<OrderListViewModel> GetAllOrders()
         {
-            var orders = _orderRepo.GetAllOrders();
+            var orders = _orderRepo.GetAllOrdersLinqQuery().ToList();
             return orders;
         }
+
+        public List<OrderItemListViewModel> GetAllOrderItems(int orderId)
+        {
+            var orderitems = _orderRepo.GetAllOrderItemsLinqQuery().ToList();
+            return orderitems;
+        }
+
+        public List <OrderItemListViewModel> GetAllItemsInCart () {
+            var openOrderId = _orderRepo.GetOpenOrderId();
+            var orderitemlist = _orderRepo.GetAllOrderItemsLinqQuery().Where( a => a.OrderId.Equals(openOrderId)).ToList();
+            return orderitemlist;
+        } 
 
         // Function that return a list of all the orders in alphabetic order
         public List<OrderListViewModel> OrderByDate(List<OrderListViewModel> methodOrders)
@@ -61,7 +73,6 @@ namespace web.Services
             var order = _orderRepo.GetOrderWithId(Id);
             return order;
         }
-
 
         public void AddOrder(OrderInputModel inputOrder)
         {
