@@ -11,6 +11,12 @@
     <span asp-validation-for="Name" class="text-danger"></span>
     <br/>
 
+    <label asp-for="Description">Book Description</label>
+    <br/>
+    <textarea asp-for="Description" placeholder="Book description..."></textarea>
+    <span asp-validation-for="Description" class="text-danger"></span>
+    <br/>
+
 
     <label>Author</label>
     <select asp-for="AuthorId">
