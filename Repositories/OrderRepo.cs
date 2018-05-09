@@ -76,7 +76,7 @@ namespace web.Repositories
         public int GetOpenOrderId()
         {
             var order = (from o in _db.Orders
-                        where o.Status == "open"
+                        //where o.Status == "open"
                         select new OrderDetailViewModel
                         {
                             Id = o.Id,

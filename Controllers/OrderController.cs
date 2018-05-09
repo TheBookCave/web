@@ -26,8 +26,22 @@ namespace web.Controllers
 
         public IActionResult Index() {
           
-          var orderitems = _orderService.GetAllItemsInCart();
-          return View(orderitems);
+
+          var orderitems1 = _orderService.GetAllItemsInCart();
+          //Console.WriteLine(orderitems2[0].Quantity);
+
+          var orderitem = new OrderItemListViewModel() {
+            Id = 1,
+            ItemDiscount = 1,
+            ItemPrice = 10, 
+            BookId = 1,
+            OrderId = 1,
+            Quantity = 5
+          };
+          var orderitems2 = new List <OrderItemListViewModel>() {};
+          orderitems2.Add(orderitem);
+          Console.WriteLine(orderitems2[0].Quantity);
+          return View(orderitems2);
         }
 
         public IActionResult temp(string orderby, string genre)
