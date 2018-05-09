@@ -88,7 +88,6 @@ namespace web.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-
             var inputModel = new BookInputModel {
                 AllGenres = _bookService.GetAllGenres(),
                 AllAuthors = _bookService.GetAllAuthors(),
@@ -97,7 +96,7 @@ namespace web.Controllers
             return View(inputModel);
         }
 
-         [HttpPost]
+        [HttpPost]
         public IActionResult Create(BookInputModel inputBook)
         {
             if(ModelState.IsValid)
