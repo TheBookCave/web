@@ -11,9 +11,10 @@ using web.Data;
 namespace web.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20180509151143_add_bookid_column_to_orderItems_table")]
+    partial class add_bookid_column_to_orderItems_table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
