@@ -122,7 +122,6 @@ namespace web.Controllers
         public IActionResult RateBook(RatingInputModel rating)
         {
             rating.CustomerId = 101;    // dont know how to get customer ID
-            rating.BookId = 101; // dont knkow how to get BookId
             rating.RatingDate = DateTime.Now;
 
             if(ModelState.IsValid)
