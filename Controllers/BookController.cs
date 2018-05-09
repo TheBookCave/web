@@ -11,17 +11,22 @@ using web.Models.ViewModels;
 using web.Services;
 using web.Data;
 
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+
 namespace web.Controllers
 {
     public class BookController : Controller
     {
         // BookController owns an instance of the BookService
         private BookService _bookService;
+        private readonly UserManager<ApplicationUser> _userManager;
 
         // Constructor for the BookController where the _bookService is created
-        public BookController(DataContext context)
+        public BookController(DataContext context, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
         {
             _bookService = new BookService(context);
+            _userManager = userManager;
         }
 
         public IActionResult Index(string orderby, string searchString2)
@@ -103,9 +108,11 @@ namespace web.Controllers
             return View();
         } 
 
+        [Authorize]
         [HttpGet]
         public IActionResult RateBook(int BId, string BookName)
         {
+
             var book = new RatingInputModel
             {
                 BookId = BId,
@@ -121,9 +128,12 @@ namespace web.Controllers
         [HttpPost]
         public IActionResult RateBook(RatingInputModel rating)
         {
+            var userId = _userManager.GetUserId(HttpContext.User);
             rating.CustomerId = 101;    // dont know how to get customer ID
+            //rating.CustomerId = userId;
             rating.BookId = 101; // dont knkow how to get BookId
             rating.RatingDate = DateTime.Now;
+
 
             if(ModelState.IsValid)
             {
