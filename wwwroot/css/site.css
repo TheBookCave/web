@@ -19,6 +19,27 @@
   width: auto\9; /* ie8 */
 }
 
+/* Book detail buttons */
+.detailCart {
+  width: 100%;
+  margin-bottom: 2px;
+}
+.detailReview {
+  width: auto;
+  margin-right: 2px;
+}
+.detailWishlist {
+  width: auto;
+}
+.detailAuthor {
+  color: black;
+}
+
+.bookDetails {
+  border: 2px solid black;
+  border-radius: 20px;
+}
+
 /* Carousel */
 .carousel-caption p {
   font-size: 20px;
