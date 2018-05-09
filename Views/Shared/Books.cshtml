@@ -28,7 +28,7 @@ else {
           <a asp-controller="Book" asp-action="Details" asp-route-Id="@book.Id">
           <img class="card-img" src="@book.ImageUrl" alt="Card image">
           </a>
-          <div class="card-img-overlay" data-toggle="tooltip" data-placement="right" data-html="true" title="<strong>@book.Name</strong><br/><small>by @book.Author</small><br/>
+          <div class="card-img-overlay book-overlay" data-toggle="tooltip" data-placement="right" data-html="true" title="<strong>@book.Name</strong><br/><small>by @book.Author</small><br/>
                       @if(@book.Rating <= 0.5) {
                         <i class='far fa-star'></i><i class='far fa-star'></i><i class='far fa-star'></i><i class='far fa-star'></i><i class='far fa-star'></i>
                       }
@@ -47,6 +47,7 @@ else {
                       else if(@book.Rating <= 5) {
                         <i class='fas fa-star'></i><i class='fas fa-star'></i><i class='fas fa-star'></i><i class='fas fa-star'></i><i class='fas fa-star'></i>
                       }
+                      @book.Rating
                       <p>Some quick example text to build on the card title and make up the bulk of the cards content.</p>">
           <!--<span class="badge badge-secondary star align-top">
           @if(@book.Rating <= 0.5) {
@@ -70,7 +71,7 @@ else {
           @book.Rating
           </span>-->
             <h5 class="card-title">
-              <a class="card-link" asp-controller="Book" asp-action="Details" asp-route-Id="@book.Id">@book.Name</a>
+              <a class="card-link book-card-link" asp-controller="Book" asp-action="Details" asp-route-Id="@book.Id">@book.Name</a>
             </h5>
           </div>
         </div>
