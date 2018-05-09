@@ -68,7 +68,7 @@ namespace web.Repositories
 
             var books = (from b in _db.Books
                          join at in _db.Authors on b.AuthorId equals at.Id
-                         //join g in bookGenres on b.Id equals g.BookId
+                         join g in bookGenres on b.Id equals g.BookId
                          join r in ratings on b.Id equals r.BookId into a
                          from c in a.DefaultIfEmpty(new RatingViewModel() {BookId = b.Id, AverageRating = 0})
                          select new BookListViewModel
@@ -80,8 +80,8 @@ namespace web.Repositories
                              Price = b.Price,
                              Discount = b.Discount,
                              Rating = c.AverageRating,
-                             Genres = null,//g.BookGenres,
-                             AllGenres = null//allGenres
+                             Genres = g.BookGenres,
+                             AllGenres = allGenres
                          });
 
             // Query to solve the fact that books without genres would not be listed
