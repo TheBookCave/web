@@ -7,7 +7,7 @@ namespace web.Models.InputModels
     {
         public int BookId { get; set; }
         public string CustomerId { get; set; }
-        public string RatingValue { get; set; }
+        public int RatingValue { get; set; }
         public string Comment { get; set; }
         public DateTime RatingDate { get; set; }
     }
