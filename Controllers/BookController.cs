@@ -130,8 +130,6 @@ namespace web.Controllers
         {
             var userId = _userManager.GetUserId(HttpContext.User);
             rating.CustomerId = 101;    // dont know how to get customer ID
-            //rating.CustomerId = userId;
-            rating.BookId = 101; // dont knkow how to get BookId
             rating.RatingDate = DateTime.Now;
 
 

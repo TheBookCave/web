@@ -119,7 +119,7 @@ namespace web.Repositories
                                    select new RatingViewModel
                                    {
                                        BookId = rating.Key,
-                                       AverageRating = rating.Average(x => x.RatingValue)
+                                       AverageRating = Math.Round(rating.Average(x => x.RatingValue),2)
                                    }).ToList();
         
             return averageRatings;
@@ -135,7 +135,7 @@ namespace web.Repositories
 
             if (ratings.Count != 0)
             {
-                rating = ratings.Average();
+                rating = Math.Round(ratings.Average(),2);
             }
 
             var book = (from b in _db.Books
