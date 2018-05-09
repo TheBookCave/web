@@ -73,6 +73,26 @@ namespace web.Repositories
         }
 
 
+
+        public OrderItemInputModel GetOrderItemInputModel(int bookId, string userId) {
+
+
+            var orderiteminput = new OrderItemInputModel
+            {
+                BookId = bookId,
+                OrderId = GetOpenOrderId(userId),
+                ItemDiscount = Convert.ToDecimal((from b in _db.Books where b.Id == bookId select b.Discount).ToList()[0]),
+                ItemPrice = Convert.ToDecimal((from b in _db.Books where b.Id == bookId select b.Price).ToList()[0]),
+                Quantity = 1
+            };
+            return orderiteminput;
+        }
+
+        public void AddToCart(OrderItemInputModel orderinput) {
+            _db.Add(orderinput);
+            _db.SaveChanges();
+        }
+
         public int GetOpenOrderId(string userId)
         {
             var orderId = (from o in _db.Orders

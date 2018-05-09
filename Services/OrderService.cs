@@ -37,7 +37,14 @@ namespace web.Services
             //var openOrderId = 1;
             var orderitemlist = _orderRepo.GetAllOrderItemsLinqQuery().Where( a => a.OrderId.Equals(openOrderId) && a.CustomerId == userId).ToList();
             return orderitemlist;
-        } 
+        }
+
+        public OrderItemInputModel GetOrderItemInputModel(int bookId, string userId) {
+
+            var oim = _orderRepo.GetOrderItemInputModel(bookId, userId);
+            return oim;
+
+        }
 
         // Function that return a list of all the orders in alphabetic order
         public List<OrderListViewModel> OrderByDate(List<OrderListViewModel> methodOrders)
@@ -78,6 +85,11 @@ namespace web.Services
         public void AddOrder(OrderInputModel inputOrder)
         {
             _orderRepo.AddOrder(inputOrder);
+        }
+
+        public void AddToCart(OrderItemInputModel orderinput) {
+
+            _orderRepo.AddToCart(orderinput);
         }
 
 
