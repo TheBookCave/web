@@ -23,12 +23,17 @@ else {
           </div>
         </div>
       </div>-->
-      <div class="col-sm-6 col-md-4 col-lg-3 book-card">
+      <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 book-card">
         <div class="card bg-dark text-white">
           <a asp-controller="Book" asp-action="Details" asp-route-Id="@book.Id">
-          <img class="card-img" src="@book.ImageUrl" alt="Card image">
+            <img class="card-img" src="@book.ImageUrl" alt="Card image">
           </a>
-          <div class="card-img-overlay book-overlay" data-toggle="tooltip" data-placement="right" data-html="true" title="<strong>@book.Name</strong><br/><small>by @book.Author</small><br/>
+          @{
+            var genre = String.Join(", ", book.Genres);
+            genre = genre.TrimEnd(' ');
+            genre = genre.TrimEnd(',');
+          }
+          <div class="card-img-overlay" data-toggle="tooltip" data-placement="right" data-html="true" title="<strong>@book.Name</strong><br/><small>by @book.Author</small><br/>
                       @if(@book.Rating <= 0.5) {
                         <i class='far fa-star'></i><i class='far fa-star'></i><i class='far fa-star'></i><i class='far fa-star'></i><i class='far fa-star'></i>
                       }
@@ -48,31 +53,18 @@ else {
                         <i class='fas fa-star'></i><i class='fas fa-star'></i><i class='fas fa-star'></i><i class='fas fa-star'></i><i class='fas fa-star'></i>
                       }
                       @book.Rating
-                      <p>Some quick example text to build on the card title and make up the bulk of the cards content.</p>">
-          <!--<span class="badge badge-secondary star align-top">
-          @if(@book.Rating <= 0.5) {
-            <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-          }
-          else if(@book.Rating <= 1.5) {
-            <i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-          }
-          else if(@book.Rating <= 2.5) {
-            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-          }
-          else if(@book.Rating <= 3.5) {
-            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-          }
-          else if(@book.Rating <= 4.5) {
-            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
-          }
-          else if(@book.Rating <= 5) {
-            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-          }
-          @book.Rating
-          </span>-->
-            <h5 class="card-title">
-              <a class="card-link book-card-link" asp-controller="Book" asp-action="Details" asp-route-Id="@book.Id">@book.Name</a>
-            </h5>
+                      <p>Some quick example text to build on the card title and make up the bulk of the cards content.</p>
+                      <p>Genres: @genre</p>">
+            <a asp-controller="Book" asp-action="Details" asp-route-Id="@book.Id" class="card-img-overlay"></a>
+            <div class="card-img-overlay book-overlay-upper">
+              <h5 class="card-title">
+                <a class="card-link book-card-link" asp-controller="Book" asp-action="Details" asp-route-Id="@book.Id">@book.Name</a>
+              </h5>
+            </div>
+            <div class="card-img-overlay book-overlay-lower btn-group btn-group-toggle" data-toggle="buttons">
+              <input class="btn btn-primary btn-sm btn-price" type="button" value="$@book.Price" disabled>
+              <button class="btn btn-success btn-sm flex-fill"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+            </div>
           </div>
         </div>
       </div>
