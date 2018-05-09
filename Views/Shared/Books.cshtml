@@ -111,7 +111,18 @@ else {
         <h6 class="card-subtitle mb-2 text-muted">@book.Author</h6>
       </div>
       <div class="card-body">
-        <span class=""><i class="fas fa-dollar-sign"></i>@book.Price</span>
+        <span class=""><i class="fas fa-dollar-sign"></i>@book.Price</span>     
+
+        @{
+          var str = String.Join(", ", book.Genres);
+          str = str.TrimEnd(' ');
+          str = str.TrimEnd(',');
+        } 
+        <span class="">@str</span>
+
+
+
+
         <button class="btn btn-success float-right"><i class="fas fa-cart-plus"></i> Add to Cart</button>
       </div>
     </div>

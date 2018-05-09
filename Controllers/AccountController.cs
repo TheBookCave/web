@@ -13,6 +13,8 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using System.Net.Mail;
 
+using web.Data.EntityModels;
+
 namespace web.Controllers
 {
     public class AccountController : Controller

@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using web.Models;
 using web.Data;
+using web.Data.EntityModels;
 
 namespace web
 {

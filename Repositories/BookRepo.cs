@@ -31,32 +31,29 @@ namespace web.Repositories
             return genres;
         }
 
- //------------------------------------------------------------------------------------------- Virkar örugglega ekki eðlilega
- // Vantar að útbúa View á þessu formati:
- // |  Book ID  | List<GenreViewModel> |       þar sem GenreViewModel inniheldur Genre ID og Genre Name eða bara List<string> þar sem það er nafnið á genre.
-         public List<BookGenreViewModel> GetGenresForAllBooks()
+        // Function that returns BookGenreViewModel for all books
+         public IQueryable<BookGenreViewModel> GetGenresForAllBooks()
          {
-             var newList = new List<string>();
-
-            var genres = ( from b in _db.Books
+            // Join Books, BookGenres and Genres tables together to a flat view
+            var allBookGenres = ( from b in _db.Books
                            join bg in _db.BookGenres on b.Id equals bg.BookId
                            join g in _db.Genres on bg.GenreId equals g.Id into view
                            from x in view.DefaultIfEmpty()
                            select new
                            {
-                               BookId = x.Id,
-                               BookGenres = view.SelectMany(y => y.Name).ToList()
-                           }).ToList();
-            
-            var result = genres.SelectMany(x => x.BookGenres).ToList();
+                               BookId = b.Id,
+                               GenreId = x.Id,
+                               GenreName = x.Name
+                           });
+
+            // Group the view by BookId and create a BookGenreViewModel that returns the bookId and list of all the Genres
+            var genresForAllBooks = (from b in allBookGenres group b.GenreName by b.BookId into g
+                         select new BookGenreViewModel{
+                             BookId = g.Key,
+                             BookGenres = g.ToList()
+                         });
                            
-            return null;
-            //     from bg in _db.BookGenres
-            //               join g in _db.Genres on bg.GenreId equals g.Id into a
-            //               from b in a.DefaultIfEmpty(new BookGenreViewModel() {BookId = bg.BookId, BookGenres = null})
-            //               select new 
-            // )
-            // return genres;
+            return genresForAllBooks;
          }
 
 //--------------------------------------------------------------------------------------------------------------------------------------------
@@ -67,8 +64,11 @@ namespace web.Repositories
 
             var allGenres = GetAllGenres();
 
+            var bookGenres = GetGenresForAllBooks();
+
             var books = (from b in _db.Books
                          join at in _db.Authors on b.AuthorId equals at.Id
+                         join g in bookGenres on b.Id equals g.BookId
                          join r in ratings on b.Id equals r.BookId into a
                          from c in a.DefaultIfEmpty(new RatingViewModel() {BookId = b.Id, AverageRating = 0})
                          select new BookListViewModel
@@ -80,9 +80,27 @@ namespace web.Repositories
                              Price = b.Price,
                              Discount = b.Discount,
                              Rating = c.AverageRating,
-                             Genres = null,
+                             Genres = g.BookGenres,
                              AllGenres = allGenres
                          });
+
+            // Query to solve the fact that books without genres would not be listed
+            var books2 = ( from b in books
+                            join g in bookGenres on b.Id equals g.BookId into a
+                            from c in a.DefaultIfEmpty()
+                            select new BookListViewModel
+                            {
+                                Id = b.Id,
+                                Name = b.Name,
+                                Author = b.Name,
+                                ImageUrl = b.ImageUrl,
+                                Price = b.Price,
+                                Discount = b.Discount,
+                                Rating = b.Rating,
+                                Genres = c.BookGenres,//g.BookGenres,
+                                AllGenres = allGenres//allGenres
+                            });
+
             return books;
         }
 
