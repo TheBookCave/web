@@ -60,9 +60,12 @@ else {
       <div class="card-body">
         <span class=""><i class="fas fa-dollar-sign"></i>@book.Price</span>     
 
-
-
-        <span class="">@book.Genres</span> <!--vantar að geta loopað í gegnum Genres til að birta hér -->
+        @{
+          var str = String.Join(", ", book.Genres);
+          str = str.TrimEnd(' ');
+          str = str.TrimEnd(',');
+        } 
+        <span class="">@str</span>
 
 
 
