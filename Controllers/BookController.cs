@@ -95,6 +95,7 @@ namespace web.Controllers
             return View(book);
         }
 
+        [Authorize(Roles = "Staff")]
         [HttpGet]
         public IActionResult Create()
         {
@@ -106,13 +107,14 @@ namespace web.Controllers
             return View(inputModel);
         }
 
+        [Authorize(Roles = "Staff")]
         [HttpPost]
         public IActionResult Create(BookInputModel inputBook)
         {
             if(ModelState.IsValid)
             {
                 _bookService.AddBook(inputBook);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Staff");
             }
             return View();
         } 
@@ -134,6 +136,7 @@ namespace web.Controllers
             return View(book);
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult RateBook(RatingInputModel rating)
         {
@@ -150,17 +153,19 @@ namespace web.Controllers
             return View();
         }
 
-         [HttpPost]
+        [Authorize(Roles = "Staff")]
+        [HttpPost]
         public IActionResult CreateGenre(GenreInputModel inputGenre)
         {
             if(ModelState.IsValid)
             {
                 _bookService.AddGenre(inputGenre);
-                return RedirectToAction("Create");
+                return RedirectToAction("Index", "Staff");
             }
             return View();
         } 
 
+        [Authorize(Roles = "Staff")]
         [HttpGet]
         public IActionResult CreateGenre()
         {
@@ -168,18 +173,19 @@ namespace web.Controllers
         }
 
 
-
-         [HttpPost]
+        [Authorize(Roles = "Staff")]
+        [HttpPost]
         public IActionResult CreateAuthor(AuthorInputModel inputAuthor)
         {
             if(ModelState.IsValid)
             {
                 _bookService.AddAuthor(inputAuthor);
-                return RedirectToAction("Create");
+                return RedirectToAction("Index", "Staff");
             }
             return View();
         } 
 
+        [Authorize(Roles = "Staff")]
         [HttpGet]
         public IActionResult CreateAuthor()
         {
@@ -191,11 +197,12 @@ namespace web.Controllers
             if(ModelState.IsValid)
             {
                 _bookService.AddPublisher(inputPublisher);
-                return RedirectToAction("Create");
+                return RedirectToAction("Index", "Staff");
             }
             return View();
         } 
 
+        [Authorize(Roles = "Staff")]
         [HttpGet]
         public IActionResult CreatePublisher()
         {
