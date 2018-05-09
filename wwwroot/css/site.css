@@ -22,7 +22,7 @@
 /* Book detail buttons */
 .detailCart {
   width: 100%;
-  margin-bottom: 2px;
+  margin: 2px 0;
 }
 .detailReview {
   width: auto;
