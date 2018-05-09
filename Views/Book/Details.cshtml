@@ -24,16 +24,41 @@
 
 
 <div>
-    <h3>Comments: </h3>
+    <h3>Reviews: </h3>
     @foreach(var comment in @Model.Comments)
     {
-        <div class="row">
-            <p>Date: @comment.RatingDate</p>
-            <p>Rating: @comment.RatingValue</p>
-            @if(@comment.Comment != null)
-            {
-                <p>Comment: @comment.Comment</p>
-            }
+        <div>
+            <div class="card mb-3" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title text-warning">
+                        @if(@comment.RatingValue <= 0.5) {
+                            <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                        }
+                        else if(@comment.RatingValue <= 1.5) {
+                            <i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                        }
+                        else if(@comment.RatingValue <= 2.5) {
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                        }
+                        else if(@comment.RatingValue <= 3.5) {
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                        }
+                        else if(@comment.RatingValue <= 4.5) {
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                        }
+                        else if(@comment.RatingValue <= 5) {
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        }
+                        @comment.RatingValue
+                    </h5>
+                    <h6 class="card-subtitle mb-2 text-muted">@comment.RatingDate</h6>
+                    @if(@comment.Comment != null)
+                    {
+                        <p class="card-text">@comment.Comment</p>
+                    }
+                </div>
+            </div>
+            
         </div>
     }
 </div>
