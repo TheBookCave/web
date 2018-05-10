@@ -179,7 +179,8 @@ namespace web.Repositories
                             Price = b.Price,
                             Discount = b.Discount,
                             Rating = rating,
-                            Comments = comments
+                            Comments = comments,
+                            Description = b.Description
 
                         }).FirstOrDefault();
 
