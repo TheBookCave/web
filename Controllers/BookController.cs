@@ -68,11 +68,6 @@ namespace web.Controllers
             {
                 books = _bookService.OrderByRatingDesc(books);
             }
-
-            if(books.Count == 0)
-            {
-                return View("ErrorNotFound");
-            }
     
             return View(books);
         }
@@ -80,6 +75,7 @@ namespace web.Controllers
         public IActionResult Top10()
         {
             var books = _bookService.GetTop10Books();
+            
             return View(books);
         }
 
