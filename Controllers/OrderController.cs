@@ -35,6 +35,7 @@ namespace web.Controllers
           return View(orderitems);
         }
 
+
         [Authorize]
         public IActionResult AddToCart(int BId)
         {
@@ -59,17 +60,86 @@ namespace web.Controllers
           return View(orderitems);
         }
         
+
+
+
+        [HttpGet]
         public IActionResult CheckOutAddress() {
           var userId = _userManager.GetUserId(HttpContext.User);
           var addressList = _orderService.GetUserAddresses(userId);
+          var openorder = _orderService.GetOpenOrder(userId);
 
-          return View(addressList);
+          var order = new OrderInputModel() {
+            AllUserAddresses = addressList
+          };
+
+          return View(order);
         }
 
-        public IActionResult CheckOut2(AddressInputModel deliveryAddress, AddressInputModel billingAddress) {
+        [HttpPost]
+        public IActionResult CheckOutAddress(OrderInputModel order) { // 2 addresses, [0] is delivery, [1] is billing
+          var userId = _userManager.GetUserId(HttpContext.User);
+          var addressList = _orderService.GetUserAddresses(userId);
+          var openorder = _orderService.GetOpenOrder(userId);
+
+          order.Id = openorder.Id;
+          order.CustomerId = openorder.CustomerId;
+          order.Status = openorder.Status;
+          order.OrderDate = openorder.OrderDate;
+          order.ShippingDate = openorder.ShippingDate;
+          order.TrackingNumber = openorder.TrackingNumber;
+          order.PurchaseAmount = openorder.PurchaseAmount;
+          order.AllUserAddresses = addressList;
+
+            if(ModelState.IsValid)
+            {
+                _orderService.ChangeOrderAddress(order);
+                return RedirectToAction("CheckOutReview");
+
+            }
+          return View("CheckOutAddress", order);
+        }
+
+      [HttpGet]
+      public IActionResult CheckOutReview() {
+      var userId = _userManager.GetUserId(HttpContext.User);
+      var openorder = _orderService.GetOpenOrder(userId);
+      var addressesUsed = _orderService.GetAddressesOnOrder(openorder.Id);
+
+      var ordertoconfirm = new OrderConfirmationViewModel() {
+        Order = openorder,
+        Addresses = addressesUsed
+      };
+
+      return View(ordertoconfirm);
+      }
+
+      [HttpPost]
+        public IActionResult CheckOutReview(OrderConfirmationViewModel ordertoconfirm) {
 
 
-          return View();
+        /*  var userId = _userManager.GetUserId(HttpContext.User);
+          
+                    var confirmation = new OrderConfirmationViewModel() {
+            Order = _orderService.GetOrderWithId(order.Id),
+            Addresses = []
+          };
+           */
+
+          //confirmation.Order.ShippingAddressId = chosenaddresses[0].Id;
+          //confirmation.Order.BillingAddressId = chosenaddresses[1].Id;
+          return View(ordertoconfirm);
+        }
+
+      [HttpPost]
+        public IActionResult CheckOutConfirmed(OrderConfirmationViewModel confirmed) {
+           if(ModelState.IsValid)
+            {
+                _orderService.ChangeOrderAddressAndClose(confirmed);
+                return RedirectToAction("Index");
+            }
+
+          return View(confirmed);
         }
 
         public IActionResult Details(int Id)

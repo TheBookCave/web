@@ -70,6 +70,78 @@ namespace web.Repositories
                         }).FirstOrDefault();
             return order;
         }
+        public OrderDetailViewModel GetOpenOrder(string userId) {
+            var order = (from o in _db.Orders
+                        where o.CustomerId == userId
+                        where o.Status == "open"
+
+                        select new OrderDetailViewModel
+                        {
+                            Id = o.Id,
+                            CustomerId = o.CustomerId,
+                            BillingAddressId = o.BillingAddressId,
+                            ShippingAddressId = o.ShippingAddressId,
+                            Status = o.Status,
+                            OrderDate = o.OrderDate, 
+                            ShippingDate = o.ShippingDate,
+                            PurchaseAmount = o.PurchaseAmount
+                        }).FirstOrDefault();
+            return order;
+        }
+        public void ChangeOrderAddressAndClose(OrderConfirmationViewModel confirmed) {
+            var orderNow = _db.Orders.SingleOrDefault(o => o.Id == confirmed.Order.Id);
+            orderNow.ShippingAddressId = confirmed.Addresses[0].Id;
+            orderNow.BillingAddressId = confirmed.Addresses[1].Id;
+            _db.SaveChanges();
+        }
+
+        public void ChangeOrderAddress(OrderInputModel orderinput) {
+            var orderNow = _db.Orders.SingleOrDefault(o => o.Id == orderinput.Id);
+            orderNow.ShippingAddressId = orderinput.ShippingAddressId;
+            orderNow.BillingAddressId = orderinput.BillingAddressId;
+            _db.SaveChanges();
+        }
+
+        public List<AddressListViewModel> GetAddressesOnOrder(int orderId) {
+            var del_address = (from da in _db.Addresses
+                            join o in _db.Orders on da.Id equals o.ShippingAddressId
+                            where o.Id == orderId
+                            select da).SingleOrDefault();
+            var bil_address = (from ba in _db.Addresses
+                            join o in _db.Orders on ba.Id equals o.BillingAddressId
+                            where o.Id == orderId
+                            select ba).SingleOrDefault();
+            
+            var del_listviewmodel = new AddressListViewModel() {
+                Id = del_address.Id,
+                CustomerId = del_address.CustomerId,
+                FirstName = del_address.FirstName,
+                LastName = del_address.LastName,
+                PhoneNumber = del_address.PhoneNumber,
+                Country = del_address.Country,
+                City = del_address.City,
+                StreetAddress = del_address.StreetAddress,
+                ZipCode = del_address.ZipCode
+            };
+
+            var bil_listviewmodel = new AddressListViewModel() {
+                Id = bil_address.Id,
+                CustomerId = bil_address.CustomerId,
+                FirstName = bil_address.FirstName,
+                LastName = bil_address.LastName,
+                PhoneNumber = bil_address.PhoneNumber,
+                Country = bil_address.Country,
+                City = bil_address.City,
+                StreetAddress = bil_address.StreetAddress,
+                ZipCode = bil_address.ZipCode
+            };
+
+            var addresses = new List<AddressListViewModel>();
+            addresses.Add(del_listviewmodel);
+            addresses.Add(bil_listviewmodel);
+            return addresses;
+        }
+
 
         public List<AddressListViewModel> GetUserAddresses(string userId) {
             var addressesEntity = (from a in _db.Addresses

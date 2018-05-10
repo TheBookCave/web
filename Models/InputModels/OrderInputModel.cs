@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using web.Models.ViewModels;
+
 namespace web.Models.InputModels
 {
     public class OrderInputModel
@@ -11,5 +14,6 @@ namespace web.Models.InputModels
         public string ShippingDate { get; set; }
         public string TrackingNumber { get; set; }
         public decimal PurchaseAmount { get; set;}
+        public List<AddressListViewModel> AllUserAddresses { get; set; }
     }
 }
