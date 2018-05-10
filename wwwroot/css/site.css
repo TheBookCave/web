@@ -33,6 +33,11 @@
   margin-top: 1rem;
 }
 
+.addressButtons {
+  margin-left: 20%;
+  width: 60%;
+}
+
 /* Carousel */
 .carousel-caption p {
   font-size: 20px;
@@ -68,6 +73,16 @@
   /* Flexbox var ekki að standa sig */
   .billAdd {
     width: 100%;
+  }
+  /* Overwriting a bit of bootstrap so that the buttons look better */
+  .btn-group>.btn-group:not(:last-child)>.btn, .btn-group>.btn:not(:last-child):not(.dropdown-toggle), .addreButton {
+    border-top-right-radius: .25rem;
+    border-bottom-right-radius: .25rem;
+  }
+  /* Overwriting a bit of bootstrap so that the buttons look better */
+  .btn-group>.btn-group:not(:first-child)>.btn, .btn-group>.btn:not(:first-child), .addreButton {
+    border-top-left-radius: .25rem;
+    border-bottom-left-radius: .25rem;
   }
 }
 
