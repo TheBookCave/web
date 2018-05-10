@@ -19,25 +19,27 @@
 
 
     <label>Author</label>
-    <select asp-for="AuthorId">
+    <select asp-for="AuthorId" required>
+        <option selected name="AuthorId" value=-1>Select Author Name</option>
         @foreach (var author in Model.AllAuthors)
         {
             <option name="AuthorId" value=@author.Id >@author.Name</option>
         }
     </select>
-
+    <span asp-validation-for="AuthorId" class="text-danger"></span>
     <a asp-controller="Book" asp-action="CreateAuthor" >New Author</a>
     <br/>
 
 
     <label>Publisher</label>
-    <select asp-for="PublisherId">
-    @foreach (var publisher in Model.AllPublishers)
-        {
-            <option name="PublisherId" value=@publisher.Id>@publisher.Name</option>
-        }
+    <select asp-for="PublisherId" required>
+        <option selected name="PublisherId" value=-1>Select Publisher Name</option>
+        @foreach (var publisher in Model.AllPublishers)
+            {
+                <option name="PublisherId" value=@publisher.Id>@publisher.Name</option>
+            }
     </select>
-
+    <span asp-validation-for="PublisherId" class="text-danger"></span>
     <a asp-controller="Book" asp-action="CreatePublisher" >New Publisher</a>
     <br/>
 
@@ -54,7 +56,7 @@
     <span asp-validation-for="ISBN" class="text-danger"></span>
     <br/>
     <label asp-for="Language">Language</label>
-    <input type="text" asp-for="Language" value="English">
+    <input type="text" asp-for="Language">
     <span asp-validation-for="Language" class="text-danger"></span>
     <br/>
     <label asp-for="Quantity">Quantity</label>
@@ -62,11 +64,11 @@
     <span asp-validation-for="Quantity" class="text-danger"></span>
     <br/>
     <label asp-for="Price">Price</label>
-    <input type="number" asp-for="Price">
+    <input type="text" asp-for="Price">
     <span asp-validation-for="Price" class="text-danger"></span>
     <br/>
     <label asp-for="Discount">Discount</label>
-    <input type="number" asp-for="Discount">
+    <input type="text" asp-for="Discount">
     <span asp-validation-for="Discount" class="text-danger"></span>
     <br/>
     <label asp-for="Genres">Genre</label>
@@ -80,6 +82,7 @@
             </div>
     }    
     <a asp-controller="Book" asp-action="CreateGenre" >New Genre</a>
+    <span asp-validation-for="Genres" class="text-danger"></span>
     <br/>
 
     <input type="submit" value="Submit Book" class="btn btn-info">
