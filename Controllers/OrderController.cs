@@ -39,6 +39,7 @@ namespace web.Controllers
         public IActionResult AddToCart(int BId)
         {
             var userId = _userManager.GetUserId(HttpContext.User);
+
             
             var book = _orderService.GetOrderItemInputModel(BId, userId);
             if(ModelState.IsValid)
@@ -49,40 +50,26 @@ namespace web.Controllers
             return View("Cart");
         }
 
-        public IActionResult temp(string orderby, string genre)
-        {
-            var orders = new List<OrderListViewModel>();
 
-            orders = _orderService.GetAllOrders();
-
-            if (orderby == "date-asc")
-            {
-                orders = _orderService.OrderByDate(orders);
-            }
-            else if(orderby == "date-desc")
-            {
-                orders = _orderService.OrderByDateDesc(orders);
-            }
-            else if(orderby == "amount-asc")
-            {
-                orders = _orderService.OrderByAmount(orders);
-            }
-            else if(orderby == "amount-desc")
-            {
-                orders = _orderService.OrderByAmountDesc(orders);
-            }
-            else
-            {
-                orders = _orderService.GetAllOrders();
-            }      
-            return View(orders);
-        }
-
-public IActionResult Cart(string orderby, Order order)
+        [Authorize]
+        public IActionResult Cart(string orderby, Order order)
         {
           var userId = _userManager.GetUserId(HttpContext.User);
           var orderitems = _orderService.GetAllItemsInCart(userId);
           return View(orderitems);
+        }
+        
+        public IActionResult CheckOutAddress() {
+          var userId = _userManager.GetUserId(HttpContext.User);
+          var addressList = _orderService.GetUserAddresses(userId);
+
+          return View(addressList);
+        }
+
+        public IActionResult CheckOut2(AddressInputModel deliveryAddress, AddressInputModel billingAddress) {
+
+
+          return View();
         }
 
         public IActionResult Details(int Id)
@@ -112,7 +99,34 @@ public IActionResult Cart(string orderby, Order order)
             }
             return View();
         } 
+        public IActionResult temp(string orderby, string genre)
+        {
+            var orders = new List<OrderListViewModel>();
 
+            orders = _orderService.GetAllOrders();
+
+            if (orderby == "date-asc")
+            {
+                orders = _orderService.OrderByDate(orders);
+            }
+            else if(orderby == "date-desc")
+            {
+                orders = _orderService.OrderByDateDesc(orders);
+            }
+            else if(orderby == "amount-asc")
+            {
+                orders = _orderService.OrderByAmount(orders);
+            }
+            else if(orderby == "amount-desc")
+            {
+                orders = _orderService.OrderByAmountDesc(orders);
+            }
+            else
+            {
+                orders = _orderService.GetAllOrders();
+            }      
+            return View(orders);
+        }
 /*
 
         [HttpGet]

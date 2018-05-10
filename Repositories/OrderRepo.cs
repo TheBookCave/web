@@ -39,7 +39,6 @@ namespace web.Repositories
         {
             var newOrder = new Order()
             {
-                Id = inputOrder.Id,
                 CustomerId = inputOrder.CustomerId,
                 BillingAddressId = inputOrder.BillingAddressId,
                 ShippingAddressId = inputOrder.ShippingAddressId,
@@ -72,7 +71,29 @@ namespace web.Repositories
             return order;
         }
 
+        public List<AddressListViewModel> GetUserAddresses(string userId) {
+            var addressesEntity = (from a in _db.Addresses
+                            where a.CustomerId == userId
+                            select a
+                            ).ToList();
+            var addresses = new List<AddressListViewModel>();
+            foreach (var a in addressesEntity) {
+                var addressView = new AddressListViewModel {
+                    Id = a.Id,
+                    CustomerId = a.CustomerId,
+                    FirstName = a.FirstName,
+                    LastName = a.LastName,
+                    PhoneNumber = a.PhoneNumber,
+                    Country = a.Country,
+                    City = a.City,
+                    StreetAddress = a.StreetAddress,
+                    ZipCode = a.ZipCode
+                };
+                addresses.Add(addressView);
+            }
 
+            return addresses;
+        }
 
         public OrderItemInputModel GetOrderItemInputModel(int bookId, string userId) {
 
@@ -111,13 +132,20 @@ namespace web.Repositories
                 return orderId[0];
             }
             else {
-                return 0;
+                var neworder = new Order() {
+                CustomerId = userId,
+                BillingAddressId = -1,
+                ShippingAddressId = -1,
+                Status = "open",
+                OrderDate = "", 
+                ShippingDate = "",
+                PurchaseAmount = 0
+                };
 
-                //var neworderinput = new OrderInputModel() {
-                    
+                _db.Add(neworder);
+                _db.SaveChanges();
 
-                //}
-               // _db.Orders.Add()
+                return neworder.Id;
             }
         }
 
