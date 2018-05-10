@@ -8,7 +8,7 @@
     <button class="btn btn-info col-md detailReview" onclick="location.href='@Url.Action("RateBook", "Book", new { BookId = @Model.Id, BookName = @Model.Name})'"><i class="far fa-star"></i> Review</button>
     <button class="btn btn-primary col-md detailWishlist"><i class="far fa-heart"></i> Add to wishlist</button>
   </div>
-  <div class="row col-md-7 offset-md-1 bookDetails">
+  <div class="row col-md-7 offset-md-1 border rounded">
     <div class="col-md-12"> </div>
     <div class="col-md-6"><strong>Price:</strong> $@Model.Price</div>
     <div class="col-md-6">
