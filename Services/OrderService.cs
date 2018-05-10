@@ -116,6 +116,18 @@ namespace web.Services
         }
 
 
+        public void IncrementOrderItemQuantity (int orderItemId) {
+            _orderRepo.IncrementOrderItemQuantity (orderItemId);
+        }
+
+        public void DecrementOrderItemQuantity (int orderItemId) {
+            _orderRepo.IncrementOrderItemQuantity (orderItemId);
+        }
+
+        public void DeleteOrderItem (int orderItemId) {
+            _orderRepo.DeleteOrderItem (orderItemId);
+        }
+
     }
 }
         // Function that searches orders
