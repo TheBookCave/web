@@ -18,6 +18,8 @@ using System.IO;
 using web.Data.EntityModels;
 using web.Data;
 
+using web.Repositories;
+
 namespace web.Controllers
 {
     public class AccountController : Controller
@@ -26,7 +28,7 @@ namespace web.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
 
-        //private DataContext _context;
+        private DataContext _context;
         private BookService _bookService;
         private AuthenticationDbContext _aContext;
         private OrderService _orderService;
@@ -41,7 +43,7 @@ namespace web.Controllers
             _roleManager = roleManager;
             _appEnvironment = appEnvironment;
             _aContext = aContext;
-            //_context = context;
+            _context = context;
             _bookService = new BookService(context, aContext);
             _orderService = new OrderService(context);
         }
@@ -70,12 +72,22 @@ namespace web.Controllers
         [HttpGet]
         public IActionResult CreateAddress()
         {
-            
-            var _addressListViewModel = new AddressListViewModel();
-            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            return View();
+        }
 
-            _addressListViewModel.CustomerId = userId;
-            return View(_addressListViewModel);
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateAddress(AddressListViewModel model)
+        {
+            if(!ModelState.IsValid) { 
+                return View(); 
+            }
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            model.CustomerId = user.Id;
+            var _addressRepo = new AddressRepo(_context);
+            _addressRepo.AddAddress(model);
+            return RedirectToAction("Index", "Account");
         }
 
         [HttpPost]

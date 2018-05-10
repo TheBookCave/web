@@ -46,6 +46,7 @@
         </table>
         <a class="btn btn-primary" asp-controller="Order" asp-action="Cart">Cart</a>
         <a class="btn btn-primary" asp-controller="Order" asp-action="Cart">Previous Orders</a>
+        <a class="btn btn-primary" asp-controller="Account" asp-action="CreateAddress">Add Address</a>
         <a class="btn btn-primary" asp-controller="Account" asp-action="Edit">Edit Profile</a>
         @if (User.IsInRole("Staff")) { <a class="btn btn-primary" asp-controller="Staff" asp-action="Index">Management Console</a> }
 

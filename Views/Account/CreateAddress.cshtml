@@ -1,9 +1,9 @@
 @model web.Models.ViewModels.AddressListViewModel
 
-<form class="row">
+<form class="row" asp-action="CreateAddress" asp-controller="Account">
     <div class="border rounded p-4 billAdd">
         <h2>New Address</h2>
-        <fieldset class="inputaddress row" id="billinginput">
+        <fieldset class="inputaddress row">
             <input type="text" class="col-12" asp-for="FirstName" placeholder="First Name"></br>
             <span asp-validation-for="FirstName" class="text-danger"></span>
             <input type="text" class="col-12" asp-for="LastName" placeholder="Last Name"></br>
@@ -19,7 +19,6 @@
             <input type="text" class="col-12" asp-for="ZipCode" placeholder="Zip Code">
             <span asp-validation-for="ZipCode" class="text-danger"></span>
         </fieldset>
-    </div>
-    
     <button type="submit" class="btn btn-default col-md-4 offset-md-4 addressButton">Continue</button>
+    </div>
 </form>
