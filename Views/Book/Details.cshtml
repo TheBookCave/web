@@ -5,10 +5,10 @@
   <div class="row col-md-4">
     <div class="col-md-12"><img class="bookImage"src="@Model.ImageUrl"/></div>
     <button class="btn btn-success detailCart"><i class="fas fa-cart-plus"></i> Add to cart</button>
-    <button class="btn btn-info detailReview" onclick="location.href='@Url.Action("RateBook", "Book", new { BookId = @Model.Id, BookName = @Model.Name})'"><i class="far fa-star"></i> Review</button>
+    <button class="btn btn-info col-md detailReview" onclick="location.href='@Url.Action("RateBook", "Book", new { BookId = @Model.Id, BookName = @Model.Name})'"><i class="far fa-star"></i> Review</button>
     <button class="btn btn-primary col-md detailWishlist"><i class="far fa-heart"></i> Add to wishlist</button>
   </div>
-  <div class="row col-md-7 offset-1 bookDetails">
+  <div class="row col-md-7 offset-md-1 bookDetails">
     <div class="col-md-12"> </div>
     <div class="col-md-6">Price: @Model.Price</div>
     <div class="col-md-6">

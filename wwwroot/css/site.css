@@ -24,12 +24,32 @@
   width: 100%;
   margin: 2px 0;
 }
-.detailReview {
-  width: auto;
-  margin-right: 2px;
+@media screen and (min-width: 992px) {
+  .detailReview {
+    width: auto;
+    margin-right: 2px;
+  }
 }
-.detailWishlist {
-  width: auto;
+@media screen and (max-width: 991px) {
+  .detailReview {
+    width: auto;
+    margin-bottom: 2px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .detailReview {
+    width: 100%;
+    margin-bottom: 2px;
+  }
+  .detailWishlist {
+    width: 100%;
+    margin-bottom: 2px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .detailWishlist {
+    width: auto;
+  }
 }
 .detailAuthor {
   color: black;
