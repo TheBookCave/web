@@ -1,44 +1,49 @@
 @model List<web.Models.ViewModels.AddressListViewModel>
 
-<p>Hey, @Model[0].FirstName! Please Select or fill out your Delivery and Shipping Address</p>
+<p>Hey, <!-- Model[0].FirstName var ekki að virka á meðan ég var að gera allt semi-fallegt. -->Asdf! Please Select or fill out your Delivery and Shipping Address</p>
 
-<form >
-  <fieldset class="selectaddress">
-    <select id="deliveryselect">
-      @foreach (var a in Model) {
-        <option>@a.StreetAddress</option>
-      }
-    </select>
-  </fieldset>
-
-  <fieldset class="selectaddress">
-    <select id="billingselect">
-      @foreach (var a in Model) {
-        <option>@a.StreetAddress</option>
-      }
-    </select>
-  </fieldset>
-
-  <fieldset class="inputaddress" id="deliveryinput">
-    <input type="text" placeholder="First Name"></br>
-    <input type="text" placeholder="Last Name"></br>
-    <input type="text" placeholder="Phone Number"></br>
-    <input type="text" placeholder="Country"></br>
-    <input type="text" placeholder="City"></br>
-    <input type="text" placeholder="Street Address"></br>
-    <input type="text" placeholder="Zip Code"></br>
-  </fieldset>
-
-  <fieldset class="inputaddress" id="billinginput">
-    <input type="text" placeholder="First Name"></br>
-    <input type="text" placeholder="Last Name"></br>
-    <input type="text" placeholder="Phone Number"></br>
-    <input type="text" placeholder="Country"></br>
-    <input type="text" placeholder="City"></br>
-    <input type="text" placeholder="Street Address"></br>
-    <input type="text" placeholder="Zip Code">
-
-  </fieldset>
-
-<button type="submit" class="btn btn-default">Continue</button>
+<form class="row">
+  <div class="niceBorder delivAdd">
+    <h2>Delivery address</h2>
+    <fieldset class="selectaddress row">
+      <select class="col-12" id="deliveryselect">
+        @foreach (var a in Model) {
+          <option>@a.StreetAddress</option>
+        }
+      </select>
+    </fieldset>
+    </br>
+    <fieldset class="inputaddress row" id="deliveryinput">
+      <input type="text" class="col-12" placeholder="First Name"></br>
+      <input type="text" class="col-12" placeholder="Last Name"></br>
+      <input type="text" class="col-12" placeholder="Phone Number"></br>
+      <input type="text" class="col-12" placeholder="Country"></br>
+      <input type="text" class="col-12" placeholder="City"></br>
+      <input type="text" class="col-12" placeholder="Street Address"></br>
+      <input type="text" class="col-12" placeholder="Zip Code"></br>
+    </fieldset>
+  </div>
+  
+  <div class="niceBorder billAdd">
+    <h2>Billing address</h2>
+    <fieldset class="selectaddress row">
+      <select class="col-12" id="billingselect">
+        @foreach (var a in Model) {
+          <option>@a.StreetAddress</option>
+        }
+      </select>
+    </fieldset>
+    </br>
+    <fieldset class="inputaddress row" id="billinginput">
+      <input type="text" class="col-12" placeholder="First Name"></br>
+      <input type="text" class="col-12" placeholder="Last Name"></br>
+      <input type="text" class="col-12" placeholder="Phone Number"></br>
+      <input type="text" class="col-12" placeholder="Country"></br>
+      <input type="text" class="col-12" placeholder="City"></br>
+      <input type="text" class="col-12" placeholder="Street Address"></br>
+      <input type="text" class="col-12" placeholder="Zip Code">
+    </fieldset>
+  </div>
+  
+  <button type="submit" class="btn btn-default col-md-4 offset-md-4 addressButton">Continue</button>
 </form>

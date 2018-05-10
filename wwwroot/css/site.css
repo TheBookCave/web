@@ -60,6 +60,35 @@
   border-radius: .25rem;
 }
 
+.niceBorder {
+  padding: 1.5rem;
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: .25rem;
+}
+
+@media screen and (min-width: 768px) {
+  .delivAdd {
+    width: 49%;
+    margin-right: 2%;
+  }
+  .billAdd {
+    width: 49%;
+  }
+}
+@media screen and (max-width: 767px) {
+  .delivAdd {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  .billAdd {
+    width: 100%;
+  }
+}
+.addressButton {
+  margin-top: 1rem;
+}
+
+
 /* Carousel */
 .carousel-caption p {
   font-size: 20px;
@@ -103,7 +132,7 @@
   top: auto;
 }
 
-.btn-price:disabled {
+.btn-price:disabled, .btn-cart:disabled {
   opacity: 1;
 }
 
