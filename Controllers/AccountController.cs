@@ -26,28 +26,30 @@ namespace web.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
 
+        //private DataContext _context;
+        private BookService _bookService;
         private AuthenticationDbContext _aContext;
+        private OrderService _orderService;
         
         private readonly IHostingEnvironment _appEnvironment;
        // var RoleManager = new RoleManager<IdentityRole>
 
-        public AccountController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IHostingEnvironment appEnvironment, AuthenticationDbContext aContext)
+        public AccountController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IHostingEnvironment appEnvironment, DataContext context, AuthenticationDbContext aContext)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _roleManager = roleManager;
             _appEnvironment = appEnvironment;
             _aContext = aContext;
+            //_context = context;
+            _bookService = new BookService(context, aContext);
+            _orderService = new OrderService(context);
         }
 
         [Authorize]
         [HttpGet]
         public IActionResult Index()
         {
-            //var userid = _userManager.GetUserId(HttpContext.User);
-            //ApplicationUser user = _userManager.FindByIdAsync(userid).Result;
-           // _userManager.GetClaimsAsync(user)
-           
             return View();
         }
 
@@ -55,11 +57,13 @@ namespace web.Controllers
         [HttpGet]
         public IActionResult Edit()
         {
-            //var userid = _userManager.GetUserId(HttpContext.User);
-            //ApplicationUser user = _userManager.FindByIdAsync(userid).Result;
-            //Console.WriteLine(user.UserName);
-           // _userManager.GetClaimsAsync(user)
-            return View();
+            
+            var _userEditInputModel = new UserEditInputModel();
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            _userEditInputModel.AllBooks = _bookService.GetAllBooks();
+            _userEditInputModel.AllAddresses = _orderService.GetUserAddresses(userId);
+            return View(_userEditInputModel);
         }
 
         [HttpPost]

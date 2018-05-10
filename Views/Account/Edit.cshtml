@@ -3,18 +3,50 @@
 <h1>Edit Profile</h1>
 <form asp-action="Edit" asp-controller="Account" class="form-horizontal" method="POST" enctype="multipart/form-data">
     <div class="form-group">
-        <input type="string" asp-for="FirstName" class="form-controll" placeholder="Enter First Name"/>
+        <label asp-for="FirstName">First Name</label>
+        <input type="text" asp-for="FirstName" class="form-controll" placeholder="Enter First Name"/>
+        <span asp-validation-for="FirstName" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <input type="string" asp-for="LastName" class="form-controll" placeholder="Enter Last Name"/>
+        <label asp-for="LastName">Last Name</label>
+        <input type="text" asp-for="LastName" class="form-controll" placeholder="Enter Last Name"/>
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+
+    <div class="form-row form-group">
+        <div class="col-md-6">
+        <label>Favorite Book</label>
+        <select asp-for="FavoriteBookId" required class="form-control">
+            <option selected name="BookId" value=-1>Select Books</option>
+            @foreach (var book in Model.AllBooks)
+            {
+            <option name="FavoriteBookId" value=@book.Id >@book.Name</option>
+            }
+        </select>
+        <span asp-validation-for="FavoriteBookId" class="text-danger"></span>
+        </div>
+
+        @if( Model.AllAddresses != null) {
+        <div class="col-md-6">
+        <label>Primary Address</label>
+        <select asp-for="PrimaryAddressId" required class="form-control">
+            <option selected name="BookId" value=-1>Select Address</option>
+            @foreach (var addess in Model.AllAddresses)
+            {
+            <option name="PrimaryAddressId" value=@addess.Id >@addess.StreetAddress</option>
+            }
+        </select>
+        <span asp-validation-for="PrimaryAddressId" class="text-danger"></span>
+        </div>
+        }
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PrimaryAddressId">PrimaryAddressId (Backup until create address is available)</label>
+        <input type="number" asp-for="PrimaryAddressId" class="form-controll"/>
     </div>
     <div class="form-group">
-        <input type="number" asp-for="FavoriteBookId" class="form-controll" placeholder="Enter favorite book id"/>
-    </div>
-    <div class="form-group">
-        <input type="number" asp-for="PrimaryAddressId" class="form-controll" placeholder="Enter primary address id"/>
-    </div>
-    <div class="form-group">
+        <label asp-for="UserPhoto">Upload profile image</label>
         <input type="file" asp-for="UserPhoto" accept=".png,.jpg,.jpeg,.gif,.tif" />
     </div>
     <div class="form-group">
