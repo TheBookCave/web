@@ -35,26 +35,17 @@ namespace web.Controllers
         }
 
 
-        [HttpGet]
         public IActionResult AddToCart(int BId)
         {
             var userId = _userManager.GetUserId(HttpContext.User);
             var book = _orderService.GetOrderItemInputModel(BId, userId);
-            
-            return View(book);
-        }
-
-                [HttpPost]
-        public IActionResult AddToCart(OrderItemInputModel orderinput)
-        {
             if(ModelState.IsValid)
             {
-                _orderService.AddToCart(orderinput);
+                _orderService.AddToCart(book);
                 return RedirectToAction("Cart"); // ma breyta i ad redirecta einhvert annad
             }
-            return View();
+            return View("Cart");
         }
-
 
         public IActionResult temp(string orderby, string genre)
         {

@@ -8,6 +8,21 @@ else {
   <div class="row">
     @foreach(var book in @Model)
     {
+      <!--<div class="col-sm-6 col-md-4 col-lg-3">
+        <div id="book-@book.Id" class="thumbnail card photo-item">
+          <img class="card-img-top" src="@book.ImageUrl" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title"><a asp-controller="Book" asp-action="Details" asp-route-Id="@book.Id">@book.Name</a></h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the cards content.</p>
+            <p>Author: @book.Author</p>
+            <p>Price: @book.Price</p>
+            <p>Discount: @book.Discount</p>
+            <p>Rating: @book.Rating</p>
+            <a asp-controller="Book" asp-action="Details" asp-route-Id="@book.Id" class="btn btn-primary">Details</a>
+
+          </div>
+        </div>
+      </div>-->
       <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 book-card">
         <div class="card bg-light text-white">
           <a asp-controller="Book" asp-action="Details" asp-route-Id="@book.Id">
@@ -38,7 +53,7 @@ else {
                         <i class='fas fa-star'></i><i class='fas fa-star'></i><i class='fas fa-star'></i><i class='fas fa-star'></i><i class='fas fa-star'></i>
                       }
                       @book.Rating
-                      <p>@book.Description</p>
+                      <p>Some quick example text to build on the card title and make up the bulk of the cards content.</p>
                       <p>Genres: @genre</p>">
             <a asp-controller="Book" asp-action="Details" asp-route-Id="@book.Id" class="card-img-overlay"></a>
             <div class="card-img-overlay book-overlay-upper">
@@ -78,6 +93,57 @@ else {
           </div>
         </div>
       </div>
+  <div class="col-sm-6 col-md-4 col-lg-3 book-card">
+    <div class="card align-item-stretch">
+      <a asp-controller="Book" asp-action="Details" asp-route-Id="@book.Id" data-toggle="tooltip" data-placement="right" title="Some quick example text to build on the card title and make up the bulk of the cards content.">
+        <img class="card-img-top" src="@book.ImageUrl" alt="Card image cap">
+        <div class="card-img-overlay badge rating">
+          <span class="badge badge-secondary star">
+          @if(@book.Rating <= 0.5) {
+            <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          }
+          else if(@book.Rating <= 1.5) {
+            <i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          }
+          else if(@book.Rating <= 2.5) {
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          }
+          else if(@book.Rating <= 3.5) {
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          }
+          else if(@book.Rating <= 4.5) {
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+          }
+          else if(@book.Rating <= 5) {
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          }
+          @book.Rating
+          </span>
+        </div>
+      </a>
+      <div class="card-body">
+        <a class="card-link" asp-controller="Book" asp-action="Details" asp-route-Id="@book.Id">
+          <h5 class="card-title">@book.Name</h5>
+        </a>
+        <h6 class="card-subtitle mb-2 text-muted">@book.Author</h6>
+      </div>
+      <div class="card-body">
+        <span class=""><i class="fas fa-dollar-sign"></i>@book.Price</span>     
+
+        @{
+          var str = String.Join(", ", book.Genres);
+          str = str.TrimEnd(' ');
+          str = str.TrimEnd(',');
+        } 
+        <span class="">@str</span>
+
+
+
+
+        <button class="btn btn-success float-right"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+      </div>
+    </div>
+  </div>
     }
   </div>
 }

@@ -88,7 +88,15 @@ namespace web.Repositories
             return orderiteminput;
         }
 
-        public void AddToCart(OrderItemInputModel orderinput) {
+        public void AddToCart(OrderItemInputModel oi) {
+            var orderinput = new OrderItem() {
+                OrderId = oi.OrderId,
+                BookId = oi.BookId,
+                Quantity = oi.Quantity,
+                ItemPrice = oi.ItemPrice,
+                ItemDiscount = oi.ItemDiscount
+            };
+            
             _db.Add(orderinput);
             _db.SaveChanges();
         }
