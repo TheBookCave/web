@@ -1,24 +1,18 @@
-@model List<web.Models.ViewModels.AddressListViewModel>
-</br>
-<div class="btn-group addressButtons row">
-  <button type="button" class="btn btn-primary col-md-6 addreButton">1</button>
-  <button type="button" class="btn btn-info col-md-6 addreButton">2</button>
-</div>
-</br>
-</br>
+@model web.Models.InputModels.OrderInputModel
 
 <p>Hey, <!-- Model[0].FirstName var ekki að virka á meðan ég var að gera allt semi-fallegt. -->Asdf! Please Select or fill out your Delivery and Shipping Address</p>
 
-<form class="row">
+<form class="row" method="POST">
   <div class="border rounded p-4 delivAdd">
     <h2>Delivery address</h2>
     <fieldset class="selectaddress row">
-      <select class="col-12" id="deliveryselect">
-        @foreach (var a in Model) {
-          <option>@a.StreetAddress</option>
+      <select asp-for="ShippingAddressId" class="col-12" id="deliveryselect">
+        @foreach (var a in Model.AllUserAddresses) {
+          <option value=@a.Id>@a.StreetAddress</option>
         }
       </select>
     </fieldset>
+
     </br>
     <fieldset class="inputaddress row" id="deliveryinput">
       <input type="text" class="col-12" placeholder="First Name"></br>
@@ -34,9 +28,9 @@
   <div class="border rounded p-4 billAdd">
     <h2>Billing address</h2>
     <fieldset class="selectaddress row">
-      <select class="col-12" id="billingselect">
-        @foreach (var a in Model) {
-          <option>@a.StreetAddress</option>
+      <select asp-for="BillingAddressId" class="col-12" id="billingselect">
+        @foreach (var a in Model.AllUserAddresses) {
+          <option value=@a.Id>@a.StreetAddress</option>
         }
       </select>
     </fieldset>

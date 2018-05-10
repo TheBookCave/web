@@ -5,6 +5,7 @@ using web.Repositories;
 using System.Linq;
 using System;
 using web.Data;
+using web.Data.EntityModels;
 
 namespace web.Services
 {
@@ -49,6 +50,23 @@ namespace web.Services
         public List<AddressListViewModel> GetUserAddresses(string userId) {
 
             return _orderRepo.GetUserAddresses(userId);
+        }
+
+        public OrderDetailViewModel GetOpenOrder(string userId) {
+            return _orderRepo.GetOpenOrder(userId);
+        }
+        public void ChangeOrderAddressAndClose(OrderConfirmationViewModel confirmed) {
+             _orderRepo.ChangeOrderAddressAndClose(confirmed);
+             return;
+        }
+
+        public void ChangeOrderAddress(OrderInputModel orderinput) {
+             _orderRepo.ChangeOrderAddress(orderinput);
+             return;
+        }
+
+        public List<AddressListViewModel> GetAddressesOnOrder(int orderId) {
+            return _orderRepo.GetAddressesOnOrder(orderId);
         }
 
         // Function that return a list of all the orders in alphabetic order
