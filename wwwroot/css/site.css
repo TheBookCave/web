@@ -46,11 +46,6 @@
   line-height: 1.4;
 }
 
-/* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"] {
-  width: 100%;
-}
-
 /* QR code generator */
 #qrCode {
   margin: 15px;
@@ -99,14 +94,3 @@
 .book-card-link:hover {
   color: white;
 }
-
-/*.card {
-  width: 200px;
-  height:800px;
-  margin: 10px;
-}*/
-
-/*.card-img-top {
-  height: 100px;
-  width: 100%;
-}*/

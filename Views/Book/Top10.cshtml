@@ -1,6 +1,13 @@
 @model List<web.Models.ViewModels.BookListViewModel>
+
+@section Scripts {
+  <script src="~/js/booklist.js" asp-append-version="true"></script>
+}
+
 <div>
-    <h2>Top 10 books</h2>
+  <h2>Top 10 books</h2>
 </div>
+
+
 
 @{ await Html.RenderPartialAsync("Books", Model);}
