@@ -66,6 +66,18 @@ namespace web.Controllers
             return View(_userEditInputModel);
         }
 
+        [Authorize]
+        [HttpGet]
+        public IActionResult CreateAddress()
+        {
+            
+            var _addressListViewModel = new AddressListViewModel();
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            _addressListViewModel.CustomerId = userId;
+            return View(_addressListViewModel);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(UserEditInputModel model)
