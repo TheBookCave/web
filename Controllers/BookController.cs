@@ -72,6 +72,13 @@ namespace web.Controllers
             return View(books);
         }
 
+        [HttpGet]
+        public IActionResult GetAllGenres()
+        {
+            var genres = _bookService.GetAllGenres();
+            return Json(genres);
+        }
+
         public IActionResult Top10()
         {
             var books = _bookService.GetTop10Books();
