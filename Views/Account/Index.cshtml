@@ -1,11 +1,40 @@
+@{
+    //If we use claims then the user must log out and in again for action to take effect.
+    //var claim = (User.Identity  as System.Security.Claims.ClaimsIdentity).Claims.FirstOrDefault(x => x.Type == "ProfilePic");
+    //var profilePicPath = "images\\profilepics\\anon.jpg";
+    //profilePicPath = claim.Value.ToString();
+    var name = (User.Identity  as System.Security.Claims.ClaimsIdentity).Claims.FirstOrDefault(x => x.Type == "Name").Value.ToString();
+
+    var profilePicPath = "images\\profilepics\\default.jpg";
+    var username = UserManager.GetUserName(User);
+    var user = UserManager.Users.FirstOrDefault(x => x.UserName == UserManager.GetUserName(User));
+
+
+    if(user.UserPhotoLocation != null)
+    {
+        //Console.WriteLine(UserManager.Users.FirstOrDefault(x => x.UserName == UserManager.GetUserName(User)));
+        profilePicPath = user.UserPhotoLocation;
+    }
+}
 
 <div>
     <h2>Account Profile</h2>
 </div>
 
 <p>
-    Hi @((User.Identity  as System.Security.Claims.ClaimsIdentity).Claims.FirstOrDefault(x => x.Type == "Name").Value.ToString())
+    Hi @user.FirstName @user.LastName
 </p>
+<p>
+    Email: @user.Email
+</p>
+<p>
+    Favorite book: @user.FavoriteBookId
+</p>
+<p>
+    Primary address: @user.PrimaryAddressId
+</p>
+
+<img src="@profilePicPath" />
 
 @if (User.IsInRole("Staff"))
 {
@@ -16,6 +45,11 @@
 </form>
 }
 
+<form asp-action="Edit" asp-controller="Account" method="GET">
+    <div class="form-group">
+        <button type="submit" class="btn btn-default">Edit profile</button>
+    </div>
+</form>
 
 <form asp-action="Logout" asp-controller="Account" method="POST">
     <div class="form-group">

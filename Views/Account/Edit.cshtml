@@ -1,0 +1,23 @@
+@model web.Models.InputModels.UserEditInputModel
+
+<h1>Edit Profile</h1>
+<form asp-action="Edit" asp-controller="Account" class="form-horizontal" method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+        <input type="string" asp-for="FirstName" class="form-controll" placeholder="Enter First Name"/>
+    </div>
+    <div class="form-group">
+        <input type="string" asp-for="LastName" class="form-controll" placeholder="Enter Last Name"/>
+    </div>
+    <div class="form-group">
+        <input type="number" asp-for="FavoriteBookId" class="form-controll" placeholder="Enter favorite book id"/>
+    </div>
+    <div class="form-group">
+        <input type="number" asp-for="PrimaryAddressId" class="form-controll" placeholder="Enter primary address id"/>
+    </div>
+    <div class="form-group">
+        <input type="file" asp-for="UserPhoto" accept=".png,.jpg,.jpeg,.gif,.tif" />
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-default">Update</button>
+    </div>
+</form>

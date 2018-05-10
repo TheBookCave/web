@@ -11,9 +11,10 @@ using web.Data;
 namespace web.Migrations.AuthenticationDb
 {
     [DbContext(typeof(AuthenticationDbContext))]
-    partial class AuthenticationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180510130136_userphoto")]
+    partial class userphoto
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -145,10 +146,6 @@ namespace web.Migrations.AuthenticationDb
 
                     b.Property<int>("FavoriteBookId");
 
-                    b.Property<string>("FirstName");
-
-                    b.Property<string>("LastName");
-
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
@@ -173,6 +170,8 @@ namespace web.Migrations.AuthenticationDb
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
+
+                    b.Property<byte[]>("UserPhoto");
 
                     b.Property<string>("UserPhotoLocation");
 
