@@ -11,6 +11,7 @@ using web.Models.ViewModels;
 using web.Services;
 using web.Data;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace web.Controllers
 {
@@ -34,10 +35,11 @@ namespace web.Controllers
           return View(orderitems);
         }
 
-
+        [Authorize]
         public IActionResult AddToCart(int BId)
         {
             var userId = _userManager.GetUserId(HttpContext.User);
+            
             var book = _orderService.GetOrderItemInputModel(BId, userId);
             if(ModelState.IsValid)
             {
