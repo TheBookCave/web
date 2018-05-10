@@ -10,9 +10,9 @@
   </div>
   <div class="row col-md-7 offset-md-1 bookDetails">
     <div class="col-md-12"> </div>
-    <div class="col-md-6">Price: @Model.Price</div>
+    <div class="col-md-6"><strong>Price:</strong> $@Model.Price</div>
     <div class="col-md-6">
-      Rating: 
+      <strong>Rating:</strong> 
       @if(@Model.Rating <= 0.5) {
         <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
       }
@@ -33,14 +33,14 @@
       }
       @Model.Rating
     </div>
-    <div class="col-md-12">Discount: @Model.Discount</div>
-    <div class="col-md-12">Language: @Model.Language</div>
+    <div class="col-md-12"><strong>Discount:</strong> @Model.Discount</div>
+    <div class="col-md-12"><strong>Language:</strong> @Model.Language</div>
     <div class="col-md-12"><h4>Description</h4> @Model.Description</div>
     <!-- Description is available through @Model.Description -->
     <div class="col-md-12"><h4>Author</h4> <a href="~/Book/Search?searchString=@Model.AuthorName" class="detailAuthor">@Model.AuthorName</a></div>
     <div class="col-md-12"><h4>Publisher</h4> @Model.PublisherName</div>
-    <div class="col-md-6">Year published: @Model.Year</div>
-    <div class="col-md-6">ISBN: @Model.ISBN</div>
+    <div class="col-md-6"><strong>Year published:</strong> @Model.Year</div>
+    <div class="col-md-6"><strong>ISBN:</strong> @Model.ISBN</div>
   </div>
 </div>
 
