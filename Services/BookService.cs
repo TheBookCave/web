@@ -127,6 +127,7 @@ namespace web.Services
             _bookRepo.AddBook(inputBook);
         }
 
+
         public void AddGenre(GenreInputModel inputGenre)
         {
             _genreRepo.AddGenre(inputGenre);
@@ -168,6 +169,18 @@ namespace web.Services
         {
             _publisherRepo.AddPublisher(inputPublisher);
         }
+
+        
+        public BookInputModel CreateNewBookInputModel()
+        {
+           var book = new BookInputModel
+            {  
+                AllAuthors = GetAllAuthors(),
+                AllGenres = GetAllGenres(),
+                AllPublishers = GetAllPublishers()
+            };
+            return book;
+        } 
 
     }
 }

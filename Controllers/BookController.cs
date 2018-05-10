@@ -102,12 +102,9 @@ namespace web.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            var inputModel = new BookInputModel {
-                AllGenres = _bookService.GetAllGenres(),
-                AllAuthors = _bookService.GetAllAuthors(),
-                AllPublishers = _bookService.GetAllPublishers()
-            };
-            return View(inputModel);
+            var book = _bookService.CreateNewBookInputModel(); // Create new BookInputViewModel and add Genres, Authors and Publishers
+            
+            return View(book);
         }
 
         [Authorize(Roles = "Staff")]
@@ -119,7 +116,12 @@ namespace web.Controllers
                 _bookService.AddBook(inputBook);
                 return RedirectToAction("Index", "Staff");
             }
-            return View();
+                // Add Genres, Authors and Publishers to the inputBook so that dropdownlists and checkboxes will be populated.
+                inputBook.AllGenres = _bookService.GetAllGenres();
+                inputBook.AllAuthors = _bookService.GetAllAuthors();
+                inputBook.AllPublishers = _bookService.GetAllPublishers();
+            
+            return View(inputBook);
         } 
 
         [Authorize]
