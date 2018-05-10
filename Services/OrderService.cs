@@ -46,6 +46,11 @@ namespace web.Services
 
         }
 
+        public List<AddressListViewModel> GetUserAddresses(string userId) {
+
+            return _orderRepo.GetUserAddresses(userId);
+        }
+
         // Function that return a list of all the orders in alphabetic order
         public List<OrderListViewModel> OrderByDate(List<OrderListViewModel> methodOrders)
         {

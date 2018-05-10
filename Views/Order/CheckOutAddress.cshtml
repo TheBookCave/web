@@ -1,0 +1,44 @@
+@model List<web.Models.ViewModels.AddressListViewModel>
+
+<p>Hey, @Model[0].FirstName! Please Select or fill out your Delivery and Shipping Address</p>
+
+<form >
+  <fieldset class="selectaddress">
+    <select id="deliveryselect">
+      @foreach (var a in Model) {
+        <option>@a.StreetAddress</option>
+      }
+    </select>
+  </fieldset>
+
+  <fieldset class="selectaddress">
+    <select id="billingselect">
+      @foreach (var a in Model) {
+        <option>@a.StreetAddress</option>
+      }
+    </select>
+  </fieldset>
+
+  <fieldset class="inputaddress" id="deliveryinput">
+    <input type="text" placeholder="First Name"></br>
+    <input type="text" placeholder="Last Name"></br>
+    <input type="text" placeholder="Phone Number"></br>
+    <input type="text" placeholder="Country"></br>
+    <input type="text" placeholder="City"></br>
+    <input type="text" placeholder="Street Address"></br>
+    <input type="text" placeholder="Zip Code"></br>
+  </fieldset>
+
+  <fieldset class="inputaddress" id="billinginput">
+    <input type="text" placeholder="First Name"></br>
+    <input type="text" placeholder="Last Name"></br>
+    <input type="text" placeholder="Phone Number"></br>
+    <input type="text" placeholder="Country"></br>
+    <input type="text" placeholder="City"></br>
+    <input type="text" placeholder="Street Address"></br>
+    <input type="text" placeholder="Zip Code">
+
+  </fieldset>
+
+<button type="submit" class="btn btn-default">Continue</button>
+</form>

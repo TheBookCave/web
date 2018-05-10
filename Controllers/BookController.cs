@@ -68,18 +68,21 @@ namespace web.Controllers
             {
                 books = _bookService.OrderByRatingDesc(books);
             }
-
-            if(books.Count == 0)
-            {
-                return View("ErrorNotFound");
-            }
     
             return View(books);
+        }
+
+        [HttpGet]
+        public IActionResult GetAllGenres()
+        {
+            var genres = _bookService.GetAllGenres();
+            return Json(genres);
         }
 
         public IActionResult Top10()
         {
             var books = _bookService.GetTop10Books();
+            
             return View(books);
         }
 
@@ -99,12 +102,9 @@ namespace web.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            var inputModel = new BookInputModel {
-                AllGenres = _bookService.GetAllGenres(),
-                AllAuthors = _bookService.GetAllAuthors(),
-                AllPublishers = _bookService.GetAllPublishers()
-            };
-            return View(inputModel);
+            var book = _bookService.CreateNewBookInputModel(); // Create new BookInputViewModel and add Genres, Authors and Publishers
+            
+            return View(book);
         }
 
         [Authorize(Roles = "Staff")]
@@ -116,17 +116,23 @@ namespace web.Controllers
                 _bookService.AddBook(inputBook);
                 return RedirectToAction("Index", "Staff");
             }
-            return View();
+                // Add Genres, Authors and Publishers to the inputBook so that dropdownlists and checkboxes will be populated.
+                inputBook.AllGenres = _bookService.GetAllGenres();
+                inputBook.AllAuthors = _bookService.GetAllAuthors();
+                inputBook.AllPublishers = _bookService.GetAllPublishers();
+            
+            return View(inputBook);
         } 
 
         [Authorize]
         [HttpGet]
-        public IActionResult RateBook(int BId, string BookName)
+        public IActionResult RateBook(int BookId, string BookName)
         {
 
             var book = new RatingInputModel
             {
-                BookId = BId,
+                BookId = BookId,
+                BookName = BookName,
                 CustomerId = "",
                 RatingValue = 0,
                 Comment = "",
@@ -150,7 +156,7 @@ namespace web.Controllers
                 _bookService.AddRating(rating);
                 return RedirectToAction("Details", new {Id = rating.BookId});
             }
-            return View();
+            return View(rating);
         }
 
         [Authorize(Roles = "Staff")]

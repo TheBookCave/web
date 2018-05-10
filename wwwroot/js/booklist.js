@@ -10,3 +10,15 @@ $("#priceRange").change(function() {
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
+
+/// Fills the genre filter with all the genres
+$.get("Book/GetAllGenres", function (data, status) {
+  let genres = $("#genre");
+  for (let i = 0; i < data.length; i++) {
+    let option= $("<option>").append(data[i].name);
+    option.val(data[i].name);
+    genres.append(option);
+  }
+}).fail(function (errorObject) {
+  console.log("GetFilterInfo failed");
+});
