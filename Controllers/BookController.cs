@@ -126,12 +126,13 @@ namespace web.Controllers
 
         [Authorize]
         [HttpGet]
-        public IActionResult RateBook(int BId, string BookName)
+        public IActionResult RateBook(int BookId, string BookName)
         {
 
             var book = new RatingInputModel
             {
-                BookId = BId,
+                BookId = BookId,
+                BookName = BookName,
                 CustomerId = "",
                 RatingValue = 0,
                 Comment = "",
@@ -155,7 +156,7 @@ namespace web.Controllers
                 _bookService.AddRating(rating);
                 return RedirectToAction("Details", new {Id = rating.BookId});
             }
-            return View();
+            return View(rating);
         }
 
         [Authorize(Roles = "Staff")]
