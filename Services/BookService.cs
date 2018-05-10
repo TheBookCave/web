@@ -81,6 +81,13 @@ namespace web.Services
             return books;
         }
 
+        // Function that returns a list of the most recently added books
+        public List<BookListViewModel> GetRecentAdditionsBooks()
+        {
+            var books = _bookRepo.GetAllBooksLinqQuery().OrderByDescending(x => x.Id).Take(5).ToList();
+            return books;
+        }
+
         // Function that return a book with specified ID
         public BookDetailViewModel GetBookWithId(int Id)
         {
