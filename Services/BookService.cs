@@ -17,9 +17,9 @@ namespace web.Services
         private PublisherRepo _publisherRepo;
 
         // Constructor for BookService that creates the _bookRepo
-        public BookService(DataContext context)
+        public BookService(DataContext context, AuthenticationDbContext acontext)
         {
-            _bookRepo = new BookRepo(context);
+            _bookRepo = new BookRepo(context, acontext);
             _genreRepo = new GenreRepo(context);
             _authorRepo = new AuthorRepo(context);
             _publisherRepo = new PublisherRepo(context);

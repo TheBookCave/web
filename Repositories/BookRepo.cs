@@ -11,12 +11,14 @@ namespace web.Repositories
     public class BookRepo
     {
         // BookRepo owns a private instance of the databae
-        private DataContext _db;
+        private DataContext _db; 
+        private AuthenticationDbContext _dba;
 
         // Constructor to initialize the database
-        public BookRepo(DataContext context)
+        public BookRepo(DataContext context, AuthenticationDbContext acontext)
         {
             _db = context;
+            _dba = acontext;
         }
 
         // Function that return all available Genres with their ID so that they can be clickable
@@ -56,7 +58,6 @@ namespace web.Repositories
             return genresForAllBooks;
          }
 
-//--------------------------------------------------------------------------------------------------------------------------------------------
         // Function that returns a Linq Query of all the books in a database
         public IQueryable<BookListViewModel> GetAllBooksLinqQuery()
         {
@@ -140,10 +141,20 @@ namespace web.Repositories
                 rating = Math.Round(ratings.Average(),2);
             }
 
+            var usernames = ( from u in _dba.UserClaims 
+                              where u.ClaimType == "Name"
+                              select new
+                              {
+                                  UserId = u.UserId,
+                                  UserName = u.ClaimValue
+                              }).ToList();
+
             var comments = ( from c in _db.Ratings
+                             join u in usernames on c.CustomerId equals u.UserId
                             where c.BookId == Id
                             select new RatingCommentViewModel
                             {
+                                CustomerName = u.UserName,
                                 RatingValue = c.RatingValue,
                                 Comment = c.Comment,
                                 RatingDate = c.RatingDate

@@ -23,9 +23,9 @@ namespace web.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
 
         // Constructor for the BookController where the _bookService is created
-        public BookController(DataContext context, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
+        public BookController(DataContext context, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, AuthenticationDbContext aContext)
         {
-            _bookService = new BookService(context);
+            _bookService = new BookService(context, aContext);
             _userManager = userManager;
         }
 

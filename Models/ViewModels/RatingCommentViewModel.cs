@@ -7,6 +7,7 @@ namespace web.Models.ViewModels
     {
         //public int BookId { get; set; }
         //public string CustomerId { get; set; }
+        public string CustomerName { get; set; }
         
         public int RatingValue { get; set; }
         public string Comment { get; set; }
