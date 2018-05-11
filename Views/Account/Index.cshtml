@@ -1,46 +1,30 @@
-@{
-    //If we use claims then the user must log out and in again for action to take effect.
-    //var claim = (User.Identity  as System.Security.Claims.ClaimsIdentity).Claims.FirstOrDefault(x => x.Type == "ProfilePic");
-    //var profilePicPath = "images\\profilepics\\anon.jpg";
-    //profilePicPath = claim.Value.ToString();
-    var name = (User.Identity  as System.Security.Claims.ClaimsIdentity).Claims.FirstOrDefault(x => x.Type == "Name").Value.ToString();
+@model web.Models.ViewModels.AccountViewModel
 
-    var profilePicPath = "images\\profilepics\\default.jpg";
-    var username = UserManager.GetUserName(User);
-    var user = UserManager.Users.FirstOrDefault(x => x.UserName == UserManager.GetUserName(User));
-
-
-    if(user.UserPhotoLocation != null)
-    {
-        //Console.WriteLine(UserManager.Users.FirstOrDefault(x => x.UserName == UserManager.GetUserName(User)));
-        profilePicPath = user.UserPhotoLocation;
-    }
-}
 
 
 <h2>Account Profile</h2>
 <div class="row justify-content-md-center">
     <div class="col-xs-12 " align="center"> 
-        <img alt="User Pic" src="@profilePicPath" class="img-circle img-responsive"> 
+        <img alt="User Pic" src="@Model.UserPhotoLocation" class="img-circle img-responsive"> 
     </div>
     <div class="col-md-8"> 
         <table class="table table-user-information">
             <tbody>
                 <tr>
                     <td>Name:</td>
-                    <td>@user.FirstName @user.LastName</td>
+                    <td>@Model.FirstName @Model.LastName</td>
                 </tr>
                 <tr>
                     <td>Favorite Book:</td>
-                    <td>@user.FavoriteBookId</td>
+                    <td>@Model.FavoriteBookName</td>
                 </tr>
                 <tr>
                     <td>Primary Address</td>
-                    <td>@user.PrimaryAddressId</td>
+                    <td>@Model.PrimaryAddressStreet</td>
                 </tr>
                 <tr>
                     <td>Email</td>
-                    <td><a href="mailto:@user.Email">@user.Email</a></td>
+                    <td><a href="mailto:@Model.Email">@Model.Email</a></td>
                 </tr>  
             </tbody>
         </table>
