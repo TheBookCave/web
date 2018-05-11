@@ -41,6 +41,13 @@ namespace web.Services
             return orderitemlist;
         }
 
+        public List <OrderItemListViewModel> GetAllItemsInOrder (int orderId) {
+            //var order = _orderRepo.GetOpenOrderId(userId);
+            //var openOrderId = 1;
+            var orderitemlist = _orderRepo.GetAllOrderItemsLinqQuery().Where( a => a.OrderId.Equals(orderId)).ToList();
+            return orderitemlist;
+        }
+
         public OrderItemInputModel GetOrderItemInputModel(int bookId, string userId) {
 
             var oim = _orderRepo.GetOrderItemInputModel(bookId, userId);

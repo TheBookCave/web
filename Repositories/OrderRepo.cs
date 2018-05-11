@@ -94,8 +94,9 @@ namespace web.Repositories
             var orderNow = _db.Orders.SingleOrDefault(o => o.Id == orderId);
             var orderItemAmount = (from oi in _db.OrderItems
                                     where oi.OrderId == orderNow.Id
-                                    select oi.ItemPrice * oi.Quantity * (1 - oi.ItemDiscount)).ToList().Sum();
-            orderNow.PurchaseAmount = orderItemAmount;
+                                    select oi.ItemPrice * oi.Quantity * (1 - oi.ItemDiscount)).ToList();
+
+            orderNow.PurchaseAmount = orderItemAmount.Sum();
             _db.SaveChanges();
         }
 
