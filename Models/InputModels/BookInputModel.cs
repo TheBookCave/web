@@ -23,13 +23,13 @@ namespace web.Models.InputModels
     [RegularExpression("[0-9]{4}", ErrorMessage = "Year has to be a four digit number")]
     public int Year { get; set; }
     [Required]
-    [RegularExpression("[0-9]{13}", ErrorMessage = "ISBN13 number is required")]        
+    [RegularExpression("[0-9]{13}", ErrorMessage = "ISBN13 number is required")]
     public string ISBN { get; set; }
     [Required]
     public string Language { get; set; }
     [Required]
     [RegularExpression("^[0-9]*$")]
-    public int Quantity { get; set;}
+    public int Quantity { get; set; }
     [Required]
     [Range(0, double.MaxValue)]
     public double Price { get; set; }

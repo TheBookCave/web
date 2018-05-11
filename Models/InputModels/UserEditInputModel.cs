@@ -11,9 +11,9 @@ namespace web.Models.InputModels
     public string LastName { get; set; }
     public int FavoriteBookId { get; set; }
 
-    public int PrimaryAddressId {get; set; }
+    public int PrimaryAddressId { get; set; }
 
-    public IFormFile UserPhoto {get; set; }
+    public IFormFile UserPhoto { get; set; }
 
     public List<BookListViewModel> AllBooks { get; set; }
     public List<AddressListViewModel> AllAddresses { get; set; }
