@@ -15,7 +15,13 @@
 	<div class="border rounded p-4 review-order">
 		<h2>Order Details</h2>
 		<h3>Price Details</h3>
-		<p>Total Price: @Model.Order.PurchaseAmount</p>
+		@foreach(var book in Model.OrderItems) {
+			<p>Title: @book.BookName</p>
+			<p>Quantity: @book.Quantity</p>
+			<p>Price per copy: @book.ItemPrice</p>
+			<p>Discount: @book.ItemDiscount</p>
+		}
+		<p>Total Price For Order: @Model.Order.PurchaseAmount</p>
 		<h1>WIP</h1>
 
 	</div>

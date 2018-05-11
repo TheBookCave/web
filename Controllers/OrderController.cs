@@ -62,6 +62,26 @@ namespace web.Controllers
         
 
 
+      [Authorize]
+      [HttpGet]
+      public IActionResult CheckOutReview() {
+      var userId = _userManager.GetUserId(HttpContext.User);
+      var openorder = _orderService.GetOpenOrder(userId);
+      var addressesUsed = _orderService.GetAddressesOnOrder(openorder.Id);
+      var orderItems = _orderService.GetAllItemsInOrder(openorder.Id);
+
+      var ordertoconfirm = new OrderConfirmationViewModel() {
+        Order = openorder,
+        Addresses = addressesUsed,
+        OrderItems = orderItems
+      };
+
+      return View(ordertoconfirm);
+      }
+
+
+
+        [Authorize]
 
         [HttpGet]
         public IActionResult CheckOutAddress() {
@@ -75,6 +95,9 @@ namespace web.Controllers
 
           return View(order);
         }
+
+
+        [Authorize]
 
         [HttpPost]
         public IActionResult CheckOutAddress(OrderInputModel order) { // 2 addresses, [0] is delivery, [1] is billing
@@ -99,45 +122,24 @@ namespace web.Controllers
             }
           return View("CheckOutAddress", order);
         }
+      
 
-      [HttpGet]
-      public IActionResult CheckOutReview() {
-      var userId = _userManager.GetUserId(HttpContext.User);
-      var openorder = _orderService.GetOpenOrder(userId);
-      var addressesUsed = _orderService.GetAddressesOnOrder(openorder.Id);
 
-      var ordertoconfirm = new OrderConfirmationViewModel() {
-        Order = openorder,
-        Addresses = addressesUsed
-      };
-
-      return View(ordertoconfirm);
-      }
-
+      [Authorize]
       [HttpPost]
         public IActionResult CheckOutReview(OrderConfirmationViewModel ordertoconfirm) {
-
-
-        /*  var userId = _userManager.GetUserId(HttpContext.User);
-          
-                    var confirmation = new OrderConfirmationViewModel() {
-            Order = _orderService.GetOrderWithId(order.Id),
-            Addresses = []
-          };
-           */
-
-          //confirmation.Order.ShippingAddressId = chosenaddresses[0].Id;
-          //confirmation.Order.BillingAddressId = chosenaddresses[1].Id;
           return View(ordertoconfirm);
         }
 
-      
+
+        [Authorize]
         public IActionResult CheckOutConfirmed() {
         var userId = _userManager.GetUserId(HttpContext.User);
         _orderService.CloseOrder(userId);
 
         return View();
         }
+
 
         public IActionResult Details(int Id)
         {
@@ -166,43 +168,6 @@ namespace web.Controllers
             }
             return View();
         } 
-        public IActionResult temp(string orderby, string genre)
-        {
-            var orders = new List<OrderListViewModel>();
-
-            orders = _orderService.GetAllOrders();
-
-            if (orderby == "date-asc")
-            {
-                orders = _orderService.OrderByDate(orders);
-            }
-            else if(orderby == "date-desc")
-            {
-                orders = _orderService.OrderByDateDesc(orders);
-            }
-            else if(orderby == "amount-asc")
-            {
-                orders = _orderService.OrderByAmount(orders);
-            }
-            else if(orderby == "amount-desc")
-            {
-                orders = _orderService.OrderByAmountDesc(orders);
-            }
-            else
-            {
-                orders = _orderService.GetAllOrders();
-            }      
-            return View(orders);
-        }
-/*
-
-        [HttpGet]
-        public IActionResult Search(string searchString)
-        {
-            var foundBooks = _bookService.SearchResults(searchString);
-            return View(foundBooks);
-        }
-         */
 
         [Authorize]
         [HttpPost]

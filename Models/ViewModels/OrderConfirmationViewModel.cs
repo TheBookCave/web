@@ -6,5 +6,6 @@ namespace web.Models.ViewModels
     {
         public OrderDetailViewModel Order { get; set; }
         public List<AddressListViewModel> Addresses { get; set;}
+        public List<OrderItemListViewModel> OrderItems { get; set; }
     }
 }
