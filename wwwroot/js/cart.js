@@ -1,5 +1,5 @@
 
-//Do the price changing code
+///Assign functionality to all buttons in the cart
 $(".cart-item").each(function () {
   let id = $(this).attr("id");
 
@@ -63,22 +63,22 @@ function updateFinalPrice() {
   let finalPrice = 0;
   $(".cart-item").each(function () {
     let id = $(this).attr("id");
-    finalPrice += 1 * $("#itemTotalPrice-" + id).html().substring(1);
+    finalPrice += parseFloat($("#itemTotalPrice-" + id).html().substring(1));
   });
   $("#cartFinalPrice").val("Total: $" + finalPrice);
 }
 
 function updateItemTotalPrice(id, increment) {
-  let quantity = $("#itemQuantity-" + id).val() * 1;
-  let singleItemPrice;
+  let quantity = parseFloat($("#itemQuantity-" + id).val());
+  let singleItemPrice = parseFloat($("#itemTotalPrice-" + id).html().substring(1));
   if (increment === true) {
-    singleItemPrice = $("#itemTotalPrice-" + id).html().substring(1) / (quantity - 1);
-  } 
+    singleItemPrice = singleItemPrice / (quantity - 1);
+  }
   else if (increment === false) {
-    singleItemPrice = $("#itemTotalPrice-" + id).html().substring(1) / (quantity + 1);
+    singleItemPrice = singleItemPrice / (quantity + 1);
   }
   else {
-    singleItemPrice = $("#itemTotalPrice-" + id).html().substring(1) / (quantity);
+    singleItemPrice = singleItemPrice / (quantity);
   }
   $("#itemTotalPrice-" + id).html("$" + quantity * singleItemPrice);
 }
