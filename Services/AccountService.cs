@@ -24,6 +24,7 @@ namespace web.Services
 
         private AuthenticationDbContext _aContext;
 
+
         // Constructor for OrderService that creates the _orderRepo
         public AccountService(DataContext context, AuthenticationDbContext aContext)
         {
@@ -52,7 +53,7 @@ namespace web.Services
             {
                 _accountViewModel.PrimaryAddressStreet = "None";
             }
-            if(_accountViewModel.UserPhotoLocation != null)
+            if(user.UserPhotoLocation != null)
             {
                 _accountViewModel.UserPhotoLocation = user.UserPhotoLocation;
             }
