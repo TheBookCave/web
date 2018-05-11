@@ -17,23 +17,26 @@ namespace web.Services
 {
     public class AccountService
     {
-        // AccountService owns a private instance of OrderRepo and AddressRepo
         private OrderRepo _orderRepo;
         private AddressRepo _addressRepo;
         private BookRepo _bookRepo;
-
         private AuthenticationDbContext _aContext;
 
 
-        // Constructor for OrderService that creates the _orderRepo
+        // Constructor for AccountService
         public AccountService(DataContext context, AuthenticationDbContext aContext)
         {
+            // Initialize repositories
             _orderRepo = new OrderRepo(context);
             _addressRepo = new AddressRepo(context);
             _bookRepo = new BookRepo(context, aContext);
+
+            // Shared AuthenticationDbContext
+            // Exception to the 3 layer design due to using the Identity Framework
             _aContext = aContext;
         }
 
+        // Get account view model for a specific user and substitute Null/0 values that have no reference
         public AccountViewModel GetAccountViewModelByUser(ApplicationUser user)
         {
             var _accountViewModel = new AccountViewModel();
@@ -47,7 +50,7 @@ namespace web.Services
             }
             if(user.PrimaryAddressId > 0)
             {
-                _accountViewModel.PrimaryAddressStreet = _addressRepo.GetAddressById(user.PrimaryAddressId).StreetAddress;//user.PrimaryAddressId.ToString();
+                _accountViewModel.PrimaryAddressStreet = this.GetAddressString(user.PrimaryAddressId);
             } 
             else
             {
@@ -62,34 +65,34 @@ namespace web.Services
                _accountViewModel.UserPhotoLocation = "images\\profilepics\\default.jpg";
             }
 
-            
             _accountViewModel.FirstName = user.FirstName;
             _accountViewModel.LastName = user.LastName;
             _accountViewModel.Email = user.Email;
             return _accountViewModel;
         }
 
+        // Add an address for a specific user
         public void AddAddressByUser(AddressListViewModel model, ApplicationUser user)
         {
             model.CustomerId = user.Id;
             _addressRepo.AddAddress(model);
         }
 
-        public string GetPrimaryAddressByUser(ApplicationUser user)
+        // Returns main parts of an address in one string for display purpouses
+        public string GetAddressString(int id)
         {
-            var address = _addressRepo.GetAddressById(user.PrimaryAddressId);
-            return address.StreetAddress + ", " + address.LastName;
+            var address = _addressRepo.GetAddressById(id);
+            return address.StreetAddress + ", " +  address.Country + ", " + address.City + ", " + address.FirstName + " " + address.LastName;
         }
 
+        // Update user values for input values that are not null
         public async Task<bool>  UpdateUserChangedValues(ApplicationUser user, UserEditInputModel model, string rootPath)
         {
             
-            // Save image
+            // Save image if uploaded
             var pic = model.UserPhoto;
             if(pic != null)
             {
-                
-
                 //Create path for image, images/profilepics/{id}{filename}
                 var relPath = Path.Combine(Path.Combine("images","profilepics"),user.Id + Path.GetFileName(pic.FileName));
                 var fileName = Path.Combine(rootPath, relPath);
