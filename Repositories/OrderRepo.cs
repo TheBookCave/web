@@ -263,5 +263,25 @@ namespace web.Repositories
                          });
             return orders;
         }
+
+
+
+        public void IncrementOrderItemQuantity (int orderItemId) { 
+            var orderItem = _db.OrderItems.SingleOrDefault(oi => oi.Id == orderItemId);
+            orderItem.Quantity = orderItem.Quantity + 1;
+            _db.SaveChanges();
+        }
+
+        public void DecrementOrderItemQuantity (int orderItemId) { 
+            var orderItem = _db.OrderItems.SingleOrDefault(oi => oi.Id == orderItemId);
+            orderItem.Quantity = orderItem.Quantity - 1;
+            _db.SaveChanges();
+        }
+
+        public void DeleteOrderItem (int orderItemId) {
+            var orderItem = _db.OrderItems.SingleOrDefault(oi => oi.Id == orderItemId);
+            _db.Remove(orderItem);
+            _db.SaveChanges();
+        }
     }
 }
