@@ -226,21 +226,40 @@ namespace web.Controllers
         }
         
         [Authorize(Roles = "Staff")]
-        [HttpGet]
+        [HttpPost]
         public IActionResult ChooseBookToEdit(EditBookInputModel book)
         {
-           var b = _bookService.GetBookWithId(book.BookId);
-
-           var b2 = _bookService.GetEditBookWithId(book.BookId);
-
-           b2.AllAuthors = _bookService.GetAllAuthors();
-           b2.AllPublishers = _bookService.GetAllPublishers();
-           b2.AllGenres = _bookService.GetAllGenres();
-
-            return View("ModifyBook", b2);
+            return RedirectToAction("ModifyBook", new{bookId = book.BookId});
         }
 
+        [Authorize(Roles = "Staff")]
+        [HttpGet]
+        public IActionResult ModifyBook(int bookId)
+        {
+            var b2 = _bookService.GetEditBookWithId(bookId);
 
+            b2.AllAuthors = _bookService.GetAllAuthors();
+            b2.AllPublishers = _bookService.GetAllPublishers();
+            b2.AllGenres = _bookService.GetAllGenres();
+
+            return View(b2);
+        }
+
+        [Authorize(Roles = "Staff")]
+        [HttpPost]
+        public IActionResult ModifyBook(EditBookInputModel book)
+        {
+            if(ModelState.IsValid)
+            {
+                _bookService.ModifyBook(book);
+                return RedirectToAction("Index", "Staff");
+            }
+
+            book.AllAuthors = _bookService.GetAllAuthors();
+            book.AllPublishers = _bookService.GetAllPublishers();
+            book.AllGenres = _bookService.GetAllGenres();
+            return View(book); 
+        }
 
         [HttpGet]
         public IActionResult Search(string searchString)

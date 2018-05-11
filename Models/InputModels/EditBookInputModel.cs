@@ -37,7 +37,6 @@ namespace web.Models.InputModels
         [Required]
         [Range(0, double.MaxValue)]
         public double Discount { get; set; }
-        [Required]
         public List<int> Genres { get; set; }
         public List<GenreListViewModel> AllGenres { get; set; }
         public List<AuthorListViewModel> AllAuthors { get; set; }

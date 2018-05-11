@@ -187,6 +187,7 @@ namespace web.Repositories
             return book;
         }
 
+        // Function that returns an EditbookInputModel based on the Book ID
         public EditBookInputModel GetEditBookWithId(int Id)
         {
             var book = (from b in _db.Books
@@ -212,6 +213,7 @@ namespace web.Repositories
             return book;
         }
 
+        // Function that adds a new rating to the database
         public void AddRating (RatingInputModel rating)
         {
             var r = new Rating()
@@ -227,6 +229,7 @@ namespace web.Repositories
             _db.SaveChanges();
         }
 
+        // Function that adds a new book to the database
         public void AddBook(BookInputModel inputBook)
         {
             var newBook = new Book()
@@ -256,6 +259,27 @@ namespace web.Repositories
                 };
                 _db.BookGenres.Add(_bookGenre);
             }
+            _db.SaveChanges();
+        }
+
+        // Function that finds book with ID in database and update its fields
+        public void ModifyBook(EditBookInputModel book)
+        {
+            var bookToUpdate = (from b in _db.Books
+                                where b.Id == book.BookId
+                                select b).FirstOrDefault();
+
+            bookToUpdate.Name = book.Name;
+            bookToUpdate.Description = book.Description;
+            bookToUpdate.AuthorId = book.AuthorId;
+            bookToUpdate.PublisherId = book.PublisherId;
+            bookToUpdate.ImageUrl = book.ImageUrl;
+            bookToUpdate.Year = book.Year;
+            bookToUpdate.Language = book.Language;
+            bookToUpdate.Quantity = book.Quantity;
+            bookToUpdate.Price = book.Price;
+            bookToUpdate.Discount = book.Discount;
+
             _db.SaveChanges();
         }
 

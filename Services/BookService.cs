@@ -177,6 +177,11 @@ namespace web.Services
             _publisherRepo.AddPublisher(inputPublisher);
         }
 
+        public void ModifyBook(EditBookInputModel book)
+        {
+            _bookRepo.ModifyBook(book);
+        }
+
         
         public BookInputModel CreateNewBookInputModel()
         {
