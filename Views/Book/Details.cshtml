@@ -8,7 +8,7 @@
 <div class="row">
   <div class="row col-md-4">
     <div class="col-md-12"><img class="book-image"src="@Model.ImageUrl"/></div>
-    <button class="btn btn-success detail-cart"><i class="fas fa-cart-plus"></i> Add to cart</button>
+    <button class="btn btn-success detail-cart" onclick="location.href='@Url.Action("AddToCart", "Order", new { BId = @Model.Id})'"><i class="fas fa-cart-plus"></i> Add to cart</button>
     <button class="btn btn-info col-md detail-review" onclick="location.href='@Url.Action("RateBook", "Book", new { BookId = @Model.Id, BookName = @Model.Name})'"><i class="far fa-star"></i> Review</button>
     <button class="btn btn-primary col-md detail-wishlist"><i class="far fa-heart"></i> Add to wishlist</button>
   </div>
@@ -89,9 +89,6 @@
             }
             <footer class="blockquote-footer"><cite title="Date Posted">@comment.RatingDate</cite></footer>
           </blockquote>
-            
-            
-            
           </div>
         </div>
       </div>
