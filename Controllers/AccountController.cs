@@ -32,6 +32,7 @@ namespace web.Controllers
         private BookService _bookService;
         private AuthenticationDbContext _aContext;
         private OrderService _orderService;
+        private AccountService _accountService;
         
         private readonly IHostingEnvironment _appEnvironment;
        // var RoleManager = new RoleManager<IdentityRole>
@@ -46,6 +47,7 @@ namespace web.Controllers
             _context = context;
             _bookService = new BookService(context, aContext);
             _orderService = new OrderService(context);
+            _accountService = new AccountService(context, aContext);
         }
 
         [Authorize]
@@ -54,37 +56,7 @@ namespace web.Controllers
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var user = _userManager.Users.FirstOrDefault(x => x.Id == userId);
-
-            var _accountViewModel = new AccountViewModel();
-            if(user.FavoriteBookId > 0)
-            {
-                _accountViewModel.FavoriteBookName = _bookService.GetBookWithId(user.FavoriteBookId).Name;
-            } 
-            else
-            {
-                _accountViewModel.FavoriteBookName = "None";
-            }
-            if(user.PrimaryAddressId > 0)
-            {
-                _accountViewModel.PrimaryAddressStreet = user.PrimaryAddressId.ToString();
-            } 
-            else
-            {
-                _accountViewModel.PrimaryAddressStreet = "None";
-            }
-            if(_accountViewModel.UserPhotoLocation != null)
-            {
-                _accountViewModel.UserPhotoLocation = user.UserPhotoLocation;
-            }
-            else
-            {
-               _accountViewModel.UserPhotoLocation = "images\\profilepics\\default.jpg";
-            }
-
-            
-            _accountViewModel.FirstName = user.FirstName;
-            _accountViewModel.LastName = user.LastName;
-            _accountViewModel.Email = user.Email;
+            var _accountViewModel = _accountService.GetAccountViewModelByUser(user);
             
             return View(_accountViewModel);
         }
@@ -169,9 +141,7 @@ namespace web.Controllers
                 return View(); 
             }
             var user = await _userManager.GetUserAsync(HttpContext.User);
-            model.CustomerId = user.Id;
-            var _addressRepo = new AddressRepo(_context);
-            _addressRepo.AddAddress(model);
+            _accountService.AddAddressByUser(model,user);
             return RedirectToAction("Index", "Account");
         }
 
