@@ -8,6 +8,7 @@ namespace web.Models.InputModels
 {
     public class EditBookInputModel
     {
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Please select a book from the dropdown list")]
         public int BookId { get; set; }
         [Required]
         public string Name { get; set; }
