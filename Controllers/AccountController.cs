@@ -84,43 +84,8 @@ namespace web.Controllers
 
             //Get user
             var user = await _userManager.GetUserAsync(HttpContext.User);
-
-
-            // Save image
-            var pic = model.UserPhoto;
-            if(pic != null)
-            {
-                
-
-                //Create path for image, images/profilepics/{id}{filename}
-                var relPath = Path.Combine(Path.Combine("images","profilepics"),user.Id + Path.GetFileName(pic.FileName));
-                var fileName = Path.Combine(_appEnvironment.WebRootPath, relPath);
-                var stream = new FileStream(fileName, FileMode.Create);
-                await pic.CopyToAsync(stream);
-                stream.Close();
-                
-                //Save to User table
-                user.UserPhotoLocation = relPath;   
-            }
+            await _accountService.UpdateUserChangedValues(user, model, _appEnvironment.WebRootPath);
             
-
-            // Save other values if changed
-            if(model.FirstName != null) {
-                user.FirstName = model.FirstName;
-            }
-            if(model.LastName != null) {
-                user.LastName = model.LastName;
-            }
-            if(model.FavoriteBookId > 0) {
-                user.FavoriteBookId = model.FavoriteBookId;
-            }
-            if(model.PrimaryAddressId > 0) {
-                user.PrimaryAddressId = model.PrimaryAddressId;
-            }
-
-
-            var result = await _aContext.SaveChangesAsync();
-
             return RedirectToAction("Index", "Account");
         }
 

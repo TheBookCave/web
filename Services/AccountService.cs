@@ -9,6 +9,9 @@ using web.Data.EntityModels;
 using web.Models;
 
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace web.Services
 {
@@ -19,12 +22,15 @@ namespace web.Services
         private AddressRepo _addressRepo;
         private BookRepo _bookRepo;
 
+        private AuthenticationDbContext _aContext;
+
         // Constructor for OrderService that creates the _orderRepo
         public AccountService(DataContext context, AuthenticationDbContext aContext)
         {
             _orderRepo = new OrderRepo(context);
             _addressRepo = new AddressRepo(context);
             _bookRepo = new BookRepo(context, aContext);
+            _aContext = aContext;
         }
 
         public AccountViewModel GetAccountViewModelByUser(ApplicationUser user)
@@ -74,6 +80,46 @@ namespace web.Services
             return address.StreetAddress + ", " + address.LastName;
         }
 
-        
+        public async Task<bool>  UpdateUserChangedValues(ApplicationUser user, UserEditInputModel model, string rootPath)
+        {
+            
+            // Save image
+            var pic = model.UserPhoto;
+            if(pic != null)
+            {
+                
+
+                //Create path for image, images/profilepics/{id}{filename}
+                var relPath = Path.Combine(Path.Combine("images","profilepics"),user.Id + Path.GetFileName(pic.FileName));
+                var fileName = Path.Combine(rootPath, relPath);
+                var stream = new FileStream(fileName, FileMode.Create);
+                await pic.CopyToAsync(stream);
+                stream.Close();
+                
+                //Save to User table
+                user.UserPhotoLocation = relPath;   
+            }
+            
+
+            // Save other values if changed
+            if(model.FirstName != null) {
+                user.FirstName = model.FirstName;
+            }
+            if(model.LastName != null) {
+                user.LastName = model.LastName;
+            }
+            if(model.FavoriteBookId > 0) {
+                user.FavoriteBookId = model.FavoriteBookId;
+            }
+            if(model.PrimaryAddressId > 0) {
+                user.PrimaryAddressId = model.PrimaryAddressId;
+            }
+
+
+            var result = await _aContext.SaveChangesAsync();
+            return true;
+        } 
+
+
     }
 }
