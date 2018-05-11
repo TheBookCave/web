@@ -143,12 +143,11 @@ namespace web.Repositories
         rating = Math.Round(ratings.Average(), 2);
       }
 
-      var usernames = (from u in _dba.UserClaims
-                       where u.ClaimType == "Name"
+      var usernames = (from u in _dba.Users
                        select new
                        {
-                         UserId = u.UserId,
-                         UserName = u.ClaimValue
+                         UserId = u.Id,
+                         UserName = u.FirstName + u.LastName
                        }).ToList();
 
       var comments = (from c in _db.Ratings
