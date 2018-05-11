@@ -55,8 +55,14 @@ namespace web.Services
         public OrderDetailViewModel GetOpenOrder(string userId) {
             return _orderRepo.GetOpenOrder(userId);
         }
-        public void ChangeOrderAddressAndClose(OrderConfirmationViewModel confirmed) {
-             _orderRepo.ChangeOrderAddressAndClose(confirmed);
+
+        public void OrderPurchaseSum(int orderId) {
+            _orderRepo.OrderPurchaseSum(orderId);
+        }
+
+
+        public void CloseOrder(OrderConfirmationViewModel confirmed) {
+             _orderRepo.CloseOrder(confirmed);
              return;
         }
 

@@ -135,7 +135,7 @@ namespace web.Controllers
         public IActionResult CheckOutConfirmed(OrderConfirmationViewModel confirmed) {
            if(ModelState.IsValid)
             {
-                _orderService.ChangeOrderAddressAndClose(confirmed);
+                _orderService.CloseOrder(confirmed);
                 return RedirectToAction("Index");
             }
 

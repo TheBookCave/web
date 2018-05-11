@@ -86,12 +86,22 @@ namespace web.Repositories
                             ShippingDate = o.ShippingDate,
                             PurchaseAmount = o.PurchaseAmount
                         }).FirstOrDefault();
+            OrderPurchaseSum(order.Id);
             return order;
         }
-        public void ChangeOrderAddressAndClose(OrderConfirmationViewModel confirmed) {
+
+        public void OrderPurchaseSum(int orderId) {
+            var orderNow = _db.Orders.SingleOrDefault(o => o.Id == orderId);
+            var orderItemAmount = (from oi in _db.OrderItems
+                                    where oi.OrderId == orderNow.Id
+                                    select oi.ItemPrice * oi.Quantity * (1 - oi.ItemDiscount)).ToList().Sum();
+            orderNow.PurchaseAmount = orderItemAmount;
+            _db.SaveChanges();
+        }
+
+        public void CloseOrder(OrderConfirmationViewModel confirmed) {
             var orderNow = _db.Orders.SingleOrDefault(o => o.Id == confirmed.Order.Id);
-            orderNow.ShippingAddressId = confirmed.Addresses[0].Id;
-            orderNow.BillingAddressId = confirmed.Addresses[1].Id;
+            orderNow.Status = "closed";
             _db.SaveChanges();
         }
 
@@ -241,8 +251,6 @@ namespace web.Repositories
                          });
             return orderitems;
         }
-
-
 
         public IQueryable<OrderListViewModel> GetAllOrdersLinqQuery()
         {
