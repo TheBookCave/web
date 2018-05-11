@@ -40,7 +40,7 @@ namespace web.Services
             }
             if(user.PrimaryAddressId > 0)
             {
-                _accountViewModel.PrimaryAddressStreet = user.PrimaryAddressId.ToString();
+                _accountViewModel.PrimaryAddressStreet = _addressRepo.GetAddressById(user.PrimaryAddressId).StreetAddress;//user.PrimaryAddressId.ToString();
             } 
             else
             {
@@ -66,6 +66,12 @@ namespace web.Services
         {
             model.CustomerId = user.Id;
             _addressRepo.AddAddress(model);
+        }
+
+        public string GetPrimaryAddressByUser(ApplicationUser user)
+        {
+            var address = _addressRepo.GetAddressById(user.PrimaryAddressId);
+            return address.StreetAddress + ", " + address.LastName;
         }
 
         
