@@ -68,6 +68,57 @@ namespace web.Controllers
             return View(_userEditInputModel);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(UserEditInputModel model)
+        {
+            if(!ModelState.IsValid) { 
+                return View(); 
+            }
+
+            //Get user
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+
+            // Save image
+            var pic = model.UserPhoto;
+            if(pic != null)
+            {
+                
+
+                //Create path for image, images/profilepics/{id}{filename}
+                var relPath = Path.Combine(Path.Combine("images","profilepics"),user.Id + Path.GetFileName(pic.FileName));
+                var fileName = Path.Combine(_appEnvironment.WebRootPath, relPath);
+                var stream = new FileStream(fileName, FileMode.Create);
+                await pic.CopyToAsync(stream);
+                stream.Close();
+                
+                //Save to User table
+                user.UserPhotoLocation = relPath;   
+            }
+            
+
+            // Save other values if changed
+            if(model.FirstName != null) {
+                user.FirstName = model.FirstName;
+            }
+            if(model.LastName != null) {
+                user.LastName = model.LastName;
+            }
+            if(model.FavoriteBookId > 0) {
+                user.FavoriteBookId = model.FavoriteBookId;
+            }
+            if(model.PrimaryAddressId > 0) {
+                user.PrimaryAddressId = model.PrimaryAddressId;
+            }
+
+
+            var result = await _aContext.SaveChangesAsync();
+
+            return RedirectToAction("Index", "Account");
+        }
+
+        
         [Authorize]
         [HttpGet]
         public IActionResult CreateAddress()
@@ -90,44 +141,6 @@ namespace web.Controllers
             return RedirectToAction("Index", "Account");
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(UserEditInputModel model)
-        {
-            if(!ModelState.IsValid) { 
-                return View(); 
-            }
-
-            var pic = model.UserPhoto;
-            if(pic != null)
-            {
-                //Get user
-                var user = await _userManager.GetUserAsync(HttpContext.User);
-
-                //Create path for image, images/profilepics/{id}{filename}
-                var relPath = Path.Combine(Path.Combine("images","profilepics"),user.Id + Path.GetFileName(pic.FileName));
-                var fileName = Path.Combine(_appEnvironment.WebRootPath, relPath);
-                var stream = new FileStream(fileName, FileMode.Create);
-                await pic.CopyToAsync(stream);
-                stream.Close();
-                
-                
-                //Save as a claim for the user
-                //await _userManager.RemoveClaimAsync(user, HttpContext.User.Claims.FirstOrDefault(x => x.Type == "ProfilePic"));
-                //await _userManager.AddClaimAsync(user, new Claim("ProfilePic", $"{relPath}"));
-
-                //Save to User table
-                user.FirstName = model.FirstName;
-                user.LastName = model.LastName;
-                user.UserPhotoLocation = relPath;
-                user.FavoriteBookId = model.FavoriteBookId;
-                user.PrimaryAddressId = model.PrimaryAddressId;
-
-                var result = await _aContext.SaveChangesAsync();
-            }
-
-            return RedirectToAction("Index", "Account");
-        }
 
         [HttpGet]
         public IActionResult Register()
