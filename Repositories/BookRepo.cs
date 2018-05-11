@@ -187,6 +187,31 @@ namespace web.Repositories
             return book;
         }
 
+        public EditBookInputModel GetEditBookWithId(int Id)
+        {
+            var book = (from b in _db.Books
+                        join a in _db.Authors on b.AuthorId equals a.Id
+                        join p in _db.Publishers on b.PublisherId equals p.Id
+                        where b.Id == Id
+                        select new EditBookInputModel
+                        {
+                            BookId = b.Id,
+                            Name = b.Name,
+                            AuthorId = b.AuthorId,
+                            Description = b.Description,
+                            PublisherId = b.PublisherId,
+                            ImageUrl = b.ImageUrl,
+                            Year = b.Year,
+                            ISBN = b.ISBN,
+                            Quantity = b.Quantity,
+                            Language = b.Language,
+                            Price = b.Price,
+                            Discount = b.Discount
+                            
+                        }).SingleOrDefault();
+            return book;
+        }
+
         public void AddRating (RatingInputModel rating)
         {
             var r = new Rating()

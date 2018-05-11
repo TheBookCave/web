@@ -215,6 +215,33 @@ namespace web.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Staff")]
+        [HttpGet]
+        public IActionResult ChooseBookToEdit()
+        {
+            var _editBookModel = new EditBookInputModel();
+            _editBookModel.AllBooks = _bookService.GetAllBooks();
+            
+            return View(_editBookModel);
+        }
+        
+        [Authorize(Roles = "Staff")]
+        [HttpGet]
+        public IActionResult ChooseBookToEdit(EditBookInputModel book)
+        {
+           var b = _bookService.GetBookWithId(book.BookId);
+
+           var b2 = _bookService.GetEditBookWithId(book.BookId);
+
+           b2.AllAuthors = _bookService.GetAllAuthors();
+           b2.AllPublishers = _bookService.GetAllPublishers();
+           b2.AllGenres = _bookService.GetAllGenres();
+
+            return View("ModifyBook", b2);
+        }
+
+
+
         [HttpGet]
         public IActionResult Search(string searchString)
         {
