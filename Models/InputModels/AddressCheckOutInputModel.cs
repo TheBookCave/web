@@ -7,8 +7,8 @@ namespace web.Models.InputModels
     {
         public int ShippingAddressOption { get; set; }
         public int BillingAddressOption { get; set; }
-        public AddressListViewModel ShippingAddressInput { get; set; }
-        public AddressListViewModel BillingAddressInput { get; set; }
+        public AddressInputModel ShippingAddressInput { get; set; }
+        public AddressInputModel BillingAddressInput { get; set; }
 
         public List<AddressListViewModel> AllUserAddresses { get; set; }
     }

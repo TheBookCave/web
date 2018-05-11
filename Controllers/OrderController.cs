@@ -27,6 +27,7 @@ namespace web.Controllers
         public OrderController(DataContext context, UserManager<ApplicationUser> userManager)
         {
             _orderService = new OrderService(context);
+            _accountService = new AccountService(context);
             _userManager = userManager;
         }
 
@@ -131,6 +132,7 @@ namespace web.Controllers
           }
           else{
             _accountService.AddAddressByUser(billingaddressoption, userId);
+            order.BillingAddressId = billingaddressoption.Id;
           }
 
             if(ModelState.IsValid)
