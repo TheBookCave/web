@@ -72,10 +72,9 @@ namespace web.Services
         }
 
         // Add an address for a specific user
-        public void AddAddressByUser(AddressListViewModel model, ApplicationUser user)
+        public void AddAddressByUserId(AddressInputModel model, string userId)
         {
-            model.CustomerId = user.Id;
-            _addressRepo.AddAddress(model);
+            _addressRepo.AddAddress(model,userId);
         }
 
         // Returns main parts of an address in one string for display purpouses

@@ -56,21 +56,20 @@ namespace web.Repositories
       return address;
     }
 
-    public void AddAddress(AddressListViewModel inputAddress)
+    public void AddAddress(AddressInputModel inputAddress, string userId)
     {
       var newAddress = new Address()
       {
         //Id
         City = inputAddress.City,
         Country = inputAddress.Country,
-        CustomerId = inputAddress.CustomerId,
+        CustomerId = userId,
         FirstName = inputAddress.FirstName,
         LastName = inputAddress.LastName,
         PhoneNumber = inputAddress.PhoneNumber,
         StreetAddress = inputAddress.StreetAddress,
         ZipCode = inputAddress.ZipCode
       };
-
       _db.Addresses.Add(newAddress);
       _db.SaveChanges();
     }
