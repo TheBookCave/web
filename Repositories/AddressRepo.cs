@@ -18,7 +18,7 @@ namespace web.Repositories
         }
 
 // Function that returns a list of all the genres in a database
-        public List<AddressListViewModel> GetAllPublishers()
+        public List<AddressListViewModel> GetAllAddresses()
         {
             var addresses = (from p in _db.Addresses
                          select new AddressListViewModel
@@ -36,6 +36,24 @@ namespace web.Repositories
             return addresses;
         }
 
+        public AddressListViewModel GetAddressById(int _id)
+        {
+            var address = (from p in _db.Addresses
+                         where p.Id == _id
+                         select new AddressListViewModel
+                         {
+                             Id = p.Id,
+                             City = p.City,
+                             Country = p.Country,
+                             CustomerId = p.CustomerId,
+                             FirstName = p.FirstName,
+                             LastName = p.LastName,
+                             PhoneNumber = p.PhoneNumber,
+                             StreetAddress = p.StreetAddress,
+                             ZipCode = p.ZipCode
+                         }).FirstOrDefault();
+            return address;
+        }
 
         public void AddAddress(AddressListViewModel inputAddress)
         {
