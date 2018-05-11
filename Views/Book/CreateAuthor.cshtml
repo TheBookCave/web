@@ -3,18 +3,14 @@
 @{
   ViewData["Title"] = "Add Author";
 }
-
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-
 <h1>Add a new Author</h1>
 
- <form method="POST">
+<form method="POST">
+  <div class="form-group col-md-6">
     <label asp-for="Name">Name</label>
-    <input type="text" asp-for="Name">
+    <input type="text" asp-for="Name" class="form-control">
     <span asp-validation-for="Name" class="text-danger"></span>
     <br/>
     <input type="submit" value="Submit Author" class="btn btn-info">
+  </div>
 </form> 
