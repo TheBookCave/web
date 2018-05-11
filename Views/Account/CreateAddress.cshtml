@@ -5,7 +5,7 @@
 }
 
 <form class="row" asp-action="CreateAddress" asp-controller="Account">
-    <div class="border rounded p-4 billAdd">
+    <div class="border rounded p-4 billAdd col-md-6 offset-md-3">
         <h2>New Address</h2>
         <fieldset class="inputaddress row">
             <input type="text" class="col-12" asp-for="FirstName" placeholder="First Name"></br>
@@ -23,6 +23,6 @@
             <input type="text" class="col-12" asp-for="ZipCode" placeholder="Zip Code">
             <span asp-validation-for="ZipCode" class="text-danger"></span>
         </fieldset>
-    <button type="submit" class="btn btn-default col-md-4 offset-md-4 addressButton">Continue</button>
+    <button type="submit" class="btn btn-default col-md-4 offset-md-4 checkout-button">Continue</button>
     </div>
 </form>
