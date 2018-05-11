@@ -4,9 +4,9 @@ using web.Data.EntityModels;
 
 namespace web.Models.InputModels
 {
-    public class AuthorInputModel
-    {
-        [Required]
-        public string Name { get; set; }
-    }
+  public class AuthorInputModel
+  {
+    [Required]
+    public string Name { get; set; }
+  }
 }
