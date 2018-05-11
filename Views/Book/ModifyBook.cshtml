@@ -1,0 +1,107 @@
+@model web.Models.InputModels.EditBookInputModel
+<h1>Test: @Model.Name</h1>
+
+
+ <form method="POST">
+
+  <div class="form-group">
+    <label asp-for="Name">Name</label>
+    <input type="text" asp-for="Name" class="form-control">
+    <span asp-validation-for="Name" class="text-danger"></span>
+  </div>
+
+  <div class="form-group">
+    <label asp-for="Description">Book Description</label>
+    <textarea asp-for="Description" placeholder="Book description..." class="form-control"></textarea>
+    <span asp-validation-for="Description" class="text-danger"></span>
+  </div>
+
+  <div class="form-row form-group">
+    <div class="col-md-6">
+      <label>Author</label>
+      <select asp-for="AuthorId" required class="form-control">
+        <option selected name="AuthorId" value=-1>Select Author Name</option>
+        @foreach (var author in Model.AllAuthors)
+        {
+          <option name="AuthorId" value=@author.Id >@author.Name</option>
+        }
+      </select>
+      <span asp-validation-for="AuthorId" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+      <label>Publisher</label>
+      <select asp-for="PublisherId" required class="form-control">
+        <option selected name="PublisherId" value=-1>Select Publisher Name</option>
+        @foreach (var publisher in Model.AllPublishers)
+        {
+          <option name="PublisherId" value=@publisher.Id>@publisher.Name</option>
+        }
+      </select>
+      <span asp-validation-for="PublisherId" class="text-danger"></span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label asp-for="ImageUrl">ImageUrl</label>
+    <input type="url" asp-for="ImageUrl" class="form-control">
+    <span asp-validation-for="ImageUrl" class="text-danger"></span>
+  </div>
+
+  <div class="form-group">
+    <label asp-for="ISBN">ISBN</label>
+    <input type="text" asp-for="ISBN" class="form-control" readonly>
+    <span asp-validation-for="ISBN" class="text-danger"></span>
+  </div>
+
+  <div class="form-group">
+    <label asp-for="Language">Language</label>
+    <input type="text" asp-for="Language" class="form-control">
+    <span asp-validation-for="Language" class="text-danger"></span>
+  </div>
+
+  <div class="form-row form-group">
+    <div class="col-md-3">
+      <label asp-for="Year">Year</label>
+      <input type="number" asp-for="Year" class="form-control">
+      <span asp-validation-for="Year" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-3">
+      <label asp-for="Quantity">Quantity</label>
+      <input type="number" asp-for="Quantity" class="form-control">
+      <span asp-validation-for="Quantity" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-3">
+      <label asp-for="Price">Price</label>
+      <input type="text" asp-for="Price" class="form-control">
+      <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-3">
+      <label asp-for="Discount">Discount</label>
+      <input type="text" asp-for="Discount" class="form-control">
+      <span asp-validation-for="Discount" class="text-danger"></span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label asp-for="Genres">Genres</label>
+    <div class="form-row">
+      @foreach (var genre in Model.AllGenres)
+      {
+        <div class="custom-control custom-checkbox col-md-2 ml-4">
+          <input name="Genres" type="checkbox" value="@genre.Id" class="custom-control-input" id="genreCheck-@genre.Id">
+          <label class="custom-control-label" for="genreCheck-@genre.Id">@genre.Name</label>
+        </div>
+      }
+    </div>
+    <span asp-validation-for="Genres" class="text-danger"></span>
+    <br />
+  </div>
+
+  <div class="form-group">
+    <input type="submit" value="Submit Book" class="btn btn-info">
+  </div>
+</form> 

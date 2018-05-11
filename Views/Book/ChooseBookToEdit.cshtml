@@ -1,0 +1,24 @@
+@model web.Models.InputModels.EditBookInputModel
+
+<h1>Edit book</h1>
+
+<form asp-action="ChooseBookToEdit" asp-controller="Book" class="form-horizontal" method="POST" enctype="multipart/form-data">
+
+    <div class="form-row form-group">
+        <div class="col-md-6">
+        <label>Choose Book to edit</label>
+        <select asp-for="BookId" required class="form-control">
+            <option selected name="BookId" value=-1>Select Book</option>
+            @foreach (var book in Model.AllBooks)
+            {
+            <option name="BookId" value=@book.Id >@book.Name</option>
+            }
+        </select>
+        
+        <span asp-validation-for="BookId" class="text-danger"></span> 
+        <br/>
+        <input type="submit" value="Edit Book" class="btn btn-info">
+        </div>
+        
+    </div>
+</form>

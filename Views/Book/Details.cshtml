@@ -3,10 +3,10 @@
 <h1>@Model.Name</h1>
 <div class="row">
   <div class="row col-md-4">
-    <div class="col-md-12"><img class="bookImage"src="@Model.ImageUrl"/></div>
-    <button class="btn btn-success detailCart"><i class="fas fa-cart-plus"></i> Add to cart</button>
-    <button class="btn btn-info col-md detailReview" onclick="location.href='@Url.Action("RateBook", "Book", new { BookId = @Model.Id, BookName = @Model.Name})'"><i class="far fa-star"></i> Review</button>
-    <button class="btn btn-primary col-md detailWishlist"><i class="far fa-heart"></i> Add to wishlist</button>
+    <div class="col-md-12"><img class="book-image"src="@Model.ImageUrl"/></div>
+    <button class="btn btn-success detail-cart"><i class="fas fa-cart-plus"></i> Add to cart</button>
+    <button class="btn btn-info col-md detail-review" onclick="location.href='@Url.Action("RateBook", "Book", new { BookId = @Model.Id, BookName = @Model.Name})'"><i class="far fa-star"></i> Review</button>
+    <button class="btn btn-primary col-md detail-wishlist"><i class="far fa-heart"></i> Add to wishlist</button>
   </div>
   <div class="row col-md-7 offset-md-1 border rounded">
     <div class="col-md-12"> </div>
@@ -37,7 +37,7 @@
     <div class="col-md-12"><strong>Language:</strong> @Model.Language</div>
     <div class="col-md-12"><h4>Description</h4> @Model.Description</div>
     <!-- Description is available through @Model.Description -->
-    <div class="col-md-12"><h4>Author</h4> <a href="~/Book/Search?searchString=@Model.AuthorName" class="detailAuthor">@Model.AuthorName</a></div>
+    <div class="col-md-12"><h4>Author</h4> <a href="~/Book/Search?searchString=@Model.AuthorName" class="detail-author">@Model.AuthorName</a></div>
     <div class="col-md-12"><h4>Publisher</h4> @Model.PublisherName</div>
     <div class="col-md-6"><strong>Year published:</strong> @Model.Year</div>
     <div class="col-md-6"><strong>ISBN:</strong> @Model.ISBN</div>
