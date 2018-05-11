@@ -6,6 +6,7 @@ using System.Linq;
 using System;
 using web.Data;
 using web.Data.EntityModels;
+using System.Security.Claims;
 
 namespace web.Services
 {
@@ -61,8 +62,8 @@ namespace web.Services
         }
 
 
-        public void CloseOrder(OrderConfirmationViewModel confirmed) {
-             _orderRepo.CloseOrder(confirmed);
+        public void CloseOrder(string userId) {
+             _orderRepo.CloseOrder(userId);
              return;
         }
 

@@ -95,6 +95,13 @@ namespace web.Services
             return book;
         }
 
+        // Function that returns a bokk with specified ID for modificatino
+        public EditBookInputModel GetEditBookWithId(int Id)
+        {
+            var book = _bookRepo.GetEditBookWithId(Id);
+            return book;
+        }
+
         // Function that searches books
         public List<BookListViewModel> SearchResults(string searchString)
         {

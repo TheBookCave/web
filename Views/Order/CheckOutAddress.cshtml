@@ -1,9 +1,16 @@
 @model web.Models.InputModels.OrderInputModel
+</br>
+<div class="btn-group address-buttons row">
+  <button type="button" class="btn btn-primary col-md-6 addre-button">1</button>
+  <button type="button" class="btn btn-info col-md-6 addre-button">2</button>
+</div>
+</br>
+</br>
 
 <p>Hey, <!-- Model[0].FirstName var ekki að virka á meðan ég var að gera allt semi-fallegt. -->Asdf! Please Select or fill out your Delivery and Shipping Address</p>
 
 <form class="row" method="POST">
-  <div class="border rounded p-4 delivAdd">
+  <div class="border rounded p-4 checkout-deliv">
     <h2>Delivery address</h2>
     <fieldset class="selectaddress row">
       <select asp-for="ShippingAddressId" class="col-12" id="deliveryselect">
@@ -25,7 +32,7 @@
     </fieldset>
   </div>
   
-  <div class="border rounded p-4 billAdd">
+  <div class="border rounded p-4 checkout-bill">
     <h2>Billing address</h2>
     <fieldset class="selectaddress row">
       <select asp-for="BillingAddressId" class="col-12" id="billingselect">
@@ -46,5 +53,5 @@
     </fieldset>
   </div>
   
-  <button type="submit" class="btn btn-default col-md-4 offset-md-4 addressButton">Continue</button>
+  <button type="submit" class="btn btn-default col-md-4 offset-md-4 address-button">Continue</button>
 </form>
