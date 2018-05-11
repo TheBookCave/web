@@ -44,10 +44,10 @@
               </div>
               <div class="col-md-2">
                 <div class="btn-group" role="group">
-                  <button type="button" class="btn btn-sm btn-primary btn-cart" id="itemPrice-@item.Id" disabled>$@item.ItemPrice</button>
+                  <button type="button" class="btn btn-sm btn-primary btn-cart" id="itemPrice-@item.Id" disabled>$@item.ItemPrice.ToString("0.00")</button>
                   @if(item.ItemDiscount != 0) 
                   {
-                    <button type="button" class="btn btn-sm btn-success btn-cart" id="itemDiscount-@item.Id" disabled>@item.ItemDiscount%</button>
+                    <button type="button" class="btn btn-sm btn-success btn-cart" id="itemDiscount-@item.Id" disabled>@item.ItemDiscount.ToString("0.00")%</button>
                   }
                 </div>
               </div>
@@ -57,7 +57,7 @@
                 <a href="#" class="" id="itemIncrement-@item.Id"><i class="fas fa-plus-circle"></i></a>
               </div>
               <div class="col-md-2">
-                <button type="button" class="btn btn-sm btn-primary btn-cart" id="itemTotalPrice-@item.Id" disabled>$@item.ItemTotalPrice</button>
+                <button type="button" class="btn btn-sm btn-primary btn-cart" id="itemTotalPrice-@item.Id" disabled>$@item.ItemTotalPrice.ToString("0.00")</button>
               </div>
               <div class="col-md-2">
                 <button class="btn btn-sm btn-secondary btn-cart" id="itemRemove-@item.Id">Remove</button>
