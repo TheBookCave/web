@@ -1,5 +1,9 @@
 @model web.Models.InputModels.UserEditInputModel
 
+@{
+  ViewData["Title"] = "Edit Profile";
+}
+
 <h1>Edit Profile</h1>
 <form asp-action="Edit" asp-controller="Account" class="form-horizontal" method="POST" enctype="multipart/form-data">
     <div class="form-group">

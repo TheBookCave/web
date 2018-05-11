@@ -1,5 +1,9 @@
 @model web.Models.InputModels.RatingInputModel
 
+@{
+  ViewData["Title"] = "Rate " + Model.BookName;
+}
+
 <h1>@Model.BookName </h1>
 
 <form method="POST" asp-controller="Book" asp-action="RateBook">

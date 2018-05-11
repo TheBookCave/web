@@ -3,6 +3,8 @@
     <h2>Management Console</h2>
 </div>
 @{
+    ViewData["Title"] = "Management Console";
+
     var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
     if (claimsIdentity != null)
     {
