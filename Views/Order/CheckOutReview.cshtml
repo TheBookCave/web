@@ -1,44 +1,44 @@
 @model web.Models.ViewModels.OrderConfirmationViewModel
-
-<div class="Review-details">
-  <h2>Order Details</h2>
-  <h3>Price Details</h3>
-  <p>Total Price: @Model.Order.PurchaseAmount</p>
-
+</br>
+<div class="btn-group address-buttons row">
+  <button type="button" class="btn btn-info col-md-6 addreButton">1</button>
+  <button type="button" class="btn btn-primary col-md-6 addreButton">2</button>
 </div>
+</br>
+</br>
+<div class="row">
+	<div class="border rounded p-4 review-order">
+		<h2>Order Details</h2>
+		<h3>Price Details</h3>
+		<p>Total Price: @Model.Order.PurchaseAmount</p>
+		<h1>WIP</h1>
+
+	</div>
 
 
+	<div class="border rounded p-4 review-deliv">
+		<h3>Shipping Address</h3>
+		<p>@Model.Addresses[0].CustomerId </p>
+		<p>@Model.Addresses[0].FirstName </p>
+		<p>@Model.Addresses[0].LastName </p>
+		<p>@Model.Addresses[0].PhoneNumber </p>
+		<p>@Model.Addresses[0].Country </p>
+		<p>@Model.Addresses[0].City </p>
+		<p>@Model.Addresses[0].StreetAddress </p>
+		<p>@Model.Addresses[0].ZipCode </p>
+	</div>
 
-<p>@Model.Order.ShippingAddressId</p>
+	<div class="border rounded p-4 review-bill">
+		<h3>Billing Address</h3>
+		<p>@Model.Addresses[1].CustomerId </p>
+		<p>@Model.Addresses[1].FirstName </p>
+		<p>@Model.Addresses[1].LastName </p>
+		<p>@Model.Addresses[1].PhoneNumber </p>
+		<p>@Model.Addresses[1].Country </p>
+		<p>@Model.Addresses[1].City </p>
+		<p>@Model.Addresses[1].StreetAddress </p>
+		<p>@Model.Addresses[1].ZipCode </p>
+	</div>
 
-<p>@Model.Order.BillingAddressId</p>
-
-
-<div class="shipping-address">
-  <h3>Shipping Address</h3>
-  <p>@Model.Addresses[0].CustomerId </p>
-  <p>@Model.Addresses[0].FirstName </p>
-  <p>@Model.Addresses[0].LastName </p>
-  <p>@Model.Addresses[0].PhoneNumber </p>
-  <p>@Model.Addresses[0].Country </p>
-  <p>@Model.Addresses[0].City </p>
-  <p>@Model.Addresses[0].StreetAddress </p>
-  <p>@Model.Addresses[0].ZipCode </p>
+  <button type="submit" class="btn btn-default col-md-4 offset-md-4 address-button">Continue</button>
 </div>
-
-<div class="billing-address">
-  <h3>Billing Address</h3>
-  <p>@Model.Addresses[1].CustomerId </p>
-  <p>@Model.Addresses[1].FirstName </p>
-  <p>@Model.Addresses[1].LastName </p>
-  <p>@Model.Addresses[1].PhoneNumber </p>
-  <p>@Model.Addresses[1].Country </p>
-  <p>@Model.Addresses[1].City </p>
-  <p>@Model.Addresses[1].StreetAddress </p>
-  <p>@Model.Addresses[1].ZipCode </p>
-</div>
-<p> bravooo</p>
-<!--
-
-
--->
