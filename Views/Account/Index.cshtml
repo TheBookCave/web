@@ -30,17 +30,23 @@
         </tr>  
       </tbody>
     </table>
-    <a class="btn btn-primary" asp-controller="Order" asp-action="Cart">Cart</a>
-    <a class="btn btn-primary" asp-controller="Order" asp-action="Cart">Previous Orders</a>
-    <a class="btn btn-primary" asp-controller="Account" asp-action="CreateAddress">Add Address</a>
-    <a class="btn btn-primary" asp-controller="Account" asp-action="Edit">Edit Profile</a>
-    @if (User.IsInRole("Staff")) { <a class="btn btn-primary" asp-controller="Staff" asp-action="Index">Management Console</a> }
-
-    <form class="pull-right" asp-action="Logout" asp-controller="Account" method="POST">
-      <div class="form-group">
-        <button type="submit" class="btn btn-danger">Logout</button>
+    <div class="row">
+      <div class="col-md-6 row ml-2">
+        <a class="col-5 btn btn-primary" asp-controller="Order" asp-action="Cart">Cart</a>
+        <a class="col-5 offset-1 btn btn-primary" asp-controller="Order" asp-action="Cart">Previous Orders</a>
       </div>
-    </form>
+      <div class="col-md-6 row ml-2 ml-md-0 mt-2 mt-md-0">
+        <a class="col-5 btn btn-primary" asp-controller="Account" asp-action="CreateAddress">Add Address</a>
+        <a class="col-5 offset-1 btn btn-primary" asp-controller="Account" asp-action="Edit">Edit Profile</a>
+      </div>
+      @if (User.IsInRole("Staff")) { <a class="btn btn-primary" asp-controller="Staff" asp-action="Index">Management Console</a> }
+
+      <form class="pull-right col-12 col-md-6 ml-2" asp-action="Logout" asp-controller="Account" method="POST">
+        <div class="form-group">
+          <button type="submit" class="col-11 btn btn-danger mt-2">Logout</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
 
