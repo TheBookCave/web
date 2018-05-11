@@ -10,18 +10,18 @@ using web.Services;
 
 namespace web.Controllers
 {
-    public class HomeController : Controller
-    {
-        private BookService _bookService;
+  public class HomeController : Controller
+  {
+    private BookService _bookService;
 
-        public HomeController(DataContext context, AuthenticationDbContext aContext)
-        {
-            _bookService = new BookService(context, aContext);
-        }
-        public IActionResult Index()
-        {
-            var books = _bookService.GetRecentAdditionsBooks();
-            return View(books);
-        }
+    public HomeController(DataContext context, AuthenticationDbContext aContext)
+    {
+      _bookService = new BookService(context, aContext);
     }
+    public IActionResult Index()
+    {
+      var books = _bookService.GetRecentAdditionsBooks();
+      return View(books);
+    }
+  }
 }

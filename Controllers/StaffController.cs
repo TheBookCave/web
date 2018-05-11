@@ -15,22 +15,22 @@ using web.Data.EntityModels;
 
 namespace web.Controllers
 {
-    
-    [Authorize(Roles = "Staff")]
-    public class StaffController : Controller
+
+  [Authorize(Roles = "Staff")]
+  public class StaffController : Controller
+  {
+    private readonly UserManager<ApplicationUser> _userManager;
+
+    public StaffController(UserManager<ApplicationUser> userManager)
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-
-        public StaffController(UserManager<ApplicationUser> userManager)
-        {
-            _userManager = userManager;
-        }
-
-        [HttpGet]
-        public IActionResult Index()
-        {
-            return View();
-        }
-
+      _userManager = userManager;
     }
+
+    [HttpGet]
+    public IActionResult Index()
+    {
+      return View();
+    }
+
+  }
 }
