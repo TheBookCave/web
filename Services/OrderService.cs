@@ -121,7 +121,7 @@ namespace web.Services
         }
 
         public void DecrementOrderItemQuantity (int orderItemId) {
-            _orderRepo.IncrementOrderItemQuantity (orderItemId);
+            _orderRepo.DecrementOrderItemQuantity (orderItemId);
         }
 
         public void DeleteOrderItem (int orderItemId) {

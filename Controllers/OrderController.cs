@@ -209,11 +209,30 @@ namespace web.Controllers
 
         [Authorize]
         [HttpPost]
-        public IActionResult AjaxRemove(int orderItemId)
+        public IActionResult AjaxRemoveOrderItem(int orderItemId)
         {
             if (ModelState.IsValid && orderItemId != 0)
             {
                 _orderService.DeleteOrderItem(orderItemId);
+                return Ok();
+            }
+            return BadRequest();
+        }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult AjaxChangeOrderItemQuantity(int orderItemId, bool increment)
+        {
+            if (ModelState.IsValid && orderItemId != 0)
+            {
+                if (increment) 
+                {
+                    _orderService.IncrementOrderItemQuantity(orderItemId);
+                }
+                else 
+                {
+                    _orderService.DecrementOrderItemQuantity(orderItemId);
+                }
                 return Ok();
             }
             return BadRequest();
