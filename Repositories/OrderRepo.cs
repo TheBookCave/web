@@ -114,6 +114,23 @@ namespace web.Repositories
             _db.SaveChanges();
         }
 
+        public AddressListViewModel GetAddressById(int addressId) {
+            var address = (from add in _db.Addresses
+                            where add.Id == addressId
+                            select add).SingleOrDefault();
+            var addressModel = new AddressListViewModel() {
+                Id = address.Id,
+                CustomerId = address.CustomerId,
+                FirstName = address.FirstName,
+                LastName = address.LastName,
+                PhoneNumber = address.PhoneNumber,
+                Country = address.Country,
+                City = address.City,
+                StreetAddress = address.StreetAddress,
+                ZipCode = address.ZipCode
+            };
+            return addressModel;
+        }
         public List<AddressListViewModel> GetAddressesOnOrder(int orderId) {
             var del_address = (from da in _db.Addresses
                             join o in _db.Orders on da.Id equals o.ShippingAddressId

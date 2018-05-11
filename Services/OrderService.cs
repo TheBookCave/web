@@ -55,6 +55,9 @@ namespace web.Services
 
         }
 
+        public AddressListViewModel GetAddressById(int addressId) {
+            return _orderRepo.GetAddressById(addressId);
+        }
         public List<AddressListViewModel> GetUserAddresses(string userId) {
 
             return _orderRepo.GetUserAddresses(userId);

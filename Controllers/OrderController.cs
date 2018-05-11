@@ -19,6 +19,7 @@ namespace web.Controllers
     {
         // OrderController owns an instance of the OrderService
         private OrderService _orderService;
+        private AccountService _accountService;
         private readonly UserManager<ApplicationUser> _userManager;
 
 
@@ -103,22 +104,9 @@ namespace web.Controllers
           var addressList = _orderService.GetUserAddresses(userId);
           var openorder = _orderService.GetOpenOrder(userId);
 
-          var shippingaddId = -1;
-          var billingaddId = -1;
-
-          if(addressInput.ShippingAddressInput.StreetAddress == null) {
-            shippingaddId = addressInput.ShippingAddressOption.Id;
-          }
-          
-          if(addressInput.BillingAddressInput.StreetAddress == null) {
-            shippingaddId = addressInput.BillingAddressOption.Id;
-          }
-
           var order = new OrderInputModel() {
             Id = openorder.Id,
             CustomerId = openorder.CustomerId,
-            ShippingAddressId = shippingaddId,
-            BillingAddressId = billingaddId,
             Status = openorder.Status,
             OrderDate = openorder.OrderDate,
             ShippingDate = openorder.ShippingDate,
@@ -127,6 +115,23 @@ namespace web.Controllers
             AllUserAddresses = addressList
           };
 
+          var shippingaddressoption = _orderService.GetAddressById(addressInput.ShippingAddressOption);
+          var billingaddressoption = _orderService.GetAddressById(addressInput.BillingAddressOption);
+
+          if(shippingaddressoption != null) {
+            order.ShippingAddressId = addressInput.ShippingAddressOption;
+          }
+          else{
+            _accountService.AddAddressByUser(shippingaddressoption, userId);
+            order.ShippingAddressId = shippingaddressoption.Id;
+          }
+          
+          if(addressInput.BillingAddressInput.StreetAddress != null) {
+            order.BillingAddressId = addressInput.BillingAddressOption;
+          }
+          else{
+            _accountService.AddAddressByUser(billingaddressoption, userId);
+          }
 
             if(ModelState.IsValid)
             {

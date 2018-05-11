@@ -19,7 +19,7 @@
     <fieldset class="selectaddress row">
       <select asp-for="ShippingAddressOption" class="col-12 form-control" id="deliveryselect">
         @foreach (var a in Model.AllUserAddresses) {
-          <option value=@a>@a.StreetAddress, @a.City, @a.Country</option>
+          <option value=@a.Id>@a.StreetAddress, @a.City, @a.Country</option>
         }
       </select>
     </fieldset>
