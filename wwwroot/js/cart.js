@@ -13,6 +13,7 @@ $(".cart-item").each(function () {
   $("#itemIncrement-" + id).on("click", function () {
     let quantity = $("#itemQuantity-" + id).val();
     let dataToSend = { orderItemId: id, increment: true }
+    //Tell the server with ajax to increment the quantity of the given item based on id
     $.post("AjaxChangeOrderItemQuantity", dataToSend, function (data, status) {
       $("#itemQuantity-" + id).val(++quantity);
       if (quantity === 2) {
@@ -29,6 +30,7 @@ $(".cart-item").each(function () {
     let quantity = $("#itemQuantity-" + id).val();
     if (quantity > 1) {
       let dataToSend = { orderItemId: id, increment: false }
+      //Tell the server with ajax to decrement the quantity of the given item based on id
       $.post("AjaxChangeOrderItemQuantity", dataToSend, function (data, status) {
         $("#itemQuantity-" + id).val(--quantity);
         if (quantity === 1) {
@@ -47,6 +49,7 @@ $(".cart-item").each(function () {
 
   $("#itemRemove-" + id).on("click", function () {
     let dataToSend = { orderItemId: id }
+    //Tell the server with ajax to remove the given item based on id
     $.post("AjaxRemoveOrderItem", dataToSend, function (data, status) {
       $("#" + id).remove();
       if ($(".cart-item").length === 0) {
