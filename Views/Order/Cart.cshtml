@@ -7,70 +7,72 @@
 
 <h1>My Cart</h1>
 
-@if(@Model.Count == 0) 
-{
-  <p>Your cart is currently empty.</p>
-}
-else
-{
-  <div class="card mb-3">
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">
-      <div class="row">
-        <div class="col-md-4">
-          <strong>Title</strong>
+<div id="cart">
+  @if(@Model.Count == 0) 
+  {
+    <p>Your cart is currently empty.</p>
+  }
+  else
+  {
+    <div class="card mb-3">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+        <div class="row">
+          <div class="col-md-4">
+            <strong>Title</strong>
+          </div>
+          <div class="col-md-2">
+            <strong>Price & Discount</strong>
+          </div>
+          <div class="col-md-2">
+            <strong>Quantity</strong>
+          </div>
+          <div class="col-md-2">
+            <strong>Total Price</strong>
+          </div>
+          <div class="col-md-2">
+            <strong>Remove Item</strong>
+          </div>
         </div>
-        <div class="col-md-2">
-          <strong>Price & Discount</strong>
-        </div>
-        <div class="col-md-2">
-          <strong>Quantity</strong>
-        </div>
-        <div class="col-md-2">
-          <strong>Total Price</strong>
-        </div>
-        <div class="col-md-2">
-          <strong>Remove Item</strong>
-        </div>
-      </div>
-      </li>
-      @foreach(var item in Model) 
-      {
-        <li class="list-group-item cart-item" id="@item.Id">
-          <div class="row">
-            <div class="col-md-4">
-              <h4>@item.BookName</h4>
-            </div>
-            <div class="col-md-2">
-              <div class="btn-group" role="group">
-                <button type="button" class="btn btn-sm btn-primary btn-cart" id="itemPrice-@item.Id" disabled>$@item.ItemPrice</button>
-                @if(item.ItemDiscount != 0) 
-                {
-                  <button type="button" class="btn btn-sm btn-success btn-cart" id="itemDiscount-@item.Id" disabled>@item.ItemDiscount%</button>
-                }
+        </li>
+        @foreach(var item in Model) 
+        {
+          <li class="list-group-item cart-item" id="@item.Id">
+            <div class="row">
+              <div class="col-md-4">
+                <h4>@item.BookName</h4>
+              </div>
+              <div class="col-md-2">
+                <div class="btn-group" role="group">
+                  <button type="button" class="btn btn-sm btn-primary btn-cart" id="itemPrice-@item.Id" disabled>$@item.ItemPrice</button>
+                  @if(item.ItemDiscount != 0) 
+                  {
+                    <button type="button" class="btn btn-sm btn-success btn-cart" id="itemDiscount-@item.Id" disabled>@item.ItemDiscount%</button>
+                  }
+                </div>
+              </div>
+              <div class="col-md-2">
+                <a href="#" class="" id="itemDecrement-@item.Id"><i class="fas fa-minus-circle"></i></a> 
+                <input type="button" class="btn btn-sm btn-info btn-cart" id="itemQuantity-@item.Id" value="@item.Quantity" disabled>
+                <a href="#" class="" id="itemIncrement-@item.Id"><i class="fas fa-plus-circle"></i></a>
+              </div>
+              <div class="col-md-2">
+                <button type="button" class="btn btn-sm btn-primary btn-cart" id="itemTotalPrice-@item.Id" disabled>$@item.ItemTotalPrice</button>
+              </div>
+              <div class="col-md-2">
+                <button class="btn btn-sm btn-secondary btn-cart" id="itemRemove-@item.Id">Remove</button>
               </div>
             </div>
-            <div class="col-md-2">
-              <a href="#" class="" id="itemDecrement-@item.Id"><i class="fas fa-minus-circle"></i></a> 
-              <input type="button" class="btn btn-sm btn-info btn-cart" id="itemQuantity-@item.Id" value="@item.Quantity" disabled>
-              <a href="#" class="" id="itemIncrement-@item.Id"><i class="fas fa-plus-circle"></i></a>
-            </div>
-            <div class="col-md-2">
-              <button type="button" class="btn btn-sm btn-primary btn-cart" id="itemTotalPrice-@item.Id" disabled>$@item.ItemTotalPrice</button>
-            </div>
-            <div class="col-md-2">
-              <button class="btn btn-sm btn-secondary btn-cart" id="itemRemove-@item.Id">Remove</button>
-            </div>
-          </div>
-        </li>
-      }
-    </ul>
-  </div>
-  <div>
-    <div class="btn-group float-right" role="group">
-      <button type="button" class="btn btn-primary btn-cart"disabled>Total: $$$</button>
-      <a class="btn btn-success" asp-controller="Order" asp-action="CheckOutAddress" role="button">Checkout</a>
+          </li>
+        }
+      </ul>
     </div>
-    <div class="clearfix"></div>
-  </div>
-}
+    <div>
+      <div class="btn-group float-right" role="group">
+        <button type="button" class="btn btn-primary btn-cart"disabled>Total: $$$</button>
+        <a class="btn btn-success" asp-controller="Order" asp-action="CheckOutAddress" role="button">Checkout</a>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  }
+</div>
