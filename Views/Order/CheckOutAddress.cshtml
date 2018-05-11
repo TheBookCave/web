@@ -6,8 +6,7 @@
 
 </br>
 <div class="btn-group address-buttons row">
-  <button type="button" class="btn btn-primary col-md-6 checkout-nav-buttons">1</button>
-  <a class="btn btn-info col-md-6 checkout-nav-buttons" asp-controller="Order" asp-action="CheckOutReview" role="button">2</a>
+  <a class="btn btn-info col-md-6 checkout-nav-buttons" asp-controller="Order" asp-action="Cart" role="button">Go back</a>
 </div>
 </br>
 </br>
@@ -26,15 +25,7 @@
     </fieldset>
 
     </br>
-    <fieldset class="inputaddress row" id="deliveryinput">
-      <input type="text" class="col-12 form-control" placeholder="First Name"></br>
-      <input type="text" class="col-12 form-control" placeholder="Last Name"></br>
-      <input type="text" class="col-12 form-control" placeholder="Phone Number"></br>
-      <input type="text" class="col-12 form-control" placeholder="Country"></br>
-      <input type="text" class="col-12 form-control" placeholder="City"></br>
-      <input type="text" class="col-12 form-control" placeholder="Street Address"></br>
-      <input type="text" class="col-12 form-control" placeholder="Zip Code"></br>
-    </fieldset>
+    <a class="col-md-12 btn btn-primary" asp-controller="Account" asp-action="CreateAddress">Add Address</a>
   </div>
   
   <div class="border rounded p-4 checkout-bill">
@@ -47,15 +38,7 @@
       </select>
     </fieldset>
     </br>
-    <fieldset class="inputaddress row" id="billinginput">
-      <input type="text" class="col-12 form-control" placeholder="First Name"></br>
-      <input type="text" class="col-12 form-control" placeholder="Last Name"></br>
-      <input type="text" class="col-12 form-control" placeholder="Phone Number"></br>
-      <input type="text" class="col-12 form-control" placeholder="Country"></br>
-      <input type="text" class="col-12 form-control" placeholder="City"></br>
-      <input type="text" class="col-12 form-control" placeholder="Street Address"></br>
-      <input type="text" class="col-12 form-control" placeholder="Zip Code">
-    </fieldset>
+    <a class="col-md-12 btn btn-primary" asp-controller="Account" asp-action="CreateAddress">Add Address</a>
   </div>
   
   <button type="submit" class="btn btn-secondary col-md-6 offset-md-3 checkout-button">Continue</button>
