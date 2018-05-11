@@ -1,8 +1,8 @@
 @model web.Models.ViewModels.OrderConfirmationViewModel
 </br>
 <div class="btn-group address-buttons row">
-  <button type="button" class="btn btn-info col-md-6 addreButton">1</button>
-  <button type="button" class="btn btn-primary col-md-6 addreButton">2</button>
+  <button type="button" class="btn btn-info col-md-6 checkout-nav-buttons">1</button>
+  <button type="button" class="btn btn-primary col-md-6 checkout-nav-buttons">2</button>
 </div>
 </br>
 </br>
@@ -38,5 +38,5 @@
 		<p>@Model.Addresses[1].ZipCode </p>
 	</div>
 
-      <a class="btn btn-success col-md-4 offset-md-4 address-button" asp-controller="Order" asp-action="CheckOutConfirmed" role="button">Confirm</a>
+      <a class="btn btn-success col-md-6 offset-md-3 address-button" asp-controller="Order" asp-action="CheckOutConfirmed" role="button">Confirm</a>
 </div>
