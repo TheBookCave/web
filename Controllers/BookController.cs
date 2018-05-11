@@ -229,7 +229,15 @@ namespace web.Controllers
         [HttpPost]
         public IActionResult ChooseBookToEdit(EditBookInputModel book)
         {
-            return RedirectToAction("ModifyBook", new{bookId = book.BookId});
+
+            if(book.BookId > 0)
+            {
+                return RedirectToAction("ModifyBook", new{bookId = book.BookId});
+            }
+
+            book.AllBooks = _bookService.GetAllBooks();
+            return View(book);
+            
         }
 
         [Authorize(Roles = "Staff")]
