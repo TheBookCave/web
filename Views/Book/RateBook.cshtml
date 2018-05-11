@@ -8,7 +8,7 @@
 
   <form method="POST" class="col-md-8 offset-2 row" asp-controller="Book" asp-action="RateBook">
     <label class="col-md-2" asp-for="RatingValue">Rating</label>
-    <input class="col-md-8 form-control" type="number" asp-for="RatingValue">
+    <input class="col-md-8 form-control mb-2" type="number" asp-for="RatingValue">
     <span asp-validation-for="RatingValue" class="text-danger col-md-2"></span>
 
     <label class="col-md-2" asp-for="Comment">Optional comment</label>
