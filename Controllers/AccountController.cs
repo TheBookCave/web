@@ -52,7 +52,41 @@ namespace web.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = _userManager.Users.FirstOrDefault(x => x.Id == userId);
+
+            var _accountViewModel = new AccountViewModel();
+            if(user.FavoriteBookId > 0)
+            {
+                _accountViewModel.FavoriteBookName = _bookService.GetBookWithId(user.FavoriteBookId).Name;
+            } 
+            else
+            {
+                _accountViewModel.FavoriteBookName = "None";
+            }
+            if(user.PrimaryAddressId > 0)
+            {
+                _accountViewModel.PrimaryAddressStreet = user.PrimaryAddressId.ToString();
+            } 
+            else
+            {
+                _accountViewModel.PrimaryAddressStreet = "None";
+            }
+            if(_accountViewModel.UserPhotoLocation != null)
+            {
+                _accountViewModel.UserPhotoLocation = user.UserPhotoLocation;
+            }
+            else
+            {
+               _accountViewModel.UserPhotoLocation = "images\\profilepics\\default.jpg";
+            }
+
+            
+            _accountViewModel.FirstName = user.FirstName;
+            _accountViewModel.LastName = user.LastName;
+            _accountViewModel.Email = user.Email;
+            
+            return View(_accountViewModel);
         }
 
         [Authorize]
