@@ -99,8 +99,9 @@ namespace web.Repositories
             _db.SaveChanges();
         }
 
-        public void CloseOrder(OrderConfirmationViewModel confirmed) {
-            var orderNow = _db.Orders.SingleOrDefault(o => o.Id == confirmed.Order.Id);
+        public void CloseOrder(string userId) {
+            var confirmed = GetOpenOrder(userId);
+            var orderNow = _db.Orders.SingleOrDefault(o => o.Id == confirmed.Id);
             orderNow.Status = "closed";
             _db.SaveChanges();
         }

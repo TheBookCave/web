@@ -131,15 +131,12 @@ namespace web.Controllers
           return View(ordertoconfirm);
         }
 
-      [HttpPost]
-        public IActionResult CheckOutConfirmed(OrderConfirmationViewModel confirmed) {
-           if(ModelState.IsValid)
-            {
-                _orderService.CloseOrder(confirmed);
-                return RedirectToAction("Index");
-            }
+      
+        public IActionResult CheckOutConfirmed() {
+        var userId = _userManager.GetUserId(HttpContext.User);
+        _orderService.CloseOrder(userId);
 
-          return View(confirmed);
+        return View();
         }
 
         public IActionResult Details(int Id)
