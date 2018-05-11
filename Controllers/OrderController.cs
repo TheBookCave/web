@@ -207,7 +207,17 @@ namespace web.Controllers
         }
          */
 
-
+        [Authorize]
+        [HttpPost]
+        public IActionResult AjaxRemove(int orderItemId)
+        {
+            if (ModelState.IsValid && orderItemId != 0)
+            {
+                _orderService.DeleteOrderItem(orderItemId);
+                return Ok();
+            }
+            return BadRequest();
+        }
     }
 }
 

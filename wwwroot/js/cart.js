@@ -14,6 +14,11 @@ $(".cart-item").each(function() {
   });
   
   $("#itemRemove-" + id).on("click", function() {
-    $("#" + id).remove();
+    let dataToSend = { orderItemId: id }
+    $.post("AjaxRemove", dataToSend, function (data, status) {
+      $("#" + id).remove();
+    }).fail(function () {
+      console.log("Remove failed");
+    });
   });
 });
