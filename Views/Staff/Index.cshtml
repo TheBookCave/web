@@ -1,59 +1,59 @@
 
 <div>
-    <h2>Management Console</h2>
+  <h2>Management Console</h2>
 </div>
 @{
-    ViewData["Title"] = "Management Console";
+  ViewData["Title"] = "Management Console";
 
-    var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
-    if (claimsIdentity != null)
+  var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
+  if (claimsIdentity != null)
+  {
+    var b = claimsIdentity.Claims.FirstOrDefault(x => x.Type == "Name");
+    if (b != null)
     {
-        var b = claimsIdentity.Claims.FirstOrDefault(x => x.Type == "Name");
-        if (b != null)
-        {
-            <p>
-                Hi @b.Value.ToString()
-            </p>   
-        }
+      <p>
+        Hi @b.Value.ToString()
+      </p>   
     }
+  }
 }
 
 
 <form asp-action="RegisterStaff" asp-controller="Account" method="GET">
-    <div class="form-group">
-        <button type="submit" class="btn btn-default">Register new employee</button>
-    </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-default">Register new employee</button>
+  </div>
 </form>
 
 
 <form asp-action="Create" asp-controller="Book" method="GET">
-    <div class="form-group">
-        <button type="submit" class="btn btn-default">Add Book</button>
-    </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-default">Add Book</button>
+  </div>
 </form>
 
 <form asp-action="CreateGenre" asp-controller="Book" method="GET">
-    <div class="form-group">
-        <button type="submit" class="btn btn-default">Add Genre</button>
-    </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-default">Add Genre</button>
+  </div>
 </form>
 
 
 <form asp-action="CreateAuthor" asp-controller="Book" method="GET">
-    <div class="form-group">
-        <button type="submit" class="btn btn-default">Add Author</button>
-    </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-default">Add Author</button>
+  </div>
 </form>
 
 
 <form asp-action="CreatePublisher" asp-controller="Book" method="GET">
-    <div class="form-group">
-        <button type="submit" class="btn btn-default">Add Publisher</button>
-    </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-default">Add Publisher</button>
+  </div>
 </form>
 
 <form asp-action="ChooseBookToEdit" asp-controller="Book" method="GET">
-    <div class="form-group">
-        <button type="submit" class="btn btn-default">Edit Book</button>
-    </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-default">Edit Book</button>
+  </div>
 </form>
