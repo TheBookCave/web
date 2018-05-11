@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace web.Models.ViewModels
+namespace web.Models.InputModels
 {
-    public class RegisterViewModel
+    public class RegisterInputModel
     {
         [Required]
         [EmailAddress]

@@ -119,7 +119,7 @@ namespace web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterViewModel model)
+        public async Task<IActionResult> Register(RegisterInputModel model)
         {
             if(!ModelState.IsValid) { return View(); }
             
@@ -154,7 +154,7 @@ namespace web.Controllers
         [Authorize(Roles = "Staff")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> RegisterStaff(RegisterViewModel model)
+        public async Task<IActionResult> RegisterStaff(RegisterInputModel model)
         {
             if(!ModelState.IsValid) { return View(); }
             
