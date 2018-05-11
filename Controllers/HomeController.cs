@@ -23,5 +23,15 @@ namespace web.Controllers
       var books = _bookService.GetRecentAdditionsBooks();
       return View(books);
     }
+
+    public IActionResult About()
+    {
+      return View();
+    }
+
+    public IActionResult Contact()
+    {
+      return View();
+    }
   }
 }
