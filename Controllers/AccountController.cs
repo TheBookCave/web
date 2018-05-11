@@ -100,13 +100,13 @@ namespace web.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateAddress(AddressListViewModel model)
+        public async Task<IActionResult> CreateAddress(AddressInputModel model)
         {
             if(!ModelState.IsValid) { 
                 return View(); 
             }
             var user = await _userManager.GetUserAsync(HttpContext.User);
-            _accountService.AddAddressByUser(model,user);
+            _accountService.AddAddressByUserId(model,user.Id);
             return RedirectToAction("Index", "Account");
         }
 
