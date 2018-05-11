@@ -1,4 +1,4 @@
-@model web.Models.InputModels.OrderInputModel
+@model web.Models.InputModels.AddressCheckOutInputModel
 
 @{
   ViewData["Title"] = "Shipping Address";
@@ -12,49 +12,48 @@
 </br>
 </br>
 
-<p>Hey, <!-- Model[0].FirstName var ekki að virka á meðan ég var að gera allt semi-fallegt. -->Asdf! Please Select or fill out your Delivery and Shipping Address</p>
 
 <form class="row" method="POST">
   <div class="border rounded p-4 checkout-deliv">
     <h2>Delivery address</h2>
     <fieldset class="selectaddress row">
-      <select asp-for="ShippingAddressId" class="col-12 form-control" id="deliveryselect">
+      <select asp-for="ShippingAddressOption" class="col-12 form-control" id="deliveryselect">
         @foreach (var a in Model.AllUserAddresses) {
-          <option value=@a.Id>@a.StreetAddress</option>
+          <option value=@a>@a.StreetAddress, @a.City, @a.Country</option>
         }
       </select>
     </fieldset>
 
     </br>
     <fieldset class="inputaddress row" id="deliveryinput">
-      <input type="text" class="col-12 form-control" placeholder="First Name"></br>
-      <input type="text" class="col-12 form-control" placeholder="Last Name"></br>
-      <input type="text" class="col-12 form-control" placeholder="Phone Number"></br>
-      <input type="text" class="col-12 form-control" placeholder="Country"></br>
-      <input type="text" class="col-12 form-control" placeholder="City"></br>
-      <input type="text" class="col-12 form-control" placeholder="Street Address"></br>
-      <input type="text" class="col-12 form-control" placeholder="Zip Code"></br>
+      <input type="text" class="col-12 form-control" placeholder="First Name" asp-for="ShippingAddressInput.FirstName"></br>
+      <input type="text" class="col-12 form-control" placeholder="Last Name" asp-for="ShippingAddressInput.LastName"></br>
+      <input type="text" class="col-12 form-control" placeholder="Phone Number" asp-for="ShippingAddressInput.PhoneNumber"></br>
+      <input type="text" class="col-12 form-control" placeholder="Country" asp-for="ShippingAddressInput.Country"></br>
+      <input type="text" class="col-12 form-control" placeholder="City" asp-for="ShippingAddressInput.City"></br>
+      <input type="text" class="col-12 form-control" placeholder="Street Address" asp-for="ShippingAddressInput.StreetAddress"></br>
+      <input type="text" class="col-12 form-control" placeholder="Zip Code" asp-for="ShippingAddressInput.ZipCode"></br>
     </fieldset>
   </div>
   
   <div class="border rounded p-4 checkout-bill">
     <h2>Billing address</h2>
     <fieldset class="selectaddress row">
-      <select asp-for="BillingAddressId" class="col-12 form-control" id="billingselect">
+      <select asp-for="BillingAddressOption" class="col-12 form-control" id="billingselect">
         @foreach (var a in Model.AllUserAddresses) {
-          <option value=@a.Id>@a.StreetAddress</option>
+          <option value=@a.Id>@a.StreetAddress, @a.City, @a.Country</option>
         }
       </select>
     </fieldset>
     </br>
     <fieldset class="inputaddress row" id="billinginput">
-      <input type="text" class="col-12 form-control" placeholder="First Name"></br>
-      <input type="text" class="col-12 form-control" placeholder="Last Name"></br>
-      <input type="text" class="col-12 form-control" placeholder="Phone Number"></br>
-      <input type="text" class="col-12 form-control" placeholder="Country"></br>
-      <input type="text" class="col-12 form-control" placeholder="City"></br>
-      <input type="text" class="col-12 form-control" placeholder="Street Address"></br>
-      <input type="text" class="col-12 form-control" placeholder="Zip Code">
+      <input type="text" class="col-12 form-control" placeholder="First Name" asp-for="BillingAddressInput.FirstName"></br>
+      <input type="text" class="col-12 form-control" placeholder="Last Name" asp-for="BillingAddressInput.LastName"></br>
+      <input type="text" class="col-12 form-control" placeholder="Phone Number" asp-for="BillingAddressInput.PhoneNumber"></br>
+      <input type="text" class="col-12 form-control" placeholder="Country" asp-for="BillingAddressInput.Country"></br>
+      <input type="text" class="col-12 form-control" placeholder="City" asp-for="BillingAddressInput.City"></br>
+      <input type="text" class="col-12 form-control" placeholder="Street Address" asp-for="BillingAddressInput.StreetAddress"></br>
+      <input type="text" class="col-12 form-control" placeholder="Zip Code" asp-for="BillingAddressInput.ZipCode"></br>
     </fieldset>
   </div>
   

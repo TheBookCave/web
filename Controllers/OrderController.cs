@@ -82,37 +82,51 @@ namespace web.Controllers
 
 
         [Authorize]
-
         [HttpGet]
         public IActionResult CheckOutAddress() {
           var userId = _userManager.GetUserId(HttpContext.User);
           var addressList = _orderService.GetUserAddresses(userId);
           var openorder = _orderService.GetOpenOrder(userId);
 
-          var order = new OrderInputModel() {
+          var addressInput = new AddressCheckOutInputModel() {
             AllUserAddresses = addressList
           };
 
-          return View(order);
+          return View(addressInput);
         }
 
 
         [Authorize]
-
         [HttpPost]
-        public IActionResult CheckOutAddress(OrderInputModel order) { // 2 addresses, [0] is delivery, [1] is billing
+        public IActionResult CheckOutAddress(AddressCheckOutInputModel addressInput) { // 
           var userId = _userManager.GetUserId(HttpContext.User);
           var addressList = _orderService.GetUserAddresses(userId);
           var openorder = _orderService.GetOpenOrder(userId);
 
-          order.Id = openorder.Id;
-          order.CustomerId = openorder.CustomerId;
-          order.Status = openorder.Status;
-          order.OrderDate = openorder.OrderDate;
-          order.ShippingDate = openorder.ShippingDate;
-          order.TrackingNumber = openorder.TrackingNumber;
-          order.PurchaseAmount = openorder.PurchaseAmount;
-          order.AllUserAddresses = addressList;
+          var shippingaddId = -1;
+          var billingaddId = -1;
+
+          if(addressInput.ShippingAddressInput.StreetAddress == null) {
+            shippingaddId = addressInput.ShippingAddressOption.Id;
+          }
+          
+          if(addressInput.BillingAddressInput.StreetAddress == null) {
+            shippingaddId = addressInput.BillingAddressOption.Id;
+          }
+
+          var order = new OrderInputModel() {
+            Id = openorder.Id,
+            CustomerId = openorder.CustomerId,
+            ShippingAddressId = shippingaddId,
+            BillingAddressId = billingaddId,
+            Status = openorder.Status,
+            OrderDate = openorder.OrderDate,
+            ShippingDate = openorder.ShippingDate,
+            TrackingNumber = openorder.TrackingNumber,
+            PurchaseAmount = openorder.PurchaseAmount,
+            AllUserAddresses = addressList
+          };
+
 
             if(ModelState.IsValid)
             {
@@ -120,7 +134,7 @@ namespace web.Controllers
                 return RedirectToAction("CheckOutReview");
 
             }
-          return View("CheckOutAddress", order);
+          return View("CheckOutAddress", addressInput);
         }
       
 
