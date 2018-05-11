@@ -9,13 +9,11 @@
   <form method="POST" class="col-md-8 offset-2 row" asp-controller="Book" asp-action="RateBook">
     <label class="col-md-2" asp-for="RatingValue">Rating</label>
     <input class="col-md-8 form-control" type="number" asp-for="RatingValue">
-    <div class="col-md-2"></div>
-    <span asp-validation-for="RatingValue" class="text-danger"></span>
+    <span asp-validation-for="RatingValue" class="text-danger col-md-2"></span>
 
     <label class="col-md-2" asp-for="Comment">Optional comment</label>
     <textarea class="col-md-8 form-control" name="Comment" placeholder="Enter comment here..."></textarea>
-    <div class="col-md-2"></div>
-    <span asp-validation-for="Comment" class="text-danger"></span>
+    <span asp-validation-for="Comment" class="text-danger col-md-2"></span>
     <br/>
 
     @{
